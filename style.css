@@ -6,8 +6,10 @@ https://www.youtube.com/watch?v=nSst4-WbEZk */
     --clr-dark: #020024;
     --clr-light: #F6EEF2;
     --clr-bg: #f4f4f4;
+    --clr-bg-two: #d4e8d3; /*pale green bg*/
     --clr-primary: #0A502E;
     --clr-secondary: #7E73F9;
+
 }
 
 *,
@@ -66,6 +68,7 @@ h1 {
     
     color: var(--clr-primary);
     gap: 10px;
+    padding: 20px;
 }
 
 .content {
@@ -147,47 +150,6 @@ h1 {
     color: var(--clr-primary);
 }
 
-.seatsContainer {
-    display: flex;
-    flex-direction: column;
-
-    border-radius: 10px;
-    border: 1px solid var(--clr-primary);
-    width: 50%;
-    height: 70%;
-    padding: 10px;
-}
-
-.seatLabel {
-    display: flex;
-    font-weight: 300;
-}
-
-.seats {
-    display: flex;
-    flex-direction: column;
-}
-
-.seatsColumn {
-    display: flex;
-    flex: 1;
-    justify-content: space-around;
-    padding: 10px;
-    gap: 20px;
-}
-
-.seatsGroup {
-    display: flex;
-    width: 33%;
-    gap: 5px;
-}
-
-.seat {
-    width: 28%;
-    height: 50px;
-    background-color: var(--clr-primary);
-    border-radius: 10px;
-}
 
 .container > h1 {
     font-size: 6em;

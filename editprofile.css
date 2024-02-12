@@ -1,0 +1,26 @@
+body{
+	color: var(--clr-dark) !important;
+
+}
+
+.main{
+	display: flex;
+	justify-content: center;
+}
+
+.form{
+	display: flex;
+	flex-direction: column;
+	gap: 10%;
+}
+
+input.form{
+	color: var(--clr-dark);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+}
+
+.name{
+	display: flex;
+	flex-direction: row;
+}

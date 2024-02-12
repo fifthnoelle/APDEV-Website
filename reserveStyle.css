@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100;0,300;1,100&display=swap');/* CSS VARIABLES */
+:root {
+    --clr-dark: #020024;
+    --clr-light: #F6EEF2;
+    --clr-bg: #f4f4f4;
+    --clr-primary: #0A502E;
+    --clr-bg-two: #d4e8d3; /*pale green bg*/
+    --clr-secondary: #7E73F9;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+#reservations {
+    font-family: 'Montserrat', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#reservations td, #reservations th {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    color: var(--clr-primary);
+}
+
+#reservations tr:nth-child(even){background-color: #d2d2d2;}
+
+#reservations tr:hover {background-color: #ddd;}
+
+#reservations th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+}
+
+.filterContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.filterContainer > form {
+    display: flex;
+    gap: 10px;
+}
+
+
+
+.seatsContainer {
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 10px;
+    border: 1px solid var(--clr-primary);
+    width: 50%;
+    height: 70%;
+    padding: 10px;
+}
+
+.seatLabel {
+    display: flex;
+    font-weight: 300;
+}
+
+.seat:hover{
+    background-color: yellow;
+}
+.seats {
+    display: flex;
+    flex-direction: column;
+}
+
+.seatsColumn {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    padding: 10px;
+    gap: 20px;
+}
+
+.seatsGroup {
+    display: flex;
+    width: 33%;
+    gap: 5px;
+}
+
+.seat {
+    width: 28%;
+    height: 50px;
+    background-color: var(--clr-primary);
+    border-radius: 10px;
+    color: var(--clr-primary);
+}
+
+.reserveLinks {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    width: 100%;
+    padding: 0px 30px;
+    gap: 20px;
+}
+
+.reserveFunction {
+    width: 32%;
+    height: 200px;
+    gap: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: var(--clr-light);
+    color: var(--clr-dark);
+    border-radius: 10px;
+    border: 1px solid var(--clr-primary);
+    box-shadow: 2px 2px 4px 1px rgba(0,0,0,.8);
+}
+
+.button {
+    background-color: var(--clr-primary);
+    padding: 2px 5px;
+    border-radius: 10px;
+}
+
+.button > a {
+    text-decoration: none;
+    color: var(--clr-light);
+}
+
+.reserveFunction > h1 {
+    color: var(--clr-primary);
+}
