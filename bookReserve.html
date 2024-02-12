@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="navStyle.css">
+    <link rel="stylesheet" href="https://fonts.google.com/specimen/Bebas+Neue">
+</head>
+<body>
+    <div class="navBar">
+        <span id="name"><a id="name-link" href="index.html" target="_self">iLabs</a></span>
+        <div class="navs">
+            <a href="home.html" target="_self">home</a>
+            <p>|</p>
+            <a href="reserve.html" target="_self">reservation</a>
+            <p>|</p>
+            <a href="userprofile.html">account</a>
+            <p>|</p>
+            <a href="#">logout</a>
+        </div>
+    </div>
+    <section>
+        <div class="mainContent">
+            <div class="reminders">
+                <h4>Reminders</h4>
+                <ul>
+                    <li><p>Students must arrive on their designated reservation time. In the case that the student is not present in the laboratory 10 minutes after their time, their reservation will be <b>forfeited</b>.</p></li>
+                    <li><p>Students are encouraged to be on guard with their valuables (i.e. cell phone, wallet, and other electronic devices). The Information Technology Services Office will not be held liable for the <b>loss or damage of any personal property</b> of laboratory users.</p></li>
+                    <li><p>No one is allowed to alter the setting configuration of any computer laboratory facility without proper authorization from the Information Technology Services Office.</p></li>
+                    <li><p>Computer use in the laboratory are designated for <b>academic use</b>.</p></li>
+                </ul>
+            </div>
+            <div class="content">
+                <div class="reserveForm">
+                    <form action="">
+                        <div class="formPersonal">
+                            <div class="formQuestion">
+                                <label for="Name"><b>Name</b></label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="formPersonal">
+                            <div class="formQuestion">
+                                <label for="email"><b>Email</b></label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="formLab">
+                            <div class="formQuestion">
+                                <label for="laboratory"><b>Computer Laboratory</b></label>
+                                <select name="laboratory" id="lab">
+                                    <option value="--">-- Select Lab</option>
+                                    <option value="GK304A">GK304A</option>
+                                    <option value="GK503B">GK503B</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="formDateTime">
+                            <div class="formQuestion">
+                                <label for="date"><b>Date</b></label>
+                                <input type="calendar" id="date" name="date">
+                            </div>
+                            <div class="formQuestion">
+                                <label for="time"><b>Time</b></label>
+                                <select name="time" id="time">
+                                    <option value="1">8:00 - 9:30</option>
+                                    <option value="2">10:00 - 11:30</option>
+                                    <option value="3">12:00 - 13:30</option>
+                                    <option value="4">14:00 - 15:30</option>
+                                    <option value="5">16:00 - 17:30</option>
+                                    <option value="6">18:00 - 19:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="submit" class="submitBtn">
+                    </form>
+                </div>
+                <div class="seatsContainer">
+                    <span class="seatLabel">seat no. :</span>
+                    <div class="seats">
+                        <div class="seatsColumn">
+                            <div class="seatsGroup">
+                                <span class="seat">1</span>
+                                <span class="seat">2</span>
+                                <span class="seat">3</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat">4</span>
+                                <span class="seat">5</span>
+                                <span class="seat">6</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat">7</span>
+                                <span class="seat">8</span>
+                                <span class="seat">9</span>
+                            </div>
+                        </div>
+                        <div class="seatsColumn">
+                            <div class="seatsGroup">
+                                <span class="seat">1</span>
+                                <span class="seat">2</span>
+                                <span class="seat">3</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat">4</span>
+                                <span class="seat">5</span>
+                                <span class="seat">6</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat">7</span>
+                                <span class="seat">8</span>
+                                <span class="seat">9</span>
+                            </div>
+                        </div>
+                        <div class="seatsColumn">
+                            <div class="seatsGroup">
+                                <span class="seat">1</span>
+                                <span class="seat">2</span>
+                                <span class="seat">3</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat">4</span>
+                                <span class="seat">5</span>
+                                <span class="seat">6</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat">7</span>
+                                <span class="seat">8</span>
+                                <span class="seat">9</span>
+                            </div>
+                        </div>
+                        <div class="seatsColumn">
+                            <div class="seatsGroup">
+                                <span class="seat">1</span>
+                                <span class="seat">2</span>
+                                <span class="seat">3</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat">4</span>
+                                <span class="seat">5</span>
+                                <span class="seat">6</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat">7</span>
+                                <span class="seat">8</span>
+                                <span class="seat">9</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
