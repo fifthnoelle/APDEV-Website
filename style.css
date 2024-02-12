@@ -68,9 +68,10 @@ h1 {
 #name-link:hover{
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 2px;
-    font-size: xx-large;
+    font-size: 31px;
     color: white;
-    text-shadow: 2px 2px #FF0000;
+    text-shadow: 3px 4px #163d15;
+    transition: all .6s;
 }
 
 
