@@ -54,6 +54,8 @@
     gap: 10px;
 }
 
+
+
 .seatsContainer {
     display: flex;
     flex-direction: column;
