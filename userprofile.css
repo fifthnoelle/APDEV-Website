@@ -32,7 +32,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
-    border-bottom: 1px solid #F6EEF2;
+    border-bottom: 30px solid white;
     padding: 20px;
 }
 
@@ -91,20 +91,23 @@
 .profile-box {
     display: flex;
     justify-content: space-around;
-    background-color: var(--clr-primary);
+    background-color: rgba(255, 255, 255, 0.949);
     padding-top: 10px;
     color: white;
     height: 300px;
+    outline: 2px solid var(--clr-primary);
+    margin: 0 50px;
 }
 
 [class*="profile"] {
     display: flex;
 }
 
-.profile-photo > img {
+.rounded-image {
     padding: 5px 5px 5px 5px;
-    width: 250px;
+    width: 200px;
     max-height: 250px;
+    border: 1px solid var(--clr-primary);
     border-radius: 55%;
 }
 
@@ -112,6 +115,7 @@
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
+    color: var(--clr-primary);
     width: 100%;
     padding-left: 50px;
     align-items: flex-start;
@@ -140,3 +144,70 @@
 }
 
 /* Body of Profile */
+.profile-body {
+    margin: 40px 50px;
+    font-size: 19px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profile-body > a {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--clr-primary);
+}
+
+.body-myprofile {
+    flex-direction: column;
+    width: 20%;
+    margin-left: 15px;
+}
+
+.body-myprofile ul li a {
+    text-decoration: none;
+    color: var(--clr-primary);
+}
+
+.body-myprofile a:hover {
+    text-decoration: underline;
+}
+
+[class*="body"] > strong {
+    color: var(--clr-primary);
+    padding-bottom: 10px;
+    font-size: 23px;
+}
+
+[class*="body"] > hr {
+    margin: 0 25px;
+    border: 2px solid rgb(187, 186, 186);
+    border-radius: 5px;
+}
+
+.body-myprofile ul li {
+    margin-bottom: 10px;
+    color: var(--clr-primary);
+}
+
+.body-myreservations {
+    width: 60%;
+    margin-left: 20px;
+}
+
+.body-reservationbox {
+    margin: 30px auto;
+    font-size: 15px;
+    background-color: var(--clr-primary);
+    color: white;
+    padding: 10px;
+    max-width: 800px;
+}
+
+.body-reservationbox > div {
+    background-color: rgb(74, 147, 74);
+    padding: 10px;
+    outline: 2px solid rgb(108, 163, 108);
+}
+
+.body-editresbtn {
+    margin-top: 50px;
+    width: 20%;
+}
