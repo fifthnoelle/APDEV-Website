@@ -17,23 +17,23 @@
     margin: 0;
 }
 
-.reserveTable {
+#reservations {
     font-family: 'Montserrat', sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-.reserveTable td, .reserveTable th {
+#reservations td, #reservations th {
     border-bottom: 1px solid #ddd;
     padding: 8px;
     color: var(--clr-primary);
 }
 
-.reserveTable tr:nth-child(even){background-color: #d2d2d2;}
+#reservations tr:nth-child(even){background-color: #d2d2d2;}
 
-.reserveTable tr:hover {background-color: #ddd;}
+#reservations tr:hover {background-color: #ddd;}
 
-.reserveTable th {
+#reservations th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
