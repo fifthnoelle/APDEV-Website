@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100;0,300;1,100&display=swap');/* CSS VARIABLES */
+:root {
+    --clr-dark: #020024;
+    --clr-light: #F6EEF2;
+    --clr-bg: #f4f4f4;
+    --clr-primary: #0A502E;
+    --clr-secondary: #7E73F9;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+#reservations {
+    font-family: 'Montserrat', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#reservations td, #reservations th {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    color: var(--clr-primary);
+}
+
+#reservations tr:nth-child(even){background-color: #d2d2d2;}
+
+#reservations tr:hover {background-color: #ddd;}
+
+#reservations th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+}
+
+.filterContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.filterContainer > form {
+    display: flex;
+    gap: 10px;
+}

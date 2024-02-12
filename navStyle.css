@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100;0,300;1,100&display=swap');/* CSS VARIABLES */
+:root {
+    --clr-dark: #020024;
+    --clr-light: #F6EEF2;
+    --clr-bg: #f4f4f4;
+    --clr-primary: #0A502E;
+    --clr-secondary: #7E73F9;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+/* NAV BAR */
+.navBar {
+    background-color: var(--clr-primary);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    border-bottom: 1px solid #F6EEF2;
+    padding: 20px;
+}
+
+#name {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: xx-large;
+}
+
+#name-link{
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: xx-large;
+    color: white;
+    text-decoration: none;
+}
+
+#name-link:hover{
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: 31px;
+    color: white;
+    text-shadow: 3px 4px #163d15;
+    transition: all .6s;
+}
+
+
+.navs {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex: 1;
+
+    padding: 10px;
+    gap: 1em;
+}
+
+.navs > p { 
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+}
+
+.navs > a {
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-size: small;
+    color: var(--clr-light);
+    text-decoration: none;
+}
+
+.navs > a:hover {
+    text-decoration: underline;
+}
