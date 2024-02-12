@@ -57,6 +57,23 @@ h1 {
     font-size: xx-large;
 }
 
+#name-link{
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: xx-large;
+    color: white;
+    text-decoration: none;
+}
+
+#name-link:hover{
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: xx-large;
+    color: white;
+    text-shadow: 2px 2px #FF0000;
+}
+
+
 .navs {
     display: flex;
     align-items: center;
