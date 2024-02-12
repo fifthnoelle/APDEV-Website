@@ -12,6 +12,7 @@
     --clr-light: #F6EEF2;
     --clr-bg: #f4f4f4;
     --clr-primary: #0A502E;
+    --clr-bg-two: #d4e8d3;
     --clr-secondary: #7E73F9;
 }
 
@@ -114,7 +115,8 @@
 .profile-userinfo {
     display: flex;
     flex-direction: column;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
     color: var(--clr-primary);
     width: 100%;
     padding-left: 50px;
@@ -177,6 +179,8 @@
 }
 
 [class*="body"] > strong {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
     color: var(--clr-primary);
     padding-bottom: 10px;
     font-size: 23px;
