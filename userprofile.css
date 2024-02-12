@@ -1,0 +1,109 @@
+
+/* PARENT *********************************** */
+.parent-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER *********************************** */
+.header-logo > img {
+    width: 300px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header-search,
+.header-navigation {
+    display: flex;
+    align-items: center;
+    font-size: large;
+}
+
+.header-search form,
+.header-navigation {
+    margin: 0; 
+    display: flex;
+}
+
+.header-search {
+    padding-left: 20px;
+}
+
+.header-search input[type="text"]{
+    font-family: 'Montserrat', sans-serif;
+    width: 120%;
+}
+
+.header-search input[type="text"]::placeholder {
+    color: #2E5B2D;
+    font-style: italic;
+}
+
+.header-search button {
+    font-family: 'Montserrat', sans-serif;
+    padding: 5px 10px;
+    border: white 1px solid;
+    background-color: #2E5B2D;
+    color: white;
+    border-radius: 10%;
+}
+
+.header-navigation > a {
+    padding-right: 30px;
+    color: #2E5B2D;
+}
+
+/* PROFILE BOX *********************************** */
+.profile-box {
+    display: flex;
+    justify-content: space-around;
+    background-color: #2E5B2D;
+    color: white;
+    height: 300px;
+}
+
+[class*="profile"] {
+    display: flex;
+}
+
+.profile-photo > img {
+    padding: 5px 5px 5px 5px;
+    width: 250px;
+    max-height: 250px;
+    border-radius: 55%;
+}
+
+.profile-userinfo {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    padding-left: 50px;
+    align-items: flex-start;
+    align-self: flex-start;
+    padding-top: 20px;
+}
+
+.pill {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: #2E5B2D;
+    padding: 15px 20px;
+    margin: 0.4em;
+    cursor: pointer;
+}
+
+.profile-photo {
+    align-items: center;
+    padding-left: 100px;
+}
+
+.profile-edit {
+    align-items: center;
+    width: 30%;
+    align-items: center;
+}
