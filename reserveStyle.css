@@ -4,6 +4,7 @@
     --clr-light: #F6EEF2;
     --clr-bg: #f4f4f4;
     --clr-primary: #0A502E;
+    --clr-bg-two: #d4e8d3; /*pale green bg*/
     --clr-secondary: #7E73F9;
 }
 
@@ -93,5 +94,48 @@
     height: 50px;
     background-color: var(--clr-primary);
     border-radius: 10px;
+    color: var(--clr-primary);
+}
+
+.reserveLinks {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    width: 100%;
+    padding: 0px 30px;
+    gap: 20px;
+}
+
+.reserveFunction {
+    width: 32%;
+    height: 200px;
+    gap: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: var(--clr-light);
+    color: var(--clr-dark);
+    border-radius: 10px;
+    border: 1px solid var(--clr-primary);
+    box-shadow: 2px 2px 4px 1px rgba(0,0,0,.8);
+}
+
+.button {
+    background-color: var(--clr-primary);
+    padding: 2px 5px;
+    border-radius: 10px;
+}
+
+.button > a {
+    text-decoration: none;
+    color: var(--clr-light);
+}
+
+.reserveFunction > h1 {
     color: var(--clr-primary);
 }
