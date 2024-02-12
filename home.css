@@ -64,4 +64,5 @@ img.computer{
 	border-radius: 50px;
 	margin: 20px 0 0 0;
 	border: 1px solid var(--clr-primary);
+	cursor: pointer;
 }
