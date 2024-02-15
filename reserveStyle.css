@@ -124,6 +124,15 @@
     justify-content: center;
 }
 
+.reserveBtn {
+    width: 70px;
+    height: 20px;
+    background-color: var(--clr-bg-two);
+    border-radius: 10px;
+    border: 0px;
+    color: var(--clr-primary);
+}
+
 .reserveContainer {
     display: flex;
     background-color: var(--clr-bg-two);
