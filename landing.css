@@ -42,6 +42,11 @@ img.computer{
 	font-size: 15px;
 }
 
+.welcome-desc{
+	font-size: 13px;
+	text-align: justify;
+}
+
 #button{
 	color: var(--clr-light);
 	background-color: var(--clr-primary);

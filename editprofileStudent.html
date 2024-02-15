@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link href="style.css" rel="stylesheet" />
+    <link href="editprofile.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.google.com/specimen/Bebas+Neue">
+<!--<<<<<< HEAD
+    
+=======-->
+    <link rel="stylesheet" href="navStyle.css">
+<!-- >>>>>>> a2868f32549bdd8b326453904c3bb5c7115e760b-->
+</head>
+
+<body>
+    <div class="navBar">
+        <span id="name"><a id="name-link" href="indexStudent.html" target="_self">iLabs</a></span>
+        <div class="navs">
+            <a href="indexStudent.html" target="_self">home</a>
+            <p>|</p>
+            <a href="reserveStudent.html" target="_self">reservation</a>
+            <p>|</p>
+            <a href="userprofileStudent.html" target="_self">account</a>
+            <p>|</p>
+            <a href="#">logout</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="title"><h1>Edit Student Profile</h1></div>
+        <div class="profile-img">
+            <img src="profile_photo.png" class="profile-img">
+        </div>
+        <div class="form">
+            <div class="details">
+            <div class="name">
+                <div>
+                <b>First Name: </b><br><input class="form" type="text" id="change-first" value="Sam"/>
+                </div>
+                <div>
+                <b>Last Name: </b><br><input class="form" type="text" id="change-last" value="O'Neil"/>
+                </div>
+            </div>
+
+            <div class="id-num">
+                <b>ID Number: </b><br><input class="form" type="text" id="change-id" value="122*****"/>
+            </div>
+                <b>E-mail:</b><input class="form" type="text" id="change-email" value="samantha****@dlsu.edu.ph"/>
+            <div> 
+                <b>Mobile Number: </b><br><input class="form" type="text" id="change-num" value="09*********"/>
+            <div><button class="button" id="submit-profile">Edit Profile</button></div>
+            </div>
+            </div>
+            <!-- Password details can be omitted if too much work -->
+            <br><br>
+            <div class="password">
+                <div>
+                    <b>New Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password"/>
+                </div>
+                <div>
+                    <b>Confirm New Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password to Confirm"/>
+                </div>
+                <div>
+                    <b>Current Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter Current Password"/>
+                </div>
+                <button class="button" id="submit-password">Change Password</button>
+            </div>
+        </div>
+        <div class="delete-account"><a href="deleteprofileStudent.html"><button class="alert-button">Delete Account</button></a></div>
+    </div>
+</body>
+</html>

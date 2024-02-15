@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit</title>
+    <title>Test</title>
     <link href="style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="navStyle.css"> <!--header-->
+    <link rel="stylesheet" href="navStyle.css">
     <link rel="stylesheet" href="reserveStyle.css">
-    <link rel="stylesheet" href="https://fonts.google.com/specimen/Bebas+Neue"> <!--font-->
+    <link rel="stylesheet" href="https://fonts.google.com/specimen/Bebas+Neue">
 </head>
-</html>
 <body>
     <div class="navBar">
         <span id="name"><a id="name-link" href="indexStudent.html" target="_self">iLabs</a></span>
         <div class="navs">
-            <a href="indexStudent.html" target="_self">home</a>
+            <a href="indexTech.html" target="_self">home</a>
             <p>|</p>
             <a href="reserveStudent.html" target="_self">reservation</a>
             <p>|</p>
-            <a href="userprofileStudent.html" target="_self">account</a>
+            <a href="userprofileTech.html" target="_self">account</a>
             <p>|</p>
             <a href="#">logout</a>
         </div>
     </div>
     <section>
-        <div class = "mainContent">
+        <div class="mainContent">
             <div class="reminders">
                 <h4>Reminders</h4>
                 <ul>
@@ -40,25 +39,29 @@
                         <div class="formPersonal">
                             <div class="formQuestion">
                                 <label for="Name"><b>Name</b></label>
-                                <input type="text" value="Sam O'Neil">
+                                <input type="text">
                             </div>
                         </div>
                         <div class="formPersonal">
                             <div class="formQuestion">
                                 <label for="email"><b>Email</b></label>
-                                <input type="text" value="samantha****@dlsu.edu.ph">
+                                <input type="text">
                             </div>
                         </div>
-                        <div class = "formPersonal">
+                        <div class="formLab">
                             <div class="formQuestion">
-                                <label for="Seatx"><b>Seat No.</b></label>
-                                <input type ="text" value="1-1">
+                                <label for="laboratory"><b>Computer Laboratory</b></label>
+                                <select name="laboratory" id="lab">
+                                    <option value="--">-- Select Lab</option>
+                                    <option value="GK304A">GK304A</option>
+                                    <option value="GK503B">GK503B</option>
+                                </select>
                             </div>
                         </div>
                         <div class="formDateTime">
                             <div class="formQuestion">
                                 <label for="date"><b>Date</b></label>
-                                <input type="calendar" id="date" name="date" placeholder="05/09/04">
+                                <input type="calendar" id="date" name="date">
                             </div>
                             <div class="formQuestion">
                                 <label for="time"><b>Time</b></label>
@@ -83,70 +86,70 @@
                     <div class="seats">
                         <div class="seatsColumn">
                             <div class="seatsGroup">
-                                <span class="seat">1</span>
-                                <span class="seat">2</span>
-                                <span class="seat">3</span>
+                                <span class="seat" id="A1">01</span>
+                                <span class="seat" id="A2">02</span>
+                                <span class="seat" id="A3">03</span>
                             </div>
                             <div class="seatsGroup">
-                                <span class="seat">4</span>
-                                <span class="seat">5</span>
-                                <span class="seat">6</span>
+                                <span class="seat" id="A4">04</span>
+                                <span class="seat" id="A5">05</span>
+                                <span class="seat" id="A6">06</span>
                             </div>
                             <div class="seatsGroup">
-                                <span class="seat">7</span>
-                                <span class="seat">8</span>
-                                <span class="seat">9</span>
-                            </div>
-                        </div>
-                        <div class="seatsColumn">
-                            <div class="seatsGroup">
-                                <span class="seat">1</span>
-                                <span class="seat">2</span>
-                                <span class="seat">3</span>
-                            </div>
-                            <div class="seatsGroup">
-                                <span class="seat">4</span>
-                                <span class="seat">5</span>
-                                <span class="seat">6</span>
-                            </div>
-                            <div class="seatsGroup">
-                                <span class="seat">7</span>
-                                <span class="seat">8</span>
-                                <span class="seat">9</span>
+                                <span class="seat" id="A7">07</span>
+                                <span class="seat" id="A8">08</span>
+                                <span class="seat" id="A9">09</span>
                             </div>
                         </div>
                         <div class="seatsColumn">
                             <div class="seatsGroup">
-                                <span class="seat">1</span>
-                                <span class="seat">2</span>
-                                <span class="seat">3</span>
+                                <span class="seat" id="A10">10</span>
+                                <span class="seat" id="A11">11</span>
+                                <span class="seat" id="A12">12</span>
                             </div>
                             <div class="seatsGroup">
-                                <span class="seat">4</span>
-                                <span class="seat">5</span>
-                                <span class="seat">6</span>
+                                <span class="seat" id="A13">13</span>
+                                <span class="seat" id="A14">14</span>
+                                <span class="seat" id="A15">15</span>
                             </div>
                             <div class="seatsGroup">
-                                <span class="seat">7</span>
-                                <span class="seat">8</span>
-                                <span class="seat">9</span>
+                                <span class="seat" id="A16">16</span>
+                                <span class="seat" id="A17">17</span>
+                                <span class="seat" id="A18">18</span>
                             </div>
                         </div>
                         <div class="seatsColumn">
                             <div class="seatsGroup">
-                                <span class="seat">1</span>
-                                <span class="seat">2</span>
-                                <span class="seat">3</span>
+                                <span class="seat" id="A19">19</span>
+                                <span class="seat" id="A20">20</span>
+                                <span class="seat" id="A21">21</span>
                             </div>
                             <div class="seatsGroup">
-                                <span class="seat">4</span>
-                                <span class="seat">5</span>
-                                <span class="seat">6</span>
+                                <span class="seat" id="A22">22</span>
+                                <span class="seat" id="A23">23</span>
+                                <span class="seat" id="A24">24</span>
                             </div>
                             <div class="seatsGroup">
-                                <span class="seat">7</span>
-                                <span class="seat">8</span>
-                                <span class="seat">9</span>
+                                <span class="seat" id="A25">25</span>
+                                <span class="seat" id="A26">26</span>
+                                <span class="seat" id="A27">27</span>
+                            </div>
+                        </div>
+                        <div class="seatsColumn">
+                            <div class="seatsGroup">
+                                <span class="seat" id="A28">28</span>
+                                <span class="seat" id="A29">29</span>
+                                <span class="seat" id="A30">30</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat" id="A31">31</span>
+                                <span class="seat" id="A32">32</span>
+                                <span class="seat" id="A33">33</span>
+                            </div>
+                            <div class="seatsGroup">
+                                <span class="seat" id="A34">34</span>
+                                <span class="seat" id="A35">35</span>
+                                <span class="seat" id="A36">36</span>
                             </div>
                         </div>
                     </div>

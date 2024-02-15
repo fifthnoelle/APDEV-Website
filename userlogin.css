@@ -121,6 +121,14 @@ body {
     font-size: 16px;
     color: var(--clr-light);
     font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.viewContainer > a {
+    text-decoration: none;
 }
 
 .wrapper .btn:hover{
@@ -164,7 +172,6 @@ body {
     transition: all .6s;
     cursor: pointer;
 }
-
 .wrapper .register-link {
     font-family: 'Montserrat' sans-serif;
     font-size: 15px;
@@ -184,4 +191,9 @@ body {
 
 .wrapper .register-link a::hover{
     text-decoration: underline;
+}
+.viewContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

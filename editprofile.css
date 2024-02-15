@@ -5,27 +5,126 @@ body{
 
 .main{
 	display: flex;
-	justify-content: center;
-	padding: 5%;
+	flex-direction: column;
+	align-items: center;
+	padding: 2%;
 }
 
 div.form{
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: space-evenly;
-	gap: 10%;
+	gap: 5%;
 	background-color: var(--clr-bg-two);
 	border: 1px solid var(--clr-dark);
+	border-radius: 10px;
 	padding: 3%;
+	width: 60%;
 }
 
 input.form{
 	color: var(--clr-dark);
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
+    width: 100%;
+    border: 1px solid var(--clr-primary);
+}
+
+div.details{
+	width: 50%;
+}
+
+div.password{
+	width: 50%;
 }
 
 .name{
 	display: flex;
 	flex-direction: row;
+}
+
+.title{
+	font-family: 'Bebas Neue', sans-serif;
+	letter-spacing: 2px;
+	font-size: 30px;
+	color: var(--clr-primary);
+}
+
+div.profile-img{
+    align-items: center;
+    padding: 1%;
+}
+
+img.profile-img{
+	padding: 5px 5px 5px 5px;
+    width: 150px;
+    max-height: 200px;
+    border: 1px solid var(--clr-primary);
+    border-radius: 55%;
+}
+
+.alert{
+	text-align: center;
+}
+
+button.button{
+	color: var(--clr-light);
+	background-color: var(--clr-primary);
+	font-size: 15px;
+	font-family: 'Montserrat', sans-serif;
+	width: 200px;
+	padding: 3%;
+	border-radius: 50px;
+	margin: 20px 0 0 0;
+	border: none;
+}
+
+
+
+/* ---- Delete Account ---- */
+
+button.alert-button{
+	color: var(--clr-light);
+	background-color: maroon;
+	font-size: 15px;
+	font-family: 'Montserrat', sans-serif;
+	width: 200px;
+	padding: 3%;
+	border-radius: 50px;
+	margin: 20px 0 0 0;
+	border: none;
+}
+
+div.alert-box{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	gap: 5%;
+	background-color: var(--clr-bg-two);
+	border: 1px solid var(--clr-dark);
+	border-radius: 10px;
+	padding: 3%;
+	width: 40%;
+}
+
+div.delete-account{
+	margin: 0 5px 0 5px;
+}
+
+.options{
+	display: flex;
+	flex-direction: row;
+}
+
+button:hover{
+	color: var(--clr-primary);
+	background-color: var(--clr-light);
+	font-size: 15px;
+	transition: all .5s;
+	width: 200px;
+	padding: 3%;
+	border-radius: 50px;
+	margin: 20px 0 0 0;
+	border: 1px solid var(--clr-primary);
+	cursor: pointer;
 }

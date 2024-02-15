@@ -15,13 +15,13 @@
     <div class="navBar">
         <span id="name">iLabs</span>
         <div class="navs">
-            <a href="index.html">home</a>
+            <a href="indexStudent.html" target="_self">home</a>
             <p>|</p>
-            <a href="reserve.html">reservation</a>
+            <a href="reserveStudent.html" target="_self">reservation</a>
             <p>|</p>
-            <a href="userprofile.html">account</a>
+            <a href="userprofileStudent.html" target="_self">account</a>
             <p>|</p>
-            <a href="">logout</a>
+            <a href="#">logout</a>
         </div>
     </div>
     <section>
@@ -38,11 +38,23 @@
                         <option value="GK304A">GK304A</option>
                         <option value="GK503B">GK503B</option>
                     </select>
-                    
+                    <label for="time">Time</label>
+                    <select name="time" id="time">
+                            <option value="1">8:00 - 9:30</option>
+                            <option value="2">10:00 - 11:30</option>
+                            <option value="3">12:00 - 13:30</option>
+                            <option value="4">14:00 - 15:30</option>
+                            <option value="5">16:00 - 17:30</option>
+                            <option value="6">18:00 - 19:30</option>
+                    </select>
+                    <input type="submit" class="reserveBtn" value="Filter">
                 </form>
             </div>
             <div class="seatsContainer">
-                <span class="seatLabel">seat no. :</span>
+                <div class="legendContainer">
+                    <span class="available"></span> available
+                    <span class="unavailable"></span> unavailable
+                </div>
                 <div class="seats">
                     <div class="seatsColumn">
                         <div class="seatsGroup">
