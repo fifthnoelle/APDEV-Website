@@ -68,7 +68,7 @@
 .reserveTitle > h1 {
     font-family: 'Bebas Neue', sans-serif;
 	letter-spacing: 2px;
-	font-size: 30px;
+	font-size: 3em;
 	color: var(--clr-primary);
 }
 
