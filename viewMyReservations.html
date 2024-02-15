@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations</title>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="navStyle.css">
+    <link rel="stylesheet" href="reserveStyle.css">
+    <link rel="stylesheet" href="https://fonts.google.com/specimen/Bebas+Neue">
+</head>
+<body>
+    <div class="navBar">
+        <span id="name"><a id="name-link" href="indexStudent.html" target="_self">iLabs</a></span>
+        <div class="navs">
+            <a href="indexStudent.html" target="_self">home</a>
+            <p>|</p>
+            <a href="reserveStudent.html" target="_self">reservation</a>
+            <p>|</p>
+            <a href="userprofileStudent.html" target="_self">account</a>
+            <p>|</p>
+            <a href="#">logout</a>
+        </div>
+    </div>
+    <section>
+        <div class="mainContent">
+        <h1>Reservations</h1>
+        <div class="filterContainer">
+            <h4>Filter</h4>
+            <form action="">
+                <label for="date">Date</label>
+                <input type="date">
+                <label for="compLab">Comp. Lab</label>
+                <select name="compLab" id="compLab">
+                    <option value="--">-- Select Lab</option>
+                    <option value="GK304A">GK304A</option>
+                    <option value="GK503B">GK503B</option>
+                </select>
+                <input type="submit" class="submitBtn" value="Filter">
+            </form>
+        </div>
+        <table id="reservations">
+            <tr>
+                <th>Computer Lab</th>
+                <th>Date</th>
+                <th>Time Slot</th>
+                <th>Email</th>
+                <th>User</th>
+                <th>Seat Number</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>GK304B</td>
+                <td>Feb 14, 2024</td>
+                <td>8:00 - 9:30</td>
+                <td>samantha*****@gmail.com</td>
+                <td>samOneil</td>
+                <td>A02</td>
+                <td>
+                    <div class="cont">
+                        <form action="editStudent.html">
+                            <button type="submit" class="submitBtn">Edit</button>
+                            </form> 
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>GK304B</td>
+                <td>Feb 14, 2024</td>
+                <td>8:00 - 9:30</td>
+                <td>samantha*****@gmail.com</td>
+                <td>samOneil</td>
+                <td>A02</td>
+                <td>
+                    <div class="cont">
+                        <form action="editStudent.html">
+                            <button type="submit" class="submitBtn">Edit</button>
+                            </form> 
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </section>
+</body>
+</html>
