@@ -16,20 +16,20 @@
 
 <body>
     <div class="navBar">
-        <span id="name"><a id="name-link" href="indexStudent.html" target="_self">iLabs</a></span>
+        <span id="name"><a id="name-link" href="indexTech.html" target="_self">iLabs</a></span>
         <div class="navs">
-            <a href="indexStudent.html" target="_self">home</a>
+            <a href="indexTech.html" target="_self">home</a>
             <p>|</p>
             <a href="reserveStudent.html" target="_self">reservation</a>
             <p>|</p>
-            <a href="userprofileStudent.html" target="_self">account</a>
+            <a href="userprofileTech.html" target="_self">account</a>
             <p>|</p>
             <a href="#">logout</a>
         </div>
     </div>
 
     <div class="main">
-        <div class="title"><h1>Edit Student Profile</h1></div>
+        <div class="title"><h1>Edit Technician Profile</h1></div>
         <div class="profile-img">
             <img src="profile_photo.png" class="profile-img">
         </div>
@@ -37,17 +37,22 @@
             <div class="details">
             <div class="name">
                 <div>
-                <b>First Name: </b><br><input class="form" type="text" id="change-first" value="Sam"/>
+                <b>First Name: </b><br><input class="form" type="text" id="change-first" value="Pedro"/>
                 </div>
                 <div>
-                <b>Last Name: </b><br><input class="form" type="text" id="change-last" value="O'Neil"/>
+                <b>Last Name: </b><br><input class="form" type="text" id="change-last" value="Pascual"/>
                 </div>
             </div>
 
-            <div class="id-num">
-                <b>ID Number: </b><br><input class="form" type="text" id="change-id" value="122*****"/>
+            <div class="room">
+                <b>Room: </b><br>
+                <select name="laboratory" id="lab">
+                    <option value="--">-- Select Lab</option>
+                    <option value="GK304A">GK304A</option>
+                    <option value="GK503B">GK503B</option>
+                </select>
             </div>
-                <b>E-mail:</b><input class="form" type="text" id="change-email" value="samantha****@dlsu.edu.ph"/>
+                <b>E-mail:</b><input class="form" type="text" id="change-email" value="pedro****@dlsu.edu.ph"/>
             <div> 
                 <b>Mobile Number: </b><br><input class="form" type="text" id="change-num" value="09*********"/>
             <div><button class="button" id="submit-profile">Edit Profile</button></div>
