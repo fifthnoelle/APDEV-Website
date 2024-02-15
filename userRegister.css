@@ -134,3 +134,24 @@ body {
     text-decoration: underline;
     cursor: pointer;
 }
+
+.wrapper .login-link {
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 2px;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin-top: 20px;
+}
+
+.wrapper .login-link a {
+    color: var(--clr-primary);
+    text-decoration: none;
+    padding-left: 5px;
+}
+
+.wrapper .login-link a:hover{
+    text-decoration: underline;
+}
