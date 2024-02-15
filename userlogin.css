@@ -121,6 +121,14 @@ body {
     font-size: 16px;
     color: var(--clr-light);
     font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.viewContainer > a {
+    text-decoration: none;
 }
 
 .wrapper .btn:hover{
