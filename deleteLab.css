@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100;0,300;1,100&display=swap');/* CSS VARIABLES */
+:root {
+    --clr-dark: #020024;
+    --clr-light: #F6EEF2;
+    --clr-bg: #f4f4f4;
+    --clr-primary: #0A502E;
+    --clr-bg-two: #d4e8d3; /*pale green bg*/
+    --clr-secondary: #7E73F9;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+/*delete time*/
+.mainCont{
+    display: flex;
+    flex-direction: column;
+   
+    padding-top: 20px;
+    width: 50%;
+    height: 70%;
+    font-family: 'Montserrat';
+}
+.headerbox{
+    border: none;
+    background-color:var(--clr-primary);
+    color: var(--clr-light);
+
+    margin-right: 5px;
+    padding: 5px;
+    align-content: left;
+    width: 100%;
+    max-width: 100%;
+}
+
+.deleteCont{
+    display: flex;
+    flex-direction: column;
+
+    font-family: 'Montserrat', sans-serif;
+    color: var(--clr-primary);
+}
+
+.text1{
+    padding-top: 3%;
+}
+
+.text1 > textarea{
+    text-align: start;
+    width: 100%;
+    height: 100%; 
+    max-width: 100%;
+    max-height: 100%; 
+    resize: none; 
+}
+
+.submitBtn {
+    font-family: 'Montserrat', sans-serif;
+    padding: 2px 8px;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    border-radius: 10px;
+}
+
