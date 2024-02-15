@@ -180,6 +180,29 @@
     gap: 10px;
 }
 
+.legendContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    padding: 10px;
+    gap: 10px;
+}
+
+.available {
+    height: 18px;
+    width: 18px;
+    background-color: var(--clr-primary);
+    border: 1px solid var(--clr-dark);
+}
+
+.unavailable {
+    height: 18px;
+    width: 18px;
+    background-color: rgb(95, 95, 95);
+    border: 1px solid var(--clr-dark);
+}
+
 #A1 ,#A11, #A12, #A13, #A26, #A27, #A29 {
     background-color: rgb(95, 95, 95);
     pointer-events: none;
