@@ -73,7 +73,8 @@
 }
 
 .seat:hover{
-    background-color: yellow;
+    background-color: var(--clr-bg-two);
+    color: var(--clr-primary);
 }
 .seats {
     display: flex;
@@ -99,7 +100,11 @@
     height: 50px;
     background-color: var(--clr-primary);
     border-radius: 10px;
-    color: var(--clr-primary);
+    color: var(--clr-light);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .reserveLinks {
