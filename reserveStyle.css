@@ -54,7 +54,23 @@
     gap: 10px;
 }
 
+.reserveTitle {
+    padding: 10px;
+    height: 60px;
 
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.reserveTitle > h1 {
+    font-family: 'Bebas Neue', sans-serif;
+	letter-spacing: 2px;
+	font-size: 3em;
+	color: var(--clr-primary);
+}
 
 .seatsContainer {
     display: flex;
@@ -73,7 +89,9 @@
 }
 
 .seat:hover{
-    background-color: yellow;
+    background-color: var(--clr-bg-two);
+    color: var(--clr-primary);
+    transition: all .5s;
 }
 .seats {
     display: flex;
@@ -99,7 +117,19 @@
     height: 50px;
     background-color: var(--clr-primary);
     border-radius: 10px;
-    color: var(--clr-primary);
+    color: var(--clr-light);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reserveContainer {
+    display: flex;
+    background-color: var(--clr-bg-two);
+    flex: 1;
+    padding: 50px 20px;
+    height: 400px;
 }
 
 .reserveLinks {
@@ -108,11 +138,11 @@
     flex: 1;
     width: 100%;
     padding: 0px 30px;
-    gap: 20px;
+    gap: 50px;
 }
 
 .reserveFunction {
-    width: 32%;
+    width: 30%;
     height: 200px;
     gap: 10px;
     padding: 10px;
@@ -123,7 +153,7 @@
     align-items: center;
     text-align: center;
 
-    background-color: var(--clr-light);
+    background-color: var(--clr-bg);
     color: var(--clr-dark);
     border-radius: 10px;
     border: 1px solid var(--clr-primary);
@@ -143,4 +173,37 @@
 
 .reserveFunction > h1 {
     color: var(--clr-primary);
+}
+
+.cont{
+    display: flex;
+    gap: 10px;
+}
+
+.legendContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    padding: 10px;
+    gap: 10px;
+}
+
+.available {
+    height: 18px;
+    width: 18px;
+    background-color: var(--clr-primary);
+    border: 1px solid var(--clr-dark);
+}
+
+.unavailable {
+    height: 18px;
+    width: 18px;
+    background-color: rgb(95, 95, 95);
+    border: 1px solid var(--clr-dark);
+}
+
+#A1 ,#A11, #A12, #A13, #A26, #A27, #A29 {
+    background-color: rgb(95, 95, 95);
+    pointer-events: none;
 }
