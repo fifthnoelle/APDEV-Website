@@ -73,7 +73,9 @@
 }
 
 .seat:hover{
-    background-color: yellow;
+    background-color: var(--clr-bg-two);
+    color: var(--clr-primary);
+    transition: all .5s;
 }
 .seats {
     display: flex;
@@ -99,7 +101,11 @@
     height: 50px;
     background-color: var(--clr-primary);
     border-radius: 10px;
-    color: var(--clr-primary);
+    color: var(--clr-light);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .reserveLinks {
@@ -143,4 +149,9 @@
 
 .reserveFunction > h1 {
     color: var(--clr-primary);
+}
+
+#A1 ,#A11, #A12, #A13, #A26, #A27, #A29 {
+    background-color: rgb(95, 95, 95);
+    pointer-events: none;
 }
