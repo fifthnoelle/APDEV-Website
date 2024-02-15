@@ -153,6 +153,7 @@
 
 .cont{
     display: flex;
+    gap: 10px;
 }
 
 #A1 ,#A11, #A12, #A13, #A26, #A27, #A29 {
