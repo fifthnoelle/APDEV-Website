@@ -111,6 +111,11 @@ div.delete-account{
 	margin: 0 5px 0 5px;
 }
 
+.options{
+	display: flex;
+	flex-direction: row;
+}
+
 button:hover{
 	color: var(--clr-primary);
 	background-color: var(--clr-light);
