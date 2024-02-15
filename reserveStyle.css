@@ -54,8 +54,6 @@
     gap: 10px;
 }
 
-
-
 .seatsContainer {
     display: flex;
     flex-direction: column;
@@ -160,3 +158,4 @@
     background-color: rgb(95, 95, 95);
     pointer-events: none;
 }
+
