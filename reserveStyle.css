@@ -151,6 +151,10 @@
     color: var(--clr-primary);
 }
 
+.cont{
+    display: flex;
+}
+
 #A1 ,#A11, #A12, #A13, #A26, #A27, #A29 {
     background-color: rgb(95, 95, 95);
     pointer-events: none;
