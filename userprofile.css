@@ -98,6 +98,7 @@
     height: 300px;
     outline: 2px solid var(--clr-primary);
     margin: 0 50px;
+    border-radius: 10px;
 }
 
 [class*="profile"] {

@@ -6,12 +6,17 @@ body{
 .main{
 	display: flex;
 	justify-content: center;
+	padding: 5%;
 }
 
-.form{
+div.form{
 	display: flex;
 	flex-direction: column;
+	justify-content: space-evenly;
 	gap: 10%;
+	background-color: var(--clr-bg-two);
+	border: 1px solid var(--clr-dark);
+	padding: 3%;
 }
 
 input.form{

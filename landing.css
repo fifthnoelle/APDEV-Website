@@ -42,7 +42,7 @@ img.computer{
 	font-size: 15px;
 }
 
-#reserve{
+#button{
 	color: var(--clr-light);
 	background-color: var(--clr-primary);
 	font-size: 15px;
@@ -54,7 +54,7 @@ img.computer{
 	border: none;
 }
 
-#reserve:hover{
+#button:hover{
 	color: var(--clr-primary);
 	background-color: var(--clr-light);
 	font-size: 15px;
