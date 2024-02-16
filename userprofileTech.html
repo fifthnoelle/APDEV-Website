@@ -6,6 +6,7 @@
     <title>ILABS | User Profile</title>
     <link href="userprofile.css" rel="stylesheet">
     <link rel="stylesheet" href="navStyle.css">
+    <link rel="stylesheet" href="reserveStyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;1,400;1,700;1,800&display=swap" rel="stylesheet">
@@ -33,7 +34,7 @@
             <img src="profile_photo.png" class="rounded-image">
         </div>
         <div class="profile-userinfo">
-            <h1>Pedro Pascual</h1>
+            <h1>Pa Lutrice</h1>
             <h3>Lab Technician GK302B</h3>
         </div>
         <div class="spacer">
@@ -50,11 +51,140 @@
         <div class="body-myprofile">
         <strong>My Labs</strong>
         <ul>
-            <li><a href="temp">GK304A MWH</a></li>
-            <li><a href="temp">GK0304B TF</a></li>
+            <li><a href="ViewAllReservations.html">View Reservations</a></li>
+            <li><a href="deleteprofileTech.html">Delete Profile</a></li>
         </ul>
         </div>
         <hr>
+        <div>
+            <div class="mainContent">
+                <h1>Reservations</h1>
+                <div class="filterContainer">
+                    <h4>Filter</h4>
+                    <form action="">
+                        <label for="date">Date</label>
+                        <input type="date">
+                        <label for="compLab">Comp. Lab</label>
+                        <select name="compLab" id="compLab">
+                            <option value="--">-- Select Lab</option>
+                            <option value="GK304A">GK304A</option>
+                            <option value="GK503B">GK503B</option>
+                        </select>
+                        <label for="time">Time</label>
+                        <select name="time" id="time">
+                            <option value="1">8:00 - 9:30</option>
+                            <option value="2">10:00 - 11:30</option>
+                            <option value="3">12:00 - 13:30</option>
+                            <option value="4">14:00 - 15:30</option>
+                            <option value="5">16:00 - 17:30</option>
+                            <option value="6">18:00 - 19:30</option>
+                        </select>
+                        <input type="submit" class="reserveBtn" value="Filter">
+                    </form>
+                </div>
+                <table id="reservations">
+                    <tr>
+                        <th>Computer Lab</th>
+                        <th>Date</th>
+                        <th>Time Slot</th>
+                        <th>Email</th>
+                        <th>User</th>
+                        <th>Seat Number</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>GK304B</td>
+                        <td>Feb 14, 2024</td>
+                        <td>8:00 - 9:30</td>
+                        <td>shaykintanar@gmail.com</td>
+                        <td>shayleneeK</td>
+                        <td>A01</td>
+                        <td>
+                            <div class="cont">
+                                <form action="editTechh.html">
+                                    <button type="submit" class="reserveBtn">Edit</button>
+                                    </form> 
+                                    <form action="deleteLab.html">
+                                        <button type="submit" class="reserveBtn">Delete</button>
+                                    </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GK304B</td>
+                        <td>Feb 14, 2024</td>
+                        <td>8:00 - 9:30</td>
+                        <td>shaykintanar@gmail.com</td>
+                        <td>shayleneeK</td>
+                        <td>A01</td>
+                        <td>
+                            <div class="cont">
+                                <form action="editTechh.html">
+                                    <button type="submit" class="reserveBtn">Edit</button>
+                                    </form> 
+                                    <form action="deleteLab.html">
+                                        <button type="submit" class="reserveBtn">Delete</button>
+                                    </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GK304B</td>
+                        <td>Feb 14, 2024</td>
+                        <td>8:00 - 9:30</td>
+                        <td>samantha*****@gmail.com</td>
+                        <td>samOneil</td>
+                        <td>A02</td>
+                        <td>
+                            <div class="cont">
+                                <form action="editTechh.html">
+                                    <button type="submit" class="reserveBtn">Edit</button>
+                                    </form> 
+                                    <form action="deleteLab.html">
+                                        <button type="submit" class="reserveBtn">Delete</button>
+                                    </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GK304B</td>
+                        <td>Feb 14, 2024</td>
+                        <td>8:00 - 9:30</td>
+                        <td>samantha*****@gmail.com</td>
+                        <td>samOneil</td>
+                        <td>A02</td>
+                        <td>
+                            <div class="cont">
+                                <form action="editTechh.html">
+                                    <button type="submit" class="reserveBtn">Edit</button>
+                                    </form> 
+                                    <form action="deleteLab.html">
+                                        <button type="submit" class="reserveBtn">Delete</button>
+                                    </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GK304B</td>
+                        <td>Feb 14, 2024</td>
+                        <td>8:00 - 9:30</td>
+                        <td>shaykintanar@gmail.com</td>
+                        <td>shayleneeK</td>
+                        <td>A01</td>
+                        <td>
+                            <div class="cont">
+                                <form action="editTechh.html">
+                                    <button type="submit" class="reserveBtn">Edit</button>
+                                    </form> 
+                                    <form action="deleteLab.html">
+                                        <button type="submit" class="reserveBtn">Delete</button>
+                                    </form>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
     <!-- END -->
     </div>
