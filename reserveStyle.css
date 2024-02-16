@@ -31,7 +31,7 @@
     color: var(--clr-primary);
 }
 
-#reservations tr:nth-child(even){background-color: #d2d2d2;}
+#reservations tr:nth-child(even){background-color: #ebeaea;}
 
 #reservations tr:hover {background-color: #ddd;}
 
@@ -127,7 +127,7 @@
 .reserveBtn {
     width: 70px;
     height: 20px;
-    background-color: var(--clr-bg-two);
+    background-color: rgb(135, 191, 135);
     border-radius: 10px;
     border: 0px;
     color: var(--clr-primary);
