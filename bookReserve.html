@@ -8,6 +8,25 @@
     <link rel="stylesheet" href="navStyle.css">
     <link rel="stylesheet" href="reserveStyle.css">
     <link rel="stylesheet" href="https://fonts.google.com/specimen/Bebas+Neue">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            let clicked = "";
+            for(let i = 1; i < 37; i++) {
+                $("#A"+i).click(function(){
+                    if(clicked != "") {
+                        $(clicked).css("background-color", "#0A502E");
+                        $(clicked).css("color", "#F6EEF2");
+                        clicked = String("#A" + i);
+                    }
+                        clicked = String("#A" + i);
+                        $("#A"+i).css("background-color", "#d4e8d3");
+                        $("#A"+i).css("color", "#0A502E");
+
+                });
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="navBar">
