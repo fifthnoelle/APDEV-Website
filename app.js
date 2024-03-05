@@ -23,8 +23,22 @@ server.get('/', function(req, resp){
 
 server.get('/indexStudent', function(req, resp){
     resp.render('indexStudent',{
-        layout: 'layoutReserve',
+        layout: 'layoutReserveHome',
         title: 'ILabs | Student HOME'
+    });
+});
+
+server.get('/reserveStudent', function(req, resp){
+    resp.render('reserveStudent',{
+        layout: 'layoutReserveHome',
+        title: 'ILabs | Reserve'
+    });
+});
+
+server.get('/viewMyReservations', function(req, resp){
+    resp.render('viewMyReservations',{
+        layout: 'layoutReserve',
+        title: 'ILabs | View My Reservations'
     });
 });
 
