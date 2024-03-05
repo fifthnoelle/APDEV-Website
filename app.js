@@ -21,6 +21,13 @@ server.get('/', function(req, resp){
     });
 });
 
+server.get('/indexStudent', function(req, resp){
+    resp.render('indexStudent',{
+        layout: 'layoutReserve',
+        title: 'ILabs | Student HOME'
+    });
+});
+
 const port = process.env.PORT | 9090;
 server.listen(port, function(){
     console.log('Listening at port '+port);
