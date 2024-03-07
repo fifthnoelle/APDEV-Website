@@ -32,15 +32,24 @@ input.form{
 
 div.details{
 	width: 50%;
+	
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 div.password{
 	width: 50%;
+
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .name{
 	display: flex;
 	flex-direction: row;
+	gap: 10px;
 }
 
 .title{
@@ -63,6 +72,10 @@ img.profile-img{
     border-radius: 55%;
 }
 
+.alert{
+	text-align: center;
+}
+
 button.button{
 	color: var(--clr-light);
 	background-color: var(--clr-primary);
@@ -75,7 +88,44 @@ button.button{
 	border: none;
 }
 
-button.button:hover{
+
+
+/* ---- Delete Account ---- */
+
+button.alert-button{
+	color: var(--clr-light);
+	background-color: maroon;
+	font-size: 15px;
+	font-family: 'Montserrat', sans-serif;
+	width: 200px;
+	padding: 3%;
+	border-radius: 50px;
+	margin: 20px 0 0 0;
+	border: none;
+}
+
+div.alert-box{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	gap: 5%;
+	background-color: var(--clr-bg-two);
+	border: 1px solid var(--clr-dark);
+	border-radius: 10px;
+	padding: 3%;
+	width: 40%;
+}
+
+div.delete-account{
+	margin: 0 5px 0 5px;
+}
+
+.options{
+	display: flex;
+	flex-direction: row;
+}
+
+button:hover{
 	color: var(--clr-primary);
 	background-color: var(--clr-light);
 	font-size: 15px;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservations</title>
+    <title>ILABS | View Reservation</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="stylesheet" href="navStyle.css">
     <link rel="stylesheet" href="reserveStyle.css">
@@ -15,11 +15,11 @@
         <div class="navs">
             <a href="indexTech.html" target="_self">home</a>
             <p>|</p>
-            <a href="reserveStudent.html" target="_self">reservation</a>
+            <a href="reserveTech.html" target="_self">reservation</a>
             <p>|</p>
             <a href="userprofileTech.html" target="_self">account</a>
             <p>|</p>
-            <a href="#">logout</a>
+            <a href="logoutTech.html">logout</a>
         </div>
     </div>
     <section>
@@ -36,7 +36,16 @@
                     <option value="GK304A">GK304A</option>
                     <option value="GK503B">GK503B</option>
                 </select>
-                <input type="submit" class="submitBtn" value="Filter">
+                <label for="time">Time</label>
+                <select name="time" id="time">
+                    <option value="1">8:00 - 9:30</option>
+                    <option value="2">10:00 - 11:30</option>
+                    <option value="3">12:00 - 13:30</option>
+                    <option value="4">14:00 - 15:30</option>
+                    <option value="5">16:00 - 17:30</option>
+                    <option value="6">18:00 - 19:30</option>
+                </select>
+                <input type="submit" class="reserveBtn" value="Filter">
             </form>
         </div>
         <table id="reservations">
@@ -58,11 +67,11 @@
                 <td>A01</td>
                 <td>
                     <div class="cont">
-                        <form action="editStudent.html">
-                            <button type="submit" class="submitBtn">Edit</button>
+                        <form action="editTechh.html">
+                            <button type="submit" class="reserveBtn">Edit</button>
                             </form> 
-                            <form action="">
-                                <button type="submit" class="submitBtn">Delete</button>
+                            <form action="deleteLab.html">
+                                <button type="submit" class="reserveBtn">Delete</button>
                             </form>
                     </div>
                 </td>
@@ -79,8 +88,44 @@
                         <form action="editLabTech.html">
                             <button type="submit" class="reserveBtn">Edit</button>
                             </form> 
-                            <form action="">
-                                <button type="submit" class="submitBtn">Delete</button>
+                            <form action="deleteLab.html">
+                                <button type="submit" class="reserveBtn">Delete</button>
+                            </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>GK304B</td>
+                <td>Feb 14, 2024</td>
+                <td>8:00 - 9:30</td>
+                <td>samantha*****@gmail.com</td>
+                <td>samOneil</td>
+                <td>A02</td>
+                <td>
+                    <div class="cont">
+                        <form action="editTechh.html">
+                            <button type="submit" class="reserveBtn">Edit</button>
+                            </form> 
+                            <form action="deleteLab.html">
+                                <button type="submit" class="reserveBtn">Delete</button>
+                            </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>GK304B</td>
+                <td>Feb 14, 2024</td>
+                <td>8:00 - 9:30</td>
+                <td>samantha*****@gmail.com</td>
+                <td>samOneil</td>
+                <td>A02</td>
+                <td>
+                    <div class="cont">
+                        <form action="editTechh.html">
+                            <button type="submit" class="reserveBtn">Edit</button>
+                            </form> 
+                            <form action="deleteLab.html">
+                                <button type="submit" class="reserveBtn">Delete</button>
                             </form>
                     </div>
                 </td>
