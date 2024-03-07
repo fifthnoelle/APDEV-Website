@@ -17,14 +17,16 @@ server.use(express.static('public'));
 
 
 server.get('/student-home', function(req, resp){
+	console.log('Student home loaded!')
     resp.render('sHome',{
         layout: 'index',
-        title: 'ILABS | Student Homepage'
+        title: 'ILABS | Student Homepage',
+        css: ''
     });
 });
 
 
 const port = process.env.PORT | 9090;
 server.listen(port, function(){
-	console.log("Listening at port" + port);
+	console.log("Listening at port " + port);
 });
