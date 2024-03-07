@@ -1,0 +1,31 @@
+{{>navigationBarStudent}}
+<section>
+    <div class="mainContent">
+        <div class="reminders">
+            <h4>Reminders</h4>
+            <ul>
+                <li>
+                    <p>Students must arrive on their designated reservation time. In the case that the student is not
+                        present in the laboratory 10 minutes after their time, their reservation will be
+                        <b>forfeited</b>.</p>
+                </li>
+                <li>
+                    <p>Students are encouraged to be on guard with their valuables (i.e. cell phone, wallet, and other
+                        electronic devices). The Information Technology Services Office will not be held liable for the
+                        <b>loss or damage of any personal property</b> of laboratory users.</p>
+                </li>
+                <li>
+                    <p>No one is allowed to alter the setting configuration of any computer laboratory facility without
+                        proper authorization from the Information Technology Services Office.</p>
+                </li>
+                <li>
+                    <p>Computer use in the laboratory are designated for <b>academic use</b>.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            {{> reserveForm}}
+            {{> seatTable}}
+        </div>
+    </div>
+</section>

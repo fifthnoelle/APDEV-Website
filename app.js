@@ -25,6 +25,36 @@ server.get('/student-home', function(req, resp){
     });
 });
 
+server.get('/bookReserve', function(req, resp){
+    resp.render('bookReserve',{
+        layout: 'layoutReserve',
+        title: 'ILabs | Book Reserve'
+    });
+});
+
+server.get('/indexStudent', function(req, resp){
+    resp.render('indexStudent',{
+        layout: 'layoutReserveHome',
+        title: 'ILabs | Student HOME'
+    });
+});
+
+server.get('/reserveStudent', function(req, resp){
+    resp.render('reserveStudent',{
+        layout: 'layoutReserveHome',
+        title: 'ILabs | Reserve'
+    });
+});
+
+server.get('/viewMyReservations', function(req, resp){
+    resp.render('viewMyReservations',{
+        layout: 'layoutReserve',
+        title: 'ILabs | View My Reservations'
+    });
+});
+
+
+
 
 const port = process.env.PORT | 9090;
 server.listen(port, function(){
