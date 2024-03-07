@@ -15,6 +15,15 @@ server.engine("hbs", handlebars.engine({
 server.use(express.static('public'));
 
 
+
+server.get('/student-home', function(req, resp){
+    resp.render('sHome',{
+        layout: 'index',
+        title: 'ILABS | Student Homepage'
+    });
+});
+
+
 const port = process.env.PORT | 9090;
 server.listen(port, function(){
 	console.log("Listening at port" + port);
