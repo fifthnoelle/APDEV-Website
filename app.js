@@ -21,7 +21,7 @@ server.get('/student-home', function(req, resp){
     resp.render('sHome',{
         layout: 'index',
         title: 'ILABS | Student Homepage',
-        css: ''
+        css: './css/landing.css'
     });
 });
 
