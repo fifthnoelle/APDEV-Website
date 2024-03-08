@@ -28,6 +28,13 @@ server.get('/userLoginStudent', function(req, resp){
     });
 });
 
+server.get('/userLoginTech', function(req, resp){
+    resp.render('userLoginTech',{
+        layout: 'layoutLogin',
+        title: 'ILABS | User Log-in',
+    });
+});
+
 server.get('/student-home', function(req, resp){
 	console.log('Student home loaded!')
     resp.render('sHome',{
