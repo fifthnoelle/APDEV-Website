@@ -14,6 +14,13 @@ server.engine("hbs", handlebars.engine({
 
 server.use(express.static('public'));
 
+server.get('/', function(req, resp){
+    resp.render('signIn',{
+        layout: 'layoutSignIn',
+        title: 'ILABS | Sign In',
+    });
+});
+
 server.get('/userLoginStudent', function(req, resp){
     resp.render('userLoginStudent',{
         layout: 'layoutLogin',
