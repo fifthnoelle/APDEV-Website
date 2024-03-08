@@ -14,7 +14,12 @@ server.engine("hbs", handlebars.engine({
 
 server.use(express.static('public'));
 
-
+server.get('/userLoginStudent', function(req, resp){
+    resp.render('userLoginStudent',{
+        layout: 'layoutLogin',
+        title: 'ILABS | User Log-in',
+    });
+});
 
 server.get('/student-home', function(req, resp){
 	console.log('Student home loaded!')
