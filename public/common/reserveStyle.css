@@ -95,7 +95,12 @@
 }
 .seats {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    justify-content: center;
+    align-items: center;
+
 }
 
 .seatsColumn {
@@ -113,15 +118,25 @@
 }
 
 .seat {
-    width: 28%;
+    width: 13%;
     height: 50px;
-    background-color: var(--clr-primary);
     border-radius: 10px;
+    background-color: var(--clr-primary);
     color: var(--clr-light);
 
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.available {
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+}
+
+.unavailable {
+    background-color: rgb(95, 95, 95);
+    pointer-events: none;
 }
 
 .reserveBtn {
@@ -198,22 +213,19 @@
     gap: 10px;
 }
 
-.available {
+.availableLegend {
     height: 18px;
     width: 18px;
     background-color: var(--clr-primary);
     border: 1px solid var(--clr-dark);
 }
 
-.unavailable {
+.unavailableLegend {
     height: 18px;
     width: 18px;
     background-color: rgb(95, 95, 95);
     border: 1px solid var(--clr-dark);
 }
 
-#A1 ,#A11, #A12, #A13, #A26, #A27, #A29 {
-    background-color: rgb(95, 95, 95);
-    pointer-events: none;
-}
+
 
