@@ -35,6 +35,20 @@ server.get('/userLoginTech', function(req, resp){
     });
 });
 
+server.get('/logoutTech', function(req, resp){
+    resp.render('logoutTech',{
+        layout: 'layoutLogout',
+        title: 'ILABS | Log-Out',
+    });
+});
+
+server.get('/', function(req, resp){
+    resp.render('logoutStudent',{
+        layout: 'layoutLogout',
+        title: 'ILABS | Log-Out',
+    });
+});
+
 server.get('/student-home', function(req, resp){
 	console.log('Student home loaded!')
     resp.render('sHome',{
