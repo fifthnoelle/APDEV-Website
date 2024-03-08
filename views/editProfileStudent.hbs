@@ -2,32 +2,32 @@
     <div class="main">
         <div class="title"><h1>Edit Student Profile</h1></div>
         <div class="profile-img">
-            <img src="profile_photo.png" class="profile-img">
+            <img src="{{profileimg}}" class="profile-img">
         </div>
         <div class="form">
             <div class="details">
 
-            <form class="form" id="form" onsubmit="return submitForm()" method="get">
+            <form class="form" id="form" onsubmit="return submitEditForm()" method="get">
 
             <div class="name">
                 <div>
-                <b>First Name: </b><br><input class="form" type="text" id="change-first" value="Sam"/>
+                <b>First Name: </b><br><input class="form" type="text" id="change-first" value="{{firstname}}"/>
                 </div>
                 <div>
-                <b>Last Name: </b><br><input class="form" type="text" id="change-last" value="O'Neil"/>
+                <b>Last Name: </b><br><input class="form" type="text" id="change-last" value="{{lastname}}"/>
                 </div>
             </div>
 
             <div class="id-num">
-                <b>ID Number: </b><br><input class="form" type="text" id="change-id" value="122*****"/>
+                <b>ID Number: </b><br><input class="form" type="text" id="change-id" value="{{idnum}}"/>
             </div>
 
             <div>
-                <b>E-mail:</b><input class="form" type="text" id="change-email" value="samantha****@dlsu.edu.ph"/>
+                <b>E-mail:</b><input class="form" type="text" id="change-email" value="{{email}}"/>
             </div>
 
             <div> 
-                <b>Mobile Number: </b><br><input class="form" type="text" id="change-num" value="09*********"/>
+                <b>Mobile Number: </b><br><input class="form" type="text" id="change-num" value="{{number}}"/>
             <div><input type="submit" class="button" id="submit-profile" value="Submit"/></div>
             </div>
             </form>
@@ -36,6 +36,7 @@
             <!-- Password details can be omitted if too much work -->
             <br><br>
             <div class="password">
+            <form class="form" id="password-form" onsubmit="return submitEditPassForm()" method="get">
                 <div>
                     <b>New Password: </b><br>
                     <input class="form" type="password" id="change-pw" placeholder="Enter New Password"/>
@@ -49,8 +50,8 @@
                     <input class="form" type="password" id="change-pw" placeholder="Enter Current Password"/>
                 </div>
                 <button class="button" id="submit-password">Change Password</button>
+            </form>
             </div>
-        </form>
         </div>
         <div class="delete-account"><a href="deleteprofileStudent.html"><button class="alert-button">Delete Account</button></a></div>
     </div>

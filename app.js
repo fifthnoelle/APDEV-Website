@@ -86,6 +86,21 @@ server.get('/viewMyReservations', function(req, resp){
     });
 });
 
+server.get('/editProfile/student', function(req, resp){
+    resp.render('editProfileStudent',{
+        layout: 'index',
+        title: 'ILabs | Edit My Profile'
+    });
+});
+
+
+server.get('/editProfile/technician', function(req, resp){
+    resp.render('editProfileTech',{
+        layout: 'index',
+        title: 'ILabs | Edit My Profile'
+    });
+});
+
 
 
 
