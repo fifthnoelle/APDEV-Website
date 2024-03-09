@@ -32,12 +32,16 @@ $(document).ready(function () {
             // No option is selected in the dropdown menu
             $("#time").val("");
             console.log("Please select a date first");
-        }
-        else {
+        } else if ($("#lab").val() === "") {
+            // No option is selected in the dropdown menu
+            $("#time").val("");
+            console.log("Please select a laboratory first");
+        } else {
             let selectedTime = $(this).val();
             let selectedDate = $("#date").val();
+            let selectedLab = $("#lab").val();
             $.post('load_seats',
-                { date: String(selectedDate), time: String(selectedTime) },
+                {lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
                 function (data, status) {
                     if (status === 'success') {
                         alert("Successful response received:");

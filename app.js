@@ -45,8 +45,8 @@ const seatSearchQuery = {};
 
 server.post('/load_seats', function (req, resp) {
     console.log("loadingg....");
-    const reservationSearchQuery = {date : req.body.date, time_slot : req.body.time}; 
-    console.log(req.body.time);
+    const reservationSearchQuery = {computer_lab : req.body.lab, date : req.body.date, time_slot : req.body.time}; 
+    console.log(req.body.lab + " " + req.body.date + " " + req.body.time);
 
 
     reservationModel.find(reservationSearchQuery).lean().then(function (reserve_data) {
