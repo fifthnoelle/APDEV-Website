@@ -89,28 +89,40 @@ server.get('/viewMyReservations', function(req, resp){
 server.get('/editProfile/student', function(req, resp){
     resp.render('editProfileStudent',{
         layout: 'index',
-        title: 'ILabs | Edit My Profile'
+        title: 'ILabs | Edit My Profile',
+        css: 'editprofile.css'
     });
 });
 
 server.get('/editProfile/technician', function(req, resp){
     resp.render('editProfileTech',{
         layout: 'index',
-        title: 'ILabs | Edit My Profile'
+        title: 'ILabs | Edit My Profile',
+        css: 'editprofile.css'
     });
 });
 
 server.get('/editProfile/technician/deleteProfile', function(req, resp){
     resp.render('deleteProfileTech',{
         layout: 'index',
-        title: 'ILabs | Delete My Profile'
+        title: 'ILabs | Delete My Profile',
+        css: 'editprofile.css'
     });
 });
 
 server.get('/editProfile/student/deleteProfile', function(req, resp){
     resp.render('deleteProfileStudent',{
         layout: 'index',
-        title: 'ILabs | Delete My Profile'
+        title: 'ILabs | Delete My Profile',
+        css: 'editprofile.css'
+    });
+});
+
+server.get('/deleteProfile=Success', function(req, resp){
+    resp.render('deleteSuccessful',{
+        layout: 'index',
+        title: 'ILabs | Delete Success',
+        css: 'editprofile.css'
     });
 });
 
