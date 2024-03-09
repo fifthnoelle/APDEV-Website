@@ -25,20 +25,22 @@
         <div class="formDateTime">
             <div class="formQuestion">
                 <label for="date"><b>Date</b></label>
-                <input type="date">
+                <input type="date" id="date">
             </div>
             <div class="formQuestion">
                 <label for="time"><b>Time</b></label>
                 <select name="time" id="time">
-                    <option value="1">8:00 - 9:30</option>
-                    <option value="2">10:00 - 11:30</option>
-                    <option value="3">12:00 - 13:30</option>
-                    <option value="4">14:00 - 15:30</option>
-                    <option value="5">16:00 - 17:30</option>
-                    <option value="6">18:00 - 19:30</option>
+                    <option value= "">- -</option>
+                    <option value="8:00 - 9:30">8:00 - 9:30</option>
+                    <option value="10:00 - 11:30">10:00 - 11:30</option>
+                    <option value="12:00 - 13:30">12:00 - 13:30</option>
+                    <option value="14:00 - 15:30">14:00 - 15:30</option>
+                    <option value="16:00 - 17:30">16:00 - 17:30</option>
+                    <option value="18:00 - 19:30">18:00 - 19:30</option>
                 </select>
             </div>
         </div>
+        <button class="submitBtn" id="loadSeats">Load Seats</button>
         <input type="submit" class="submitBtn">
     </form>
 </div>

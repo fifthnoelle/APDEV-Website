@@ -28,33 +28,59 @@ const seatSchema = new mongoose.Schema({
     laboratory: { type: String, required: true }
 }, { versionKey: false });
 
+const reserveSchema = new mongoose.Schema({
+    computer_lab: { "type": "String", "required": true },
+    date: { "type": "String", "required": true },
+    time_slot: { "type": "String", "required": true },
+    email: { "type": "String", "required": true },
+    user: { "type": "String", "required": true },
+    seat_num: { "type": "String", "required": true }
+})
+
 const seatModel = mongoose.model('seat', seatSchema);
 
-const searchQuery = {};
+const reservationModel = mongoose.model('reservation', reserveSchema);
 
- function checkAvailability(date, timeslot, seat) {
-    // 1.) iterate through reservations database under same date and timeslot
-    // 2.) if same seat id then return reserved/unavailable
-    // learn more about queries for mongoDB
-} 
+const seatSearchQuery = {};
+
+server.post('/load_seats', function (req, resp) {
+    console.log("loadingg....");
+    const reservationSearchQuery = {date : req.body.date, time_slot : req.body.time}; 
+    console.log(req.body.time);
+
+
+    reservationModel.find(reservationSearchQuery).lean().then(function (reserve_data) {
+        console.log("loading pt2");
+        resp.json({reservations: reserve_data });
+        console.log("loading pt3");
+    }).catch(errorFn)    
+})
 
 // Execute the find operation
-seatModel.find(searchQuery).lean().then(function (seat_data) {
+seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
     seat_data.forEach(function(seat) {
-        
-        seat.availability = checkAvailability(date, time, seat);
+        seat.availability = "available"
+        // seat.availability = checkAvailability(date, time, seat);
     });
-    console.log(seat_data);
+
+    server.get('/', function (req, resp) {
+        resp.render('bookReserve', {
+            layout: 'layoutReserve',
+            title: 'Serverr',
+            'seat-data': seat_data, // Pass the retrieved data to the view
+        });
+    });
 }).catch(errorFn);
 
 // Define your Express route handler
-server.get('/', function (req, resp) {
-    resp.render('bookReserve', {
-        layout: 'layoutReserve',
-        title: 'Serverr',
-        'seat-data': seat_data, // Pass the retrieved data to the view
-    });
-});
+
+/* 
+    seat_num
+    date
+    time
+    isAvailable
+*/
+
 
 
 server.get('/student-home', function (req, resp) {
