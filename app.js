@@ -42,7 +42,7 @@ server.get('/logoutTech', function(req, resp){
     });
 });
 
-server.get('/', function(req, resp){
+server.get('/logoutStudent', function(req, resp){
     resp.render('logoutStudent',{
         layout: 'layoutLogout',
         title: 'ILABS | Log-Out',
