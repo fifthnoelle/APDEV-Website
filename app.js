@@ -86,23 +86,58 @@ server.get('/viewMyReservations', function(req, resp){
     });
 });
 
-server.get('/editProfile/student', function(req, resp){
+server.get('/userProfile/student', function(req, resp){
+    resp.render('userProfileStudent',{
+        layout: 'index',
+        title: 'ILabs | Edit My Profile',
+        css: 'userprofile.css',
+        profileimg: '',
+        firstname: '',
+        lastname: '',
+        idnum: ''
+    });
+});
+
+server.get('/userProfile/technician', function(req, resp){
+    resp.render('userProfileTech',{
+        layout: 'index',
+        title: 'ILabs | Edit My Profile',
+        css: 'userprofile.css',
+        profileimg: '',
+        firstname: '',
+        lastname: '',
+        labnum: ''
+    });
+});
+
+server.get('/userProfile/student/edit', function(req, resp){
     resp.render('editProfileStudent',{
         layout: 'index',
         title: 'ILabs | Edit My Profile',
-        css: 'editprofile.css'
+        css: 'editprofile.css',
+        profileimg: '',
+        firstname: '',
+        lastname: '',
+        idnum: '',
+        email: '',
+        number: ''
     });
 });
 
-server.get('/editProfile/technician', function(req, resp){
+server.get('/userProfile/technician/edit', function(req, resp){
     resp.render('editProfileTech',{
         layout: 'index',
         title: 'ILabs | Edit My Profile',
-        css: 'editprofile.css'
+        css: 'editprofile.css',
+        profileimg: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        number: ''
     });
 });
 
-server.get('/editProfile/technician/deleteProfile', function(req, resp){
+server.get('/userProfile/technician/deleteProfile', function(req, resp){
     resp.render('deleteProfileTech',{
         layout: 'index',
         title: 'ILabs | Delete My Profile',
@@ -110,7 +145,7 @@ server.get('/editProfile/technician/deleteProfile', function(req, resp){
     });
 });
 
-server.get('/editProfile/student/deleteProfile', function(req, resp){
+server.get('/userProfile/student/deleteProfile', function(req, resp){
     resp.render('deleteProfileStudent',{
         layout: 'index',
         title: 'ILabs | Delete My Profile',
