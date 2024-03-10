@@ -26,68 +26,6 @@
     margin: 0;
 }
 
-/* NAV BAR */
-.navBar {
-    background-color: var(--clr-primary);
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    border-bottom: 1px solid white;
-    padding: 20px;
-}
-
-#name {
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 2px;
-    font-size: xx-large;
-}
-
-#name-link{
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 2px;
-    font-size: xx-large;
-    color: white;
-    text-decoration: none;
-}
-
-#name-link:hover{
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 2px;
-    font-size: 31px;
-    color: white;
-    text-shadow: 3px 4px #163d15;
-    transition: all .6s;
-}
-
-
-.navs {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    flex: 1;
-
-    padding: 10px;
-    gap: 1em;
-}
-
-.navs > p { 
-    font-family: 'Montserrat', sans-serif;
-    font-style: italic;
-}
-
-.navs > a {
-    font-family: 'Montserrat', sans-serif;
-    font-style: italic;
-    font-size: small;
-    color: var(--clr-light);
-    text-decoration: none;
-}
-
-.navs > a:hover {
-    text-decoration: underline;
-}
-
 /* PROFILE BOX *********************************** */
 .profile-box {
     display: flex;
@@ -97,7 +35,7 @@
     color: white;
     height: 300px;
     outline: 2px solid var(--clr-primary);
-    margin: 0 50px;
+    margin: 10px 50px;
     border-radius: 10px;
 }
 
