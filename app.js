@@ -9,8 +9,7 @@ server.use(express.urlencoded({ extended: true }));
 const handlebars = require("express-handlebars");
 server.set("view engine", "hbs");
 server.engine("hbs", handlebars.engine({
-    extname: "hbs",
-    partialsDir: __dirname + "/views/partials/" // Specify the path to your partials directory
+    extname: "hbs"
 }));
 
 server.use(express.static('public'));
