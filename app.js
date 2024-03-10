@@ -22,6 +22,14 @@ function errorFn(err) {
     console.error(err);
 }
 
+// const labtechSchema = new mongoose.Schema({
+
+// });
+
+// const studentSchema = new mongoose.Schema({
+
+// });
+
 const seatSchema = new mongoose.Schema({
     seat_id: { type: String, required: true },
     laboratory: { type: String, required: true }
@@ -116,7 +124,8 @@ server.get('/student-home', function (req, resp) {
 server.get('/indexStudent', function (req, resp) {
     resp.render('indexStudent', {
         layout: 'layoutReserveHome',
-        title: 'ILabs | Student HOME'
+        title: 'ILabs | Student HOME',
+        css: './css/landing.css'
     });
 });
 
