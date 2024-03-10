@@ -193,7 +193,7 @@ server.get('/viewMyReservations', function (req, resp) {
     });
 });
 
-server.get('/userProfile/student', function (req, resp) {
+server.get('/userProfileStudent', function (req, resp) {
     resp.render('userProfileStudent', {
         layout: 'index',
         title: 'ILabs | Edit My Profile',
