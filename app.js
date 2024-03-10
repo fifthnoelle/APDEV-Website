@@ -117,15 +117,15 @@ server.get('/student-home', function (req, resp) {
     resp.render('sHome', {
         layout: 'index',
         title: 'ILABS | Student Homepage',
-        css: './css/common/landing.css'
+        css: 'landing.css'
     });
 });
 
-server.get('/indexStudent', function (req, resp) {
-    resp.render('indexStudent', {
-        layout: 'layoutReserveHome',
-        title: 'ILabs | Student HOME',
-        css: './css/landing.css'
+server.get('/sHome', function (req, resp) {
+    resp.render('sHome', {
+        layout: 'index',
+        title: 'ILABS | Student Homepage',
+        css: 'landing.css'
     });
 });
 
