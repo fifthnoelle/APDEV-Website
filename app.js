@@ -14,6 +14,15 @@ server.engine("hbs", handlebars.engine({
 
 server.use(express.static('public'));
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/labs');
+
+
+function errorFn(err) {
+    console.log('Error found. Please trace!');
+    console.error(err);
+}
+
 server.get('/', function(req, resp){
     resp.render('signIn',{
         layout: 'layoutSignIn',
@@ -27,6 +36,45 @@ server.get('/userLoginStudent', function(req, resp){
         title: 'ILABS | User Log-in',
     });
 });
+
+const acctSchema = new mongoose.Schema({
+    u_name: {"type": "String", "required": true},
+    pass: {"type": "String", "required": true}
+}, { versionKey: false })
+
+const accountModel = mongoose.model('account', acctSchema, 'accounts');
+
+console.log('find user....');
+server.post('/login-funck', function(req, resp){
+    const { u_name, pass } = req.body; 
+    console.log('Request Body:', req.body);
+    console.log('find user....1');
+    console.log('Search query:', { u_name, pass }); 
+        // Define the search query for the current user
+        const searchQuery = {
+            u_name: u_name,
+            pass: pass
+        };
+
+    accountModel.findOne(searchQuery).lean().then(function (account){
+        console.log('find user....2');
+        if(account != undefined && account._id != null){
+            console.log('match');
+            resp.render('bookReserve',{
+                layout: 'layoutReserve',
+                title: 'ILabs | Book Reserve'
+            });
+          }else{
+            console.log('do not match');
+            resp.render('logoutStudent',{
+                layout: 'layoutLogout',
+                title: 'ILABS | Log-Out'
+            });
+          }
+        }).catch(errorFn);
+});
+
+
 
 server.get('/userLoginTech', function(req, resp){
     resp.render('userLoginTech',{

@@ -1,8 +1,15 @@
 <div class="wrapper">
-    <form onsubmit="" action='student-home' method='get'>
+    <form name="login-funck" action="login-funck" method="post">
         <h1 id="logintitle"><strong>Login as Student</strong></h1>
         <div class="log-in-container">
-            {{>userLoginFunc}}
+            <div class="input-box">
+            <input type="text" placeholder="Username" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Password" required>
+                <i class='bx bxs-lock-alt' ></i>
+            </div>
             <div class="remember">
                 <label><input type="checkbox"><span id="rem">Remember me?</span></label>
                 <a href="forgotPasswordStudent.html" id="forgotpw"><strong>Forgot Password?</strong></a>
