@@ -127,11 +127,37 @@ server.get('/reserveStudent', function (req, resp) {
     });
 });
 
-server.get('/viewSchedules', function (req, resp) {
-    resp.render('viewSchedules', {
-        layout: 'layoutReserve',
-        title: 'ILabs | Schedules'
+server.get('/reserveTech', function (req, resp) {
+    resp.render('reserveTech', {
+        layout: 'layoutReserveHome',
+        title: 'ILabs | Reserve'
     });
+});
+
+server.get('/viewSchedules', function (req, resp) {
+    seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        seat_data.forEach(function (seat) {
+            seat.availability = "available";
+        });
+        resp.render('viewSchedules', {
+            layout: 'layoutReserve',
+            title: 'ILabs | View Schedules',
+            'seat-data': seat_data
+        });
+    }).catch(errorFn);
+});
+
+server.get('/viewSchedulesTech', function (req, resp) {
+    seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        seat_data.forEach(function (seat) {
+            seat.availability = "available";
+        });
+        resp.render('viewSchedulesTech', {
+            layout: 'layoutReserve',
+            title: 'ILabs | View Schedules',
+            'seat-data': seat_data
+        });
+    }).catch(errorFn);
 });
 
 
