@@ -58,6 +58,14 @@ server.get('/', function (req, resp) {
     });
 });
 
+server.get('/studentRegister', function(req, resp){
+    resp.render('studentRegister', {
+        layout: 'index',
+        title: 'ILABS | Sign-Up',
+        css: 'userRegister.css'
+    });
+});
+
 server.get('/userLoginStudent', function (req, resp) {
     resp.render('userLoginStudent', {
         layout: 'layoutLogin',
