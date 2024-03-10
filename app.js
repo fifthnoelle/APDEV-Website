@@ -42,7 +42,7 @@ const acctSchema = new mongoose.Schema({
     pass: {"type": "String", "required": true}
 }, { versionKey: false })
 
-const accountModel = mongoose.model('account', acctSchema, 'accounts');
+const accountModel = mongoose.model('account', acctSchema);
 
 console.log('find user....');
 server.post('/login-funck', function(req, resp){
