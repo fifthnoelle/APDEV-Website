@@ -46,13 +46,13 @@ const accountModel = mongoose.model('account', acctSchema, 'accounts');
 
 console.log('find user....');
 server.post('/login-funck', function(req, resp){
-    const { u_name, pass } = req.body; 
+    const u_name = req.body.username;
+    const pass = req.body.password;
     console.log('Request Body:', req.body);
     console.log('find user....1');
-    console.log('Search query:', { u_name, pass }); 
         // Define the search query for the current user
         const searchQuery = {
-            u_name: u_name,
+            u_name: username,
             pass: pass
         };
 
