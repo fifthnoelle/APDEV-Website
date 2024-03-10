@@ -52,7 +52,7 @@ server.post('/login-funck', function(req, resp){
     console.log('find user....1');
         // Define the search query for the current user
         const searchQuery = {
-            u_name: username,
+            u_name: u_name,
             pass: pass
         };
 
