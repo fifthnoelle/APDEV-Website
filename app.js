@@ -24,7 +24,6 @@ function errorFn(err) {
 
 const seatSchema = new mongoose.Schema({
     seat_id: { type: String, required: true },
-    status: { type: String, required: true }, // Assuming status can be "available", "occupied", or other statuses
     laboratory: { type: String, required: true }
 }, { versionKey: false });
 
@@ -43,51 +42,46 @@ const reservationModel = mongoose.model('reservation', reserveSchema);
 
 const seatSearchQuery = {};
 
+
+server.get('/', function (req, resp) {
+    resp.render('signIn', {
+        layout: 'layoutSignIn',
+        title: 'ILABS | Sign In',
+    });
+});
+
+server.get('/userLoginStudent', function (req, resp) {
+    resp.render('userLoginStudent', {
+        layout: 'layoutLogin',
+        title: 'ILABS | User Log-in',
+    });
+});
+
+server.get('/userLoginTech', function (req, resp) {
+    resp.render('userLoginTech', {
+        layout: 'layoutLogin',
+        title: 'ILABS | User Log-in',
+    });
+});
+
+server.get('/logoutTech', function (req, resp) {
+    resp.render('logoutTech', {
+        layout: 'layoutLogout',
+        title: 'ILABS | Log-Out',
+    });
+});
+
+server.get('/logoutStudent', function (req, resp) {
+    resp.render('logoutStudent', {
+        layout: 'layoutLogout',
+        title: 'ILABS | Log-Out',
+    });
+});
+
+
 server.post('/load_seats', function (req, resp) {
     console.log("loadingg....");
     const reservationSearchQuery = { computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
-    console.log(req.body.lab + " " + req.body.date + " " + req.body.time);
-    server.get('/', function (req, resp) {
-        resp.render('signIn', {
-            layout: 'layoutSignIn',
-            title: 'ILABS | Sign In',
-        });
-    });
-
-    server.get('/userLoginStudent', function (req, resp) {
-        resp.render('userLoginStudent', {
-            layout: 'layoutLogin',
-            title: 'ILABS | User Log-in',
-        });
-    });
-
-    server.get('/userLoginTech', function (req, resp) {
-        resp.render('userLoginTech', {
-            layout: 'layoutLogin',
-            title: 'ILABS | User Log-in',
-        });
-    });
-
-    server.get('/logoutTech', function (req, resp) {
-        resp.render('logoutTech', {
-            layout: 'layoutLogout',
-            title: 'ILABS | Log-Out',
-        });
-    });
-
-    server.get('/logoutStudent', function (req, resp) {
-        resp.render('logoutStudent', {
-            layout: 'layoutLogout',
-            title: 'ILABS | Log-Out',
-        });
-    });
-})
-
-server.post('/load_seats', function (req, resp) {
-    console.log("loadingg....");
-    const reservationSearchQuery = { computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
-    console.log(req.body.lab + " " + req.body.date + " " + req.body.time);
-
 
     reservationModel.find(reservationSearchQuery).lean().then(function (reserve_data) {
         console.log("loading pt2");
