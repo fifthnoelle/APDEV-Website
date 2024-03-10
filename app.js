@@ -43,7 +43,7 @@ const reservationModel = mongoose.model('reservation', reserveSchema);
 const seatSearchQuery = {};
 
 
-server.get('/', function (req, resp) {
+server.get('/test', function (req, resp) {
     resp.render('signIn', {
         layout: 'layoutSignIn',
         title: 'ILABS | Sign In',
@@ -90,18 +90,18 @@ server.post('/load_seats', function (req, resp) {
     }).catch(errorFn)
 })
 
-server.get('/bookReserve', function (req, resp) {
+server.get('/', function (req, resp) {
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         seat_data.forEach(function (seat) {
-            seat.availability = "available"
+            seat.availability = "available";
             // seat.availability = checkAvailability(date, time, seat);
-        }).catch(errorFn);
-    });
-    resp.render('bookReserve', {
-        layout: 'layoutReserve',
-        title: 'ILabs | Book Reserve',
-        'seat-data': seat_data
-    });
+        });
+        resp.render('bookReserve', {
+            layout: 'layoutReserve',
+            title: 'ILabs | Book Reserve',
+            'seat-data': seat_data
+        });
+    }).catch(errorFn);
 });
 
 server.get('/student-home', function (req, resp) {
@@ -112,8 +112,6 @@ server.get('/student-home', function (req, resp) {
         css: './css/landing.css'
     });
 });
-
-
 
 server.get('/indexStudent', function (req, resp) {
     resp.render('indexStudent', {
@@ -128,6 +126,14 @@ server.get('/reserveStudent', function (req, resp) {
         title: 'ILabs | Reserve'
     });
 });
+
+server.get('/viewSchedules', function (req, resp) {
+    resp.render('viewSchedules', {
+        layout: 'layoutReserve',
+        title: 'ILabs | Schedules'
+    });
+});
+
 
 server.get('/viewMyReservations', function (req, resp) {
     resp.render('viewMyReservations', {
