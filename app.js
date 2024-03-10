@@ -66,6 +66,14 @@ server.get('/studentRegister', function(req, resp){
     });
 });
 
+server.get('/techRegister', function(req, resp){
+    resp.render('techRegister', {
+        layout: 'index',
+        title: 'ILABS | Sign-Up',
+        css: 'userRegister.css'
+    });
+});
+
 server.get('/userLoginStudent', function (req, resp) {
     resp.render('userLoginStudent', {
         layout: 'layoutLogin',
