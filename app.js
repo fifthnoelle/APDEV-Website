@@ -45,62 +45,70 @@ const seatSearchQuery = {};
 
 server.post('/load_seats', function (req, resp) {
     console.log("loadingg....");
-    const reservationSearchQuery = {computer_lab : req.body.lab, date : req.body.date, time_slot : req.body.time}; 
+    const reservationSearchQuery = { computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
     console.log(req.body.lab + " " + req.body.date + " " + req.body.time);
-server.get('/', function(req, resp){
-    resp.render('signIn',{
-        layout: 'layoutSignIn',
-        title: 'ILABS | Sign In',
+    server.get('/', function (req, resp) {
+        resp.render('signIn', {
+            layout: 'layoutSignIn',
+            title: 'ILABS | Sign In',
+        });
     });
-});
 
-server.get('/userLoginStudent', function(req, resp){
-    resp.render('userLoginStudent',{
-        layout: 'layoutLogin',
-        title: 'ILABS | User Log-in',
+    server.get('/userLoginStudent', function (req, resp) {
+        resp.render('userLoginStudent', {
+            layout: 'layoutLogin',
+            title: 'ILABS | User Log-in',
+        });
     });
-});
 
-server.get('/userLoginTech', function(req, resp){
-    resp.render('userLoginTech',{
-        layout: 'layoutLogin',
-        title: 'ILABS | User Log-in',
+    server.get('/userLoginTech', function (req, resp) {
+        resp.render('userLoginTech', {
+            layout: 'layoutLogin',
+            title: 'ILABS | User Log-in',
+        });
     });
-});
 
-server.get('/logoutTech', function(req, resp){
-    resp.render('logoutTech',{
-        layout: 'layoutLogout',
-        title: 'ILABS | Log-Out',
+    server.get('/logoutTech', function (req, resp) {
+        resp.render('logoutTech', {
+            layout: 'layoutLogout',
+            title: 'ILABS | Log-Out',
+        });
     });
-});
 
-server.get('/logoutStudent', function(req, resp){
-    resp.render('logoutStudent',{
-        layout: 'layoutLogout',
-        title: 'ILABS | Log-Out',
+    server.get('/logoutStudent', function (req, resp) {
+        resp.render('logoutStudent', {
+            layout: 'layoutLogout',
+            title: 'ILABS | Log-Out',
+        });
     });
-});
+})
+
+server.post('/load_seats', function (req, resp) {
+    console.log("loadingg....");
+    const reservationSearchQuery = { computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
+    console.log(req.body.lab + " " + req.body.date + " " + req.body.time);
+
 
     reservationModel.find(reservationSearchQuery).lean().then(function (reserve_data) {
         console.log("loading pt2");
-        resp.json({reservations: reserve_data });
+        resp.json({ reservations: reserve_data });
         console.log("loading pt3");
-    }).catch(errorFn)    
+    }).catch(errorFn)
 })
 
-
-
-// Define your Express route handler
-
-/* 
-    seat_num
-    date
-    time
-    isAvailable
-*/
-
-
+server.get('/bookReserve', function (req, resp) {
+    seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        seat_data.forEach(function (seat) {
+            seat.availability = "available"
+            // seat.availability = checkAvailability(date, time, seat);
+        }).catch(errorFn);
+    });
+    resp.render('bookReserve', {
+        layout: 'layoutReserve',
+        title: 'ILabs | Book Reserve',
+        'seat-data': seat_data
+    });
+});
 
 server.get('/student-home', function (req, resp) {
     console.log('Student home loaded!')
@@ -111,12 +119,7 @@ server.get('/student-home', function (req, resp) {
     });
 });
 
-server.get('/bookReserve', function (req, resp) {
-    resp.render('bookReserve', {
-        layout: 'layoutReserve',
-        title: 'ILabs | Book Reserve'
-    });
-});
+
 
 server.get('/indexStudent', function (req, resp) {
     resp.render('indexStudent', {
@@ -139,8 +142,8 @@ server.get('/viewMyReservations', function (req, resp) {
     });
 });
 
-server.get('/userProfile/student', function(req, resp){
-    resp.render('userProfileStudent',{
+server.get('/userProfile/student', function (req, resp) {
+    resp.render('userProfileStudent', {
         layout: 'index',
         title: 'ILabs | Edit My Profile',
         css: 'userprofile.css',
@@ -151,8 +154,8 @@ server.get('/userProfile/student', function(req, resp){
     });
 });
 
-server.get('/userProfile/technician', function(req, resp){
-    resp.render('userProfileTech',{
+server.get('/userProfile/technician', function (req, resp) {
+    resp.render('userProfileTech', {
         layout: 'index',
         title: 'ILabs | Edit My Profile',
         css: 'userprofile.css',
@@ -163,8 +166,8 @@ server.get('/userProfile/technician', function(req, resp){
     });
 });
 
-server.get('/userProfile/student/edit', function(req, resp){
-    resp.render('editProfileStudent',{
+server.get('/userProfile/student/edit', function (req, resp) {
+    resp.render('editProfileStudent', {
         layout: 'index',
         title: 'ILabs | Edit My Profile',
         css: 'editprofile.css',
@@ -177,8 +180,8 @@ server.get('/userProfile/student/edit', function(req, resp){
     });
 });
 
-server.get('/userProfile/technician/edit', function(req, resp){
-    resp.render('editProfileTech',{
+server.get('/userProfile/technician/edit', function (req, resp) {
+    resp.render('editProfileTech', {
         layout: 'index',
         title: 'ILabs | Edit My Profile',
         css: 'editprofile.css',
@@ -190,32 +193,29 @@ server.get('/userProfile/technician/edit', function(req, resp){
     });
 });
 
-server.get('/userProfile/technician/deleteProfile', function(req, resp){
-    resp.render('deleteProfileTech',{
+server.get('/userProfile/technician/deleteProfile', function (req, resp) {
+    resp.render('deleteProfileTech', {
         layout: 'index',
         title: 'ILabs | Delete My Profile',
         css: 'editprofile.css'
     });
 });
 
-server.get('/userProfile/student/deleteProfile', function(req, resp){
-    resp.render('deleteProfileStudent',{
+server.get('/userProfile/student/deleteProfile', function (req, resp) {
+    resp.render('deleteProfileStudent', {
         layout: 'index',
         title: 'ILabs | Delete My Profile',
         css: 'editprofile.css'
     });
 });
 
-server.get('/deleteProfile=Success', function(req, resp){
-    resp.render('deleteSuccessful',{
+server.get('/deleteProfile=Success', function (req, resp) {
+    resp.render('deleteSuccessful', {
         layout: 'index',
         title: 'ILabs | Delete Success',
         css: 'editprofile.css'
     });
 });
-
-
-
 
 const port = process.env.PORT | 9090;
 server.listen(port, function () {
