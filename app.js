@@ -43,7 +43,7 @@ const reservationModel = mongoose.model('reservation', reserveSchema);
 const seatSearchQuery = {};
 
 
-server.get('/test', function (req, resp) {
+server.get('/', function (req, resp) {
     resp.render('signIn', {
         layout: 'layoutSignIn',
         title: 'ILABS | Sign In',
@@ -90,7 +90,7 @@ server.post('/load_seats', function (req, resp) {
     }).catch(errorFn)
 })
 
-server.get('/', function (req, resp) {
+server.get('/bookReserve', function (req, resp) {
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         seat_data.forEach(function (seat) {
             seat.availability = "available";
