@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100;0,300;1,100&display=swap');/* CSS VARIABLES */
+:root {
+    --clr-dark: #020024;
+    --clr-light: #F6EEF2;
+    --clr-bg: #f4f4f4;
+    --clr-bg-two: #d4e8d3; /*pale green bg*/
+    --clr-primary: #0A502E;
+    --clr-secondary: #7E73F9;
+
+}
+
 body {
     background-color: var(--clr-bg-two) !important;
     color: var(--clr-light);
@@ -13,7 +24,7 @@ body {
 	margin: 0 5%;
 }
 
-img.computer{
+.computer > img {
 	width: 600px;
   	height: 600px;
   	object-fit: none;
@@ -47,7 +58,7 @@ img.computer{
 	text-align: justify;
 }
 
-#button{
+.button{
 	color: var(--clr-light);
 	background-color: var(--clr-primary);
 	font-size: 15px;
@@ -59,7 +70,7 @@ img.computer{
 	border: none;
 }
 
-#button:hover{
+.button:hover{
 	color: var(--clr-primary);
 	background-color: var(--clr-light);
 	font-size: 15px;

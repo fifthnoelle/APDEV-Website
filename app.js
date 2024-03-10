@@ -9,7 +9,8 @@ server.use(express.urlencoded({ extended: true }));
 const handlebars = require("express-handlebars");
 server.set("view engine", "hbs");
 server.engine("hbs", handlebars.engine({
-    extname: "hbs"
+    extname: "hbs",
+    partialsDir: __dirname + "/views/partials/" // Specify the path to your partials directory
 }));
 
 server.use(express.static('public'));
@@ -117,7 +118,7 @@ server.get('/student-home', function (req, resp) {
     resp.render('sHome', {
         layout: 'index',
         title: 'ILABS | Student Homepage',
-        css: './css/landing.css'
+        css: './css/common/landing.css'
     });
 });
 
