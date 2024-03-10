@@ -47,7 +47,40 @@ server.post('/load_seats', function (req, resp) {
     console.log("loadingg....");
     const reservationSearchQuery = {computer_lab : req.body.lab, date : req.body.date, time_slot : req.body.time}; 
     console.log(req.body.lab + " " + req.body.date + " " + req.body.time);
+server.get('/', function(req, resp){
+    resp.render('signIn',{
+        layout: 'layoutSignIn',
+        title: 'ILABS | Sign In',
+    });
+});
 
+server.get('/userLoginStudent', function(req, resp){
+    resp.render('userLoginStudent',{
+        layout: 'layoutLogin',
+        title: 'ILABS | User Log-in',
+    });
+});
+
+server.get('/userLoginTech', function(req, resp){
+    resp.render('userLoginTech',{
+        layout: 'layoutLogin',
+        title: 'ILABS | User Log-in',
+    });
+});
+
+server.get('/logoutTech', function(req, resp){
+    resp.render('logoutTech',{
+        layout: 'layoutLogout',
+        title: 'ILABS | Log-Out',
+    });
+});
+
+server.get('/logoutStudent', function(req, resp){
+    resp.render('logoutStudent',{
+        layout: 'layoutLogout',
+        title: 'ILABS | Log-Out',
+    });
+});
 
     reservationModel.find(reservationSearchQuery).lean().then(function (reserve_data) {
         console.log("loading pt2");
@@ -56,21 +89,7 @@ server.post('/load_seats', function (req, resp) {
     }).catch(errorFn)    
 })
 
-// Execute the find operation
-seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
-    seat_data.forEach(function(seat) {
-        seat.availability = "available"
-        // seat.availability = checkAvailability(date, time, seat);
-    });
 
-    server.get('/', function (req, resp) {
-        resp.render('bookReserve', {
-            layout: 'layoutReserve',
-            title: 'Serverr',
-            'seat-data': seat_data, // Pass the retrieved data to the view
-        });
-    });
-}).catch(errorFn);
 
 // Define your Express route handler
 
@@ -117,6 +136,81 @@ server.get('/viewMyReservations', function (req, resp) {
     resp.render('viewMyReservations', {
         layout: 'layoutReserve',
         title: 'ILabs | View My Reservations'
+    });
+});
+
+server.get('/userProfile/student', function(req, resp){
+    resp.render('userProfileStudent',{
+        layout: 'index',
+        title: 'ILabs | Edit My Profile',
+        css: 'userprofile.css',
+        profileimg: '',
+        firstname: '',
+        lastname: '',
+        idnum: ''
+    });
+});
+
+server.get('/userProfile/technician', function(req, resp){
+    resp.render('userProfileTech',{
+        layout: 'index',
+        title: 'ILabs | Edit My Profile',
+        css: 'userprofile.css',
+        profileimg: '',
+        firstname: '',
+        lastname: '',
+        labnum: ''
+    });
+});
+
+server.get('/userProfile/student/edit', function(req, resp){
+    resp.render('editProfileStudent',{
+        layout: 'index',
+        title: 'ILabs | Edit My Profile',
+        css: 'editprofile.css',
+        profileimg: '',
+        firstname: '',
+        lastname: '',
+        idnum: '',
+        email: '',
+        number: ''
+    });
+});
+
+server.get('/userProfile/technician/edit', function(req, resp){
+    resp.render('editProfileTech',{
+        layout: 'index',
+        title: 'ILabs | Edit My Profile',
+        css: 'editprofile.css',
+        profileimg: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        number: ''
+    });
+});
+
+server.get('/userProfile/technician/deleteProfile', function(req, resp){
+    resp.render('deleteProfileTech',{
+        layout: 'index',
+        title: 'ILabs | Delete My Profile',
+        css: 'editprofile.css'
+    });
+});
+
+server.get('/userProfile/student/deleteProfile', function(req, resp){
+    resp.render('deleteProfileStudent',{
+        layout: 'index',
+        title: 'ILabs | Delete My Profile',
+        css: 'editprofile.css'
+    });
+});
+
+server.get('/deleteProfile=Success', function(req, resp){
+    resp.render('deleteSuccessful',{
+        layout: 'index',
+        title: 'ILabs | Delete Success',
+        css: 'editprofile.css'
     });
 });
 

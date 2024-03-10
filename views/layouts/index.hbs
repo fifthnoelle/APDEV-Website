@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link href="style.css" rel="stylesheet" /><!--is this general css?-->
-    <link href="{{css}}" rel="stylesheet" />
-    <link rel="stylesheet" href="reserveStyle.css">
-    <!--css stuff di pa tapos-->
+    <link rel="stylesheet" href="/common/style.css"> <!--is this general css?-->
+    <link rel="stylesheet"  href="/common/{{css}}"> <!--page specific css-->
     <link rel="stylesheet" href="https://fonts.google.com/specimen/Bebas+Neue">
-<!--<<<<<< HEAD
-    
-=======-->
-    <link rel="stylesheet" href="navStyle.css">
-<!-- >>>>>>> a2868f32549bdd8b326453904c3bb5c7115e760b-->
-</head>
 
+    <!--Can be deleted-->
+    <link rel="stylesheet" href="/common/reserveStyle.css"> 
+    <link rel="stylesheet" href="/common/navStyle.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/common/func.js"></script>
+
+</head>
     <body>
         {{{body}}}
     </body>

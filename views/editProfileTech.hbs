@@ -1,0 +1,62 @@
+    {{> navigationBarTech}}
+    <div class="main">
+        <div class="title"><h1>Edit Student Profile</h1></div>
+        <div class="profile-img">
+            <img src="{{profileimg}}" class="profile-img">
+        </div>
+        <div class="form">
+            <div class="details">
+
+            <form class="form" id="form" onsubmit="return submitEditForm()" method="get">
+
+            <div class="name">
+                <div>
+                <b>First Name: </b><br><input class="form" type="text" id="change-first" value="{{firstname}}"/>
+                </div>
+                <div>
+                <b>Last Name: </b><br><input class="form" type="text" id="change-last" value="{{lastname}}"/>
+                </div>
+            </div>
+
+            <div class="room">
+                <b>Room: </b><br>
+                <select name="laboratory" id="lab">
+                    <option value="--">-- Select Lab</option>
+                    <option value="GK304A">GK304A</option>
+                    <option value="GK503B">GK503B</option>
+                </select>
+            </div>
+
+            <div>
+                <b>E-mail:</b><input class="form" type="text" id="change-email" value="{{email}}"/>
+            </div>
+
+            <div> 
+                <b>Mobile Number: </b><br><input class="form" type="text" id="change-num" value="{{number}}"/>
+            <div><input type="submit" class="button" id="submit-profile" value="Submit"/></div>
+            </div>
+            </form>
+            </div>
+
+            <!-- Password details can be omitted if too much work -->
+            <br><br>
+            <div class="password">
+            <form class="form" id="password-form" onsubmit="return submitEditPassForm()" method="get">
+                <div>
+                    <b>New Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password"/>
+                </div>
+                <div>
+                    <b>Confirm New Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password to Confirm"/>
+                </div>
+                <div>
+                    <b>Current Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter Current Password"/>
+                </div>
+                <button class="button" id="submit-password">Change Password</button>
+            </form>
+            </div>
+        </div>
+        <div class="delete-account"><a href="deleteprofileTech.html"><button class="alert-button">Delete Account</button></a></div>
+    </div>
