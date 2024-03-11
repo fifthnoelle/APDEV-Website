@@ -22,13 +22,29 @@ function errorFn(err) {
     console.error(err);
 }
 
-// const labtechSchema = new mongoose.Schema({
+const techSchema = new mongoose.Schema({
+    first_name: { type: String, required: true},
+    last_name: { type: String, required: true},
+    username: { type: String, required: true},
+    tech_code: { type: String, required: true},
+    dlsu_email: { type: String, required: true},
+    password: { type: String, required: true},
+    profileimg: { type: String}
+}, { versionKey: false });
 
-// });
+const studentSchema = new mongoose.Schema({
+    first_name: { type: String, required: true},
+    last_name: { type: String, required: true},
+    username: { type: String, required: true},
+    id_num: { type: String, required: true},
+    dlsu_email: { type: String, required: true},
+    password: { type: String, required: true},
+    profileimg: { type: String}
+}, { versionKey: false });
 
-// const studentSchema = new mongoose.Schema({
+const studentModel = mongoose.model('student', studentSchema);
 
-// });
+const techModel = mongoose.model('technician', tech);
 
 const seatSchema = new mongoose.Schema({
     seat_id: { type: String, required: true },
@@ -201,15 +217,14 @@ server.get('/viewMyReservations', function (req, resp) {
     });
 });
 
+// ==================================================
+
 server.get('/userProfileStudent', function (req, resp) {
     resp.render('userProfileStudent', {
         layout: 'index',
         title: 'ILabs | Edit My Profile',
         css: 'userprofile.css',
-        profileimg: '',
-        firstname: '',
-        lastname: '',
-        idnum: ''
+        
     });
 });
 
