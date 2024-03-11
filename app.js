@@ -97,10 +97,24 @@ server.get('/userLoginStudent', function (req, resp) {
     });
 });
 
+server.get('/forgotPasswordStudent', function(req, resp){
+    resp.render('forgotPasswordStudent', {
+        layout: 'layoutLogin',
+        title: 'ILABS | Forgot Password'
+    });
+});
+
 server.get('/userLoginTech', function (req, resp) {
     resp.render('userLoginTech', {
         layout: 'layoutLogin',
         title: 'ILABS | User Log-in',
+    });
+});
+
+server.get('/forgotPasswordTech', function(req, resp){
+    resp.render('forgotPasswordTech', {
+        layout: 'layoutLogin',
+        title: 'ILABS | Forgot Password'
     });
 });
 
