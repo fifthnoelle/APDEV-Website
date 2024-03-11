@@ -5,27 +5,22 @@
             <img src="{{profileimg}}" class="rounded-image">
         </div>
         <div class="profile-userinfo">
-            <h1>{{firstname}} {{lastname}}</h1>
-            <h3>{{idnum}}</h3>
+            <h1>{{first_name}} {{last_name}}</h1>
+            <h2>{{dlsu_email}}</h2>
+            <h3>{{id_num}}</h3>
         </div>
         <div class="spacer">
 
         </div>
         <div class="profile-edit">
-            <a href="editprofileStudent.html">
+            <a href="/editprofileStudent">
                 <button class="pill" type="button">Edit Profile</button>
             </a>
         </div>
     </div>
     <!-- Body of Profile Page -->
     <div class="profile-body">
-        <div class="body-myprofile">
-        <h1 id="reservationtitle"><strong>My Profile</strong></h1>
-        <ul>
-            <li><a href="viewMyReservations.html">View All Reservations</a></li>
-            <li><a href="deleteprofileStudent.html">Delete Profile</a></li>
-        </ul>
-        </div>
+        {{>studentprofileSide}}
         <hr>
         <div class="body-myreservations">
             <div class="mainContent">
@@ -38,6 +33,7 @@
                         <label for="compLab">Comp. Lab</label>
                         <select name="compLab" id="compLab">
                             <option value="--">-- Select Lab</option>
+                            {{!-- make an option here for each unique data in computer_lab ? for accurate filter --}}
                             <option value="GK304A">GK304A</option>
                             <option value="GK503B">GK503B</option>
                         </select>
@@ -54,51 +50,23 @@
                         <th>Seat Number</th>
                         <th></th>
                     </tr>
+                {{#each reservation_data}}
                     <tr>
-                        <td>GK304B</td>
-                        <td>Feb 14, 2024</td>
-                        <td>8:00 - 9:30</td>
-                        <td>samantha*****@gmail.com</td>
-                        <td>samOneil</td>
-                        <td>A02</td>
+                        <td>{{computer_lab}}</td>
+                        <td>{{date}}</td>
+                        <td>{{time_slot}}</td>
+                        <td>{{email}}</td>
+                        <td>{{user}}</td>
+                        <td>{{seat_num}}</td>
                         <td>
                             <div class="cont">
-                                <form action="editStudent.html">
+                                <form action="/editStudent">
                                     <button type="submit" class="reserveBtn">Edit</button>
                                     </form> 
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>GK304B</td>
-                        <td>Feb 17, 2024</td>
-                        <td>3:30 - 5:30</td>
-                        <td>samantha*****@gmail.com</td>
-                        <td>samOneil</td>
-                        <td>C04</td>
-                        <td>
-                            <div class="cont">
-                                <form action="editStudent.html">
-                                    <button type="submit" class="reserveBtn">Edit</button>
-                                    </form> 
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>GK302A</td>
-                        <td>Feb 22, 2024</td>
-                        <td>1:30 - 2:30</td>
-                        <td>samantha*****@gmail.com</td>
-                        <td>samOneil</td>
-                        <td>B01</td>
-                        <td>
-                            <div class="cont">
-                                <form action="editStudent.html">
-                                    <button type="submit" class="reserveBtn">Edit</button>
-                                    </form> 
-                            </div>
-                        </td>
-                    </tr>
+                {{/each}}
                 </table>
             </div>
         </div>

@@ -217,15 +217,18 @@ server.get('/viewMyReservations', function (req, resp) {
     });
 });
 
-// ==================================================
-
 server.get('/userProfileStudent', function (req, resp) {
-    resp.render('userProfileStudent', {
-        layout: 'index',
-        title: 'ILabs | Edit My Profile',
-        css: 'userprofile.css',
-        
-    });
+    // blank search query
+    const searchQuery = {};
+
+    studentModel.find(searchQuery).lean().then(function(student_data){
+        resp.render('userProfileStudent', {
+            layout: 'index',
+            title: 'ILabs | Edit My Profile',
+            css: 'userprofile.css',
+            student_data: student_data
+        });
+    }).catch(errorFn);
 });
 
 server.get('/userProfile/technician', function (req, resp) {
