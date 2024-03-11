@@ -145,6 +145,14 @@ server.get('/sHome', function (req, resp) {
     });
 });
 
+server.get('/indexTech', function(req, resp) {
+    resp.render('indexTech', {
+        layout: 'index',
+        title: 'ILABS | Lab Technician Homepage',
+        css: 'landing.css'
+    });
+});
+
 server.get('/reserveStudent', function (req, resp) {
     resp.render('reserveStudent', {
         layout: 'layoutReserveHome',
