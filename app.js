@@ -15,7 +15,7 @@ server.engine("hbs", handlebars.engine({
 server.use(express.static('public'));
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/labs');
+mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 function errorFn(err) {
     console.log('Error found. Please trace!');
@@ -44,7 +44,7 @@ const studentSchema = new mongoose.Schema({
 
 const studentModel = mongoose.model('student', studentSchema);
 
-const techModel = mongoose.model('technician', tech);
+const techModel = mongoose.model('technician', techSchema);
 
 const seatSchema = new mongoose.Schema({
     seat_id: { type: String, required: true },
@@ -232,42 +232,42 @@ server.get('/userProfileStudent', function (req, resp) {
 });
 
 server.get('/userProfile/technician', function (req, resp) {
-    resp.render('userProfileTech', {
-        layout: 'index',
-        title: 'ILabs | Edit My Profile',
-        css: 'userprofile.css',
-        profileimg: '',
-        firstname: '',
-        lastname: '',
-        labnum: ''
+    const searchQuery = {};
+
+    techModel.find(searchQuery).lean().then(function(technician_data){
+        resp.render('userProfileTech', {
+            layout: 'index',
+            title: 'ILabs | Edit My Profile',
+            css: 'userprofile.css',
+            technician_data: technician_data
     });
+    }).catch(errorFn);
 });
 
 server.get('/userProfile/student/edit', function (req, resp) {
-    resp.render('editProfileStudent', {
-        layout: 'index',
-        title: 'ILabs | Edit My Profile',
-        css: 'editprofile.css',
-        profileimg: '',
-        firstname: '',
-        lastname: '',
-        idnum: '',
-        email: '',
-        number: ''
+    const searchQuery = {};
+
+    studentModel.find(searchQuery).lean().then(function(student_data){
+        resp.render('editProfileStudent', {
+            layout: 'index',
+            title: 'ILabs | Edit My Profile',
+            css: 'userprofile.css',
+            student_data: student_data
     });
+    }).catch(errorFn);
 });
 
 server.get('/userProfile/technician/edit', function (req, resp) {
-    resp.render('editProfileTech', {
-        layout: 'index',
-        title: 'ILabs | Edit My Profile',
-        css: 'editprofile.css',
-        profileimg: '',
-        firstname: '',
-        lastname: '',
-        email: '',
-        number: ''
+    const searchQuery = {};
+
+    techModel.find(searchQuery).lean().then(function(technician_data){
+        resp.render('editProfileStudent', {
+            layout: 'index',
+            title: 'ILabs | Edit My Profile',
+            css: 'userprofile.css',
+            technician_data: technician_data
     });
+    }).catch(errorFn);
 });
 
 server.get('/userProfile/technician/deleteProfile', function (req, resp) {
