@@ -225,10 +225,16 @@ server.get('/viewSchedulesTech', function (req, resp) {
 
 
 server.get('/viewMyReservations', function (req, resp) {
-    resp.render('viewMyReservations', {
-        layout: 'layoutReserve',
-        title: 'ILabs | View My Reservations'
-    });
+    const searchQuery = {};
+
+    reservationModel.find(searchQuery).lean().then(function(reserve_data){
+        resp.render('viewMyReservations', {
+            layout: 'layoutReserve',
+            title: 'ILabs | View My Reservations',
+            reserve_data: reserve_data
+        });
+    }).catch(errorFn);
+        
 });
 
 server.get('/userProfileStudent', function (req, resp) {
