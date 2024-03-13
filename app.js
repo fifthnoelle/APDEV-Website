@@ -1,3 +1,11 @@
+/**
+ * The above code is a Node.js server application using Express, Mongoose for MongoDB database
+ * connection, and Handlebars for templating, implementing various routes for user authentication,
+ * reservation management, and profile editing.
+ * @param err - The code you provided sets up a Node.js server using Express, connects to a MongoDB
+ * database using Mongoose, and defines various routes for handling different functionalities of a lab
+ * reservation system. Here's a breakdown of the key components in the code:
+ */
 // npm i express body-parser express-handlebars mongoose
 const express = require("express");
 const server = express();
@@ -225,16 +233,29 @@ server.get('/viewSchedulesTech', function (req, resp) {
 
 
 server.get('/viewMyReservations', function (req, resp) {
-    const searchQuery = {};
+    const searchQuery = {};//user details query
 
-    reservationModel.find(searchQuery).lean().then(function(reserve_data){
+    reservationModel.find(searchQuery).lean().then(function(my_reserve_data){
+        console.log('loading user reservations');
         resp.render('viewMyReservations', {
             layout: 'layoutReserve',
             title: 'ILabs | View My Reservations',
-            reserve_data: reserve_data
+            reserve_data: my_reserve_data
         });
-    }).catch(errorFn);
-        
+    }).catch(errorFn);  
+});
+
+server.get('/viewAllReservations', function (req, resp) {
+    const searchQuery = {};//empty = all
+
+    reservationModel.find(searchQuery).lean().then(function(all_reserve_data){
+        console.log('loading all reservations');
+        resp.render('viewAllReservations', {
+            layout: 'layoutReserve',
+            title: 'ILabs | View All Reservations',
+            reserve_data: all_reserve_data
+        });
+    }).catch(errorFn);  
 });
 
 server.get('/userProfileStudent', function (req, resp) {
