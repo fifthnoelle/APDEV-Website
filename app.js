@@ -186,16 +186,44 @@ server.post('/load_seats', function (req, resp) {
 
 server.get('/bookReserve', function (req, resp) {
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
-        seat_data.forEach(function (seat) {
-            seat.availability = "available";
-            // seat.availability = checkAvailability(date, time, seat);
-        });
         resp.render('bookReserve', {
             layout: 'layoutReserve',
             title: 'ILabs | Book Reserve',
             'seat-data': seat_data,
             'username' : req.session.username
         });
+    }).catch(errorFn);
+});
+
+server.post('/reserveFunction', function(req, resp) {
+    const u_name = String(req.body.username);
+
+    const searchQuery = {
+        u_name: u_name,
+    };
+    console.log(searchQuery);
+
+    accountModel.findOne(searchQuery).lean().then(function (account) {
+        console.log('find user....2');
+        if (account != undefined && account._id != null) {
+            req.session.username = u_name;
+            console.log('match');
+            resp.render('sHome', {
+                layout: 'index',
+                title: 'ILABS | Student Homepage',
+                css: 'landing.css'
+            });
+        } else {
+            console.log("no match :(");
+            seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+                resp.render('bookReserve', {
+                    layout: 'layoutReserve',
+                    title: 'ILabs | Book Reserve',
+                    'seat-data': seat_data,
+                    'username' : req.session.username
+                });
+            }).catch(errorFn);
+        }
     }).catch(errorFn);
 });
 
