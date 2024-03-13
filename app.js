@@ -331,7 +331,7 @@ server.get('/userProfileStudent', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.get('/userProfile/technician', function (req, resp) {
+server.get('/userProfileTech', function (req, resp) {
     const searchQuery = {};
 
     techModel.find(searchQuery).lean().then(function (technician_data) {
