@@ -3,7 +3,7 @@ let chosen_seat = "";
 
 //Helper Functions
 function checkLab() {
-    let laboratory = document.getElementById("lab").value;
+    let laboratory = document.getElementById("laboratory").value;
     if (laboratory == "") {
         return false;
     }
@@ -27,7 +27,17 @@ function checkTime() {
 }
 
 function validateForm() {
-    
+    let u_name = $("#username").val();
+    let email = $("email").val();
+    let selectedTime = $("#time").val();
+    let selectedDate = $("#date").val();
+    let selectedLab = $("#laboratory").val();
+    let selectedSeat = chosen_seat;
+
+    $.post('reserveFunction',
+        {u_name : String(u_name), email : String(email), lab : String(selectedLab), 
+        date : String(selectedDate), time : String(selectedTime), seat : String(selectedSeat)}
+    )
 }
 
 // BOOKING RESERVING
@@ -42,9 +52,10 @@ $(document).ready(function () {
                 if (chosen_seat != "") {
                     $(chosen_seat).css("background-color", "#0A502E");
                     $(chosen_seat).css("color", "#F6EEF2");
-                    chosen_seat = String("#A" + i.toString().padStart(2, '0'));
                 }
                 chosen_seat = String("#A" + i.toString().padStart(2, '0'));
+                alert(chosen_seat);
+                $("#seat").text(chosen_seat);
                 $(this).css("background-color", "#d4e8d3");
                 $(this).css("color", "#0A502E");
             }
@@ -65,7 +76,8 @@ $(document).ready(function () {
         } else { //VALID
             let selectedTime = $(this).val();
             let selectedDate = $("#date").val();
-            let selectedLab = $("#lab").val();
+            let selectedLab = $("#laboratory").val();
+            alert(selectedLab);
             $.post('load_seats',
                 { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
                 function (data, status) {

@@ -1,0 +1,39 @@
+<div class="reserveForm">
+    <form action="reserveFunction" method="post">
+        <div class="formPersonal">
+            <div class="formQuestion">
+                <label for="Name"><b>Name</b></label>
+                <p>{{username}}</p>
+            </div>
+        </div>
+        <div class="formPersonal">
+            <div class="formQuestion">
+                <b>Email</b>
+                <p>{{email}}</p>
+            </div>
+        </div>
+        <div class="formLab">
+            <div class="formQuestion">
+                <b>Computer Laboratory</b>
+                {{laboratory}}
+            </div>
+        </div>
+        <div class="formDateTime">
+            <div class="formQuestion">
+                <b>Date</b>
+                {{date}}
+            </div>
+            <div class="formQuestion">
+                <b>Time</b>
+                {{time}}
+            </div>
+        </div>
+        <div class="formPersonal">
+            <div class="formQuestion">
+                <b>Seat Number</b>
+                {{seat}}
+            </div>
+        </div>
+        <input type="submit" class="submitBtn">
+    </form>
+</div>

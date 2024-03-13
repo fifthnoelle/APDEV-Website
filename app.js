@@ -176,6 +176,7 @@ server.get('/logoutStudent', function (req, resp) {
 server.post('/load_seats', function (req, resp) {
     console.log("loadingg....");
     const reservationSearchQuery = { computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
+    console.log(reservationSearchQuery);
 
     reservationModel.find(reservationSearchQuery).lean().then(function (reserve_data) {
         console.log("loading pt2");
@@ -196,7 +197,14 @@ server.get('/bookReserve', function (req, resp) {
 });
 
 server.post('/reserveFunction', function(req, resp) {
-    const u_name = String(req.body.username);
+    const u_name = req.body.username;
+    const email = req.body.email;
+    const date = req.body.date;
+    const laboratory = req.body.laboratory;
+    const time = req.body.time;
+    const seat = req.body.seat;
+
+    console.log(seat);
 
     const searchQuery = {
         u_name: u_name,
@@ -206,12 +214,17 @@ server.post('/reserveFunction', function(req, resp) {
     accountModel.findOne(searchQuery).lean().then(function (account) {
         console.log('find user....2');
         if (account != undefined && account._id != null) {
-            req.session.username = u_name;
             console.log('match');
-            resp.render('sHome', {
+            resp.render('reservationSuccessfulStudent', {
                 layout: 'index',
-                title: 'ILABS | Student Homepage',
-                css: 'landing.css'
+                title: 'ILABS | Reserve Successful',
+                css: 'landing.css',
+                'username': u_name,
+                'email' : email,
+                'date' : date,
+                'laboratory' : laboratory,
+                'time' : time,
+                'seat' : seat
             });
         } else {
             console.log("no match :(");

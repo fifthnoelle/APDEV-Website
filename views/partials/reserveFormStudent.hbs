@@ -1,0 +1,53 @@
+<div class="reserveForm">
+    <form action="reserveFunction" method="post">
+        <div class="formPersonal">
+            <div class="formQuestion">
+                <label for="username"><b>Name</b></label>
+                <input type="text" name="username" id="username" value="{{username}}">
+            </div>
+        </div>
+        <div class="formPersonal">
+            <div class="formQuestion">
+                <label for="email"><b>Email</b></label>
+                <input name="email" id="email" type="text">
+            </div>
+        </div>
+        <div class="formLab">
+            <div class="formQuestion">
+                <label for="laboratory"><b>Computer Laboratory</b></label>
+                <select name="laboratory" id="laboratory">
+                    <option value="">-- Select Lab</option>
+                    <option value="GK304A">GK304A</option>
+                    <option value="GK304B">GK304B</option>
+                    <option value="GK304C">GK304C</option>
+                    <option value="GK304D">GK304D</option>
+                    <option value="GK304E">GK304E</option>
+                </select>
+            </div>
+        </div>
+        <div class="formDateTime">
+            <div class="formQuestion">
+                <label for="date"><b>Date</b></label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="formQuestion">
+                <label for="time"><b>Time</b></label>
+                <select name="time" id="time">
+                    <option value= "">- -</option>
+                    <option value="8:00 - 9:30">8:00 - 9:30</option>
+                    <option value="10:00 - 11:30">10:00 - 11:30</option>
+                    <option value="12:00 - 13:30">12:00 - 13:30</option>
+                    <option value="14:00 - 15:30">14:00 - 15:30</option>
+                    <option value="16:00 - 17:30">16:00 - 17:30</option>
+                    <option value="18:00 - 19:30">18:00 - 19:30</option>
+                </select>
+            </div>
+        </div>
+        <div class="formPersonal">
+            <div class="formQuestion">
+                <h4>Seat Num :</h4><h4 id="seat" name="seat"></h6>
+            </div>
+        </div>
+        <input type="submit" class="submitBtn">
+    </form>
+</div>
