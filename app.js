@@ -104,28 +104,17 @@ server.get('/userLoginStudent', function (req, resp) {
     });
 });
 
-const acctSchema = new mongoose.Schema({
-    u_name: { "type": "String", "required": true },
-    pass: { "type": "String", "required": true }
-}, { versionKey: false })
-
-const accountModel = mongoose.model('account', acctSchema);
-
-function checkUser(searchQuery) {}
-
-console.log('find user....');
-server.post('/login-funck', function (req, resp) {
+console.log('find student user....');
+server.post('/s-login-funck', function (req, resp) {
     const u_name = String(req.body.username);
     const pass = String(req.body.password);
-    // Define the search query for the current user
     const searchQuery = {
-        u_name: u_name,
-        pass: pass
+        username: u_name,
+        password: pass
     };
 
-    accountModel.findOne(searchQuery).lean().then(function (account) {
-        console.log('find user....2');
-        if (account != undefined && account._id != null) {
+    studentModel.findOne(searchQuery).lean().then(function (student) {
+        if (student != undefined && student._id != null) {
             req.session.username = u_name;
             console.log('match');
             resp.render('sHome', {
@@ -143,12 +132,38 @@ server.post('/login-funck', function (req, resp) {
 });
 
 
-
 server.get('/userLoginTech', function (req, resp) {
     resp.render('userLoginTech', {
         layout: 'layoutLogin',
         title: 'ILABS | User Log-in',
     });
+});
+
+console.log('find technician user....');
+server.post('/t-login-funck', function (req, resp) {
+    const u_name = String(req.body.username);
+    const pass = String(req.body.password);
+    const searchQuery = {
+        username: u_name,
+        password: pass
+    };
+
+    techModel.findOne(searchQuery).lean().then(function (technician) {
+        if (technician != undefined && technician._id != null) {
+            req.session.username = u_name;
+            console.log('match');
+            resp.render('indexTech', {
+                layout: 'index',
+                title: 'ILABS | Lab Technician Homepage',
+                css: 'landing.css'
+            });
+        } else {
+            resp.render('logoutTech', {
+                layout: 'layoutLogout',
+                title: 'ILABS | Log-Out',
+            });
+        }
+    }).catch(errorFn);
 });
 
 server.get('/forgotPasswordTech', function (req, resp) {
@@ -176,6 +191,7 @@ server.get('/logoutStudent', function (req, resp) {
 server.post('/load_seats', function (req, resp) {
     console.log("loadingg....");
     const reservationSearchQuery = { computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
+    console.log(reservationSearchQuery);
 
     reservationModel.find(reservationSearchQuery).lean().then(function (reserve_data) {
         console.log("loading pt2");
@@ -186,16 +202,56 @@ server.post('/load_seats', function (req, resp) {
 
 server.get('/bookReserve', function (req, resp) {
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
-        seat_data.forEach(function (seat) {
-            seat.availability = "available";
-            // seat.availability = checkAvailability(date, time, seat);
-        });
         resp.render('bookReserve', {
             layout: 'layoutReserve',
             title: 'ILabs | Book Reserve',
             'seat-data': seat_data,
             'username' : req.session.username
         });
+    }).catch(errorFn);
+});
+
+server.post('/reserveFunction', function(req, resp) {
+    const u_name = req.body.username;
+    const email = req.body.email;
+    const date = req.body.date;
+    const laboratory = req.body.laboratory;
+    const time = req.body.time;
+    const seat = req.body.seat;
+
+    console.log(seat);
+
+    const searchQuery = {
+        username: u_name,
+    };
+    console.log(searchQuery);
+
+    studentModel.findOne(searchQuery).lean().then(function (student) {
+        console.log('find user....2');
+        if (student != undefined && student._id != null) {
+            console.log('match');
+            resp.render('reservationSuccessfulStudent', {
+                layout: 'index',
+                title: 'ILABS | Reserve Successful',
+                css: 'landing.css',
+                'username': u_name,
+                'email' : email,
+                'date' : date,
+                'laboratory' : laboratory,
+                'time' : time,
+                'seat' : seat
+            });
+        } else {
+            console.log("no match :(");
+            seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+                resp.render('bookReserve', {
+                    layout: 'layoutReserve',
+                    title: 'ILabs | Book Reserve',
+                    'seat-data': seat_data,
+                    'username' : req.session.username
+                });
+            }).catch(errorFn);
+        }
     }).catch(errorFn);
 });
 
