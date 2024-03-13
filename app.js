@@ -417,16 +417,27 @@ server.get('/viewAllReservations', function (req, resp) {
 });
 
 server.get('/userProfileStudent', function (req, resp) {
-    // blank search query
-    const searchQuery = {};
+    const studentSearchQuery = { username: req.session.username };
 
-    studentModel.find(searchQuery).lean().then(function (student_data) {
-        resp.render('userProfileStudent', {
-            layout: 'index',
-            title: 'ILabs | Edit My Profile',
-            css: 'userprofile.css',
-            student_data: student_data
-        });
+    const reservationSearchQuery = { user: req.session.username };
+
+    studentModel.find(studentSearchQuery).lean().then(function (student_data) {
+        console.log("Loading Student Data");
+        console.log(student_data);
+
+        reservationModel.find(reservationSearchQuery).lean().then(function (reservation_data) {
+            console.log("Loading Reservation Data");
+            console.log(reservation_data);
+            console.log(student_data);
+            // Render
+            resp.render('userProfileStudent', {
+                layout: 'index',
+                title: 'ILabs | Edit My Profile',
+                css: 'userprofile.css',
+                student_data: student_data,
+                reservation_data: reservation_data
+            });
+        }).catch(errorFn);
     }).catch(errorFn);
 });
 
