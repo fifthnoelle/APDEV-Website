@@ -374,8 +374,8 @@ server.get('/viewMyReservations', function (req, resp) {
         for (const item of reserve_data) {
             my_reserve_data.push({
                 computer_lab: item.computer_lab,
-                date: item.date,
-                time_slot: item.pass,
+                date_reserved: item.date,
+                time_slot: item.time_slot,
                 email: item.email,
                 user: item.user,
                 seat_num: item.seat_num
@@ -400,7 +400,7 @@ server.get('/viewAllReservations', function (req, resp) {
         for (const item of reserve_data) {
             all_reserve_data.push({
                 computer_lab: item.computer_lab,
-                date_reserved: item.date_reserved,
+                date_reserved: item.date,
                 time_slot: item.time_slot,
                 email: item.email,
                 user: item.user,
