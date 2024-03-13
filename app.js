@@ -485,6 +485,38 @@ server.get('/deleteProfile=Success', function (req, resp) {
     });
 });
 
+server.get('/editReservationTech', function (req, resp) {
+    const username = req.session.username;
+    const reservationSearchQuery = { computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
+    console.log(reservationSearchQuery);
+
+    reservationModel.find(reservationSearchQuery).lean().then(function (reserve_data) {
+        console.log("Loading Part 1");
+        resp.json({ reservations: reserve_data });
+        console.log("Finished Loading Part 1");
+    }).catch(errorFn);
+
+    // Find the user and reservation
+    reservationModel.findOne({ user: username }).lean().then(function (reservation) {
+        studentModel.findOne({ username }).lean().then(function (student) {
+            // Combine 
+            const combinedData = { reservation, student };
+
+            console.log(combinedData);
+            console.log("Finished Loading Account/Reservation");
+
+            // Render
+            resp.json({ reservation: combinedData });
+            resp.render('editReservationTech', {
+                layout: 'index',
+                title: "ILABS | Edit Reservations (Technician)",
+                css: "reserveStyle.css",
+                combinedData: combinedData
+            });
+        }).catch(errorFn);
+    }).catch(errorFn);
+});
+
 const port = process.env.PORT | 9090;
 server.listen(port, function () {
     console.log("Listening at port " + port);
