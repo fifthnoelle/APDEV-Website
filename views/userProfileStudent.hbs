@@ -25,21 +25,7 @@
         <div class="body-myreservations">
             <div class="mainContent">
                 <h1 id="reservationtitle">Reservations</h1>
-                <div class="filterContainer">
-                    <h4>Filter</h4>
-                    <form action="">
-                        <label for="date">Date</label>
-                        <input type="date">
-                        <label for="compLab">Comp. Lab</label>
-                        <select name="compLab" id="compLab">
-                            <option value="--">-- Select Lab</option>
-                            {{!-- make an option here for each unique data in computer_lab ? for accurate filter --}}
-                            <option value="GK304A">GK304A</option>
-                            <option value="GK503B">GK503B</option>
-                        </select>
-                        <input type="submit" class="reserveBtn" value="Filter">
-                    </form>
-                </div>
+                {{>filter}}
                 <table id="reservations">
                     <tr>
                         <th>Computer Lab</th>
@@ -60,6 +46,7 @@
                         <td>{{seat_num}}</td>
                         <td>
                             <div class="cont">
+                                {{!-- edit link --}}
                                 <form action="/editStudent">
                                     <button type="submit" class="reserveBtn">Edit</button>
                                     </form> 
