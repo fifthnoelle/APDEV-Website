@@ -1,33 +1,34 @@
 {{>navigationBarStudent}}
+
 <div class="mainContent">
-        <h1>Reservations</h1>
-        {{>filter}}
-        <table id="reservations">
-            <tr>
-                <th>Computer Lab</th>
-                <th>Date</th>
-                <th>Time Slot</th>
-                <th>Email</th>
-                <th>User</th>
-                <th>Seat Number</th>
-                <th></th>
-            </tr>
-            {{#each my_reserve_data}}
-            <tr>
-                <td>{{computer_lab}}</td>
-                <td>{{date}}</td>
-                <td>{{time_slot}}</td>
-                <td>{{email}}</td>
-                <td>{{user}}</td>
-                <td>{{seat_num}}</td>
-                <td>
-                    <div class="cont">
-                        <form action="editStudent.html">
-                            <button type="submit" class="reserveBtn">Edit</button>
-                        </form> 
-                    </div>
-                </td>
-            </tr>
-            {{/each}}
-        </table>
-    </div>
+    <h1>Reservations</h1>
+    {{>filter}}
+    <table id="reservations">
+        <tr>
+            <th>Computer Lab</th>
+            <th>Date</th>
+            <th>Time Slot</th>
+            <th>Email</th>
+            <th>User</th>
+            <th>Seat Number</th>
+            <th></th>
+        </tr>
+        {{#each my_reserve_data}}
+        <tr>
+            <td>{{computer_lab}}</td>
+            <td>{{date}}</td>
+            <td>{{time_slot}}</td>
+            <td>{{email}}</td>
+            <td>{{user}}</td>
+            <td>{{seat_num}}</td>
+            <td>
+                <div class="cont">
+                    <form action="editStudent.html">
+                        <button type="submit" class="reserveBtn">Edit</button>
+                    </form> 
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
