@@ -222,13 +222,13 @@ server.post('/reserveFunction', function(req, resp) {
     console.log(seat);
 
     const searchQuery = {
-        u_name: u_name,
+        username: u_name,
     };
     console.log(searchQuery);
 
-    accountModel.findOne(searchQuery).lean().then(function (account) {
+    studentModel.findOne(searchQuery).lean().then(function (student) {
         console.log('find user....2');
-        if (account != undefined && account._id != null) {
+        if (student != undefined && student._id != null) {
             console.log('match');
             resp.render('reservationSuccessfulStudent', {
                 layout: 'index',
