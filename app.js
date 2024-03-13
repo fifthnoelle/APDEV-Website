@@ -8,6 +8,7 @@
  */
 // npm i express body-parser express-handlebars mongoose
 const express = require("express");
+const session = require('express-session');
 const server = express();
 
 const bodyParser = require("body-parser")
@@ -21,6 +22,31 @@ server.engine("hbs", handlebars.engine({
 }));
 
 server.use(express.static('public'));
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/labs');
+
+
+function errorFn(err) {
+    console.log('Error found. Please trace!');
+    console.error(err);
+}
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/labs');
+
+
+function errorFn(err) {
+    console.log('Error found. Please trace!');
+    console.error(err);
+}
+
+//initialize session
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: false
+}));
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/test');
@@ -105,15 +131,47 @@ server.get('/userLoginStudent', function (req, resp) {
     });
 });
 
-server.get('/forgotPasswordStudent', function(req, resp){
-    resp.render('forgotPasswordStudent', {
-        layout: 'layoutLogin',
-        title: 'ILABS | Forgot Password'
-    });
+const acctSchema = new mongoose.Schema({
+    u_name: {"type": "String", "required": true},
+    pass: {"type": "String", "required": true}
+}, { versionKey: false })
+
+const accountModel = mongoose.model('account', acctSchema);
+
+console.log('find user....');
+server.post('/login-funck', function(req, resp){
+    const u_name = String(req.body.username);
+    const pass = String(req.body.password);
+    console.log('Request Body:' + u_name + " " + pass);
+    console.log('find user....1');
+        // Define the search query for the current user
+        const searchQuery = {
+            u_name: u_name,
+            pass: pass
+        };
+
+    accountModel.findOne(searchQuery).lean().then(function (account){
+        console.log('find user....2');
+        if(account != undefined && account._id != null){
+            console.log('match');
+            resp.render('bookReserve',{
+                layout: 'layoutReserve',
+                title: 'ILabs | Book Reserve'
+            });
+          }else{
+            console.log('do not match');
+            resp.render('logoutStudent',{
+                layout: 'layoutLogout',
+                title: 'ILABS | Log-Out'
+            });
+          }
+        }).catch(errorFn);
 });
 
-server.get('/userLoginTech', function (req, resp) {
-    resp.render('userLoginTech', {
+
+
+server.get('/userLoginTech', function(req, resp){
+    resp.render('userLoginTech',{
         layout: 'layoutLogin',
         title: 'ILABS | User Log-in',
     });
