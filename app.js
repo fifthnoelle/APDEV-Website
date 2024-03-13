@@ -481,6 +481,13 @@ server.get('/editReservationTech', function (req, resp) {
     }).catch(errorFn);
 });
 
+server.get('/signIn', function(req, resp) {
+    resp.render('signIn', {
+        layout: 'layoutSignIn',
+        title: 'ILABS | Sign In',
+    });
+});
+
 const port = process.env.PORT | 9090;
 server.listen(port, function () {
     console.log("Listening at port " + port);
