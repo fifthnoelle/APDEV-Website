@@ -9,25 +9,25 @@
                 <div class="formPersonal">
                     <div class="formQuestion">
                         <label for="Name"><b>Name</b></label>
-                        <input type="text" value="{{combinedData.student.first_name}} {{combinedData.student.last_name}}">
+                        <input type="text" value="{{username}}">
                     </div>
                 </div>
                 <div class="formPersonal">
                     <div class="formQuestion">
                         <label for="email"><b>Email</b></label>
-                        <input type="text" value="{{combinedData.student.dlsu_email}}">
+                        <input type="text" value="{{email}}">
                     </div>
                 </div>
                 <div class="formPersonal">
                     <div class="formQuestion">
                         <label for="Seatx"><b>Seat No.</b></label>
-                        <input type="text" value="{{combinedData.reservation.seat_num}}">
+                        <input type="text" value="{{reserve_data.seat_num}}">
                     </div>
                 </div>
                 <div class="formDateTime">
                     <div class="formQuestion">
                         <label for="date"><b>Date</b></label>
-                        <input type="calendar" id="date" name="date" placeholder="05/09/04">
+                        <input type="calendar" id="date" name="date" placeholder="{{reserve_data.date}}">
                     </div>
                     <div class="formQuestion">
                         <label for="time"><b>Time</b></label>
@@ -46,7 +46,7 @@
             </form>
         </div>
 
-        <div class="seatsContainer">
+        {{!-- <div class="seatsContainer">
             <div class="legendContainer">
                 <span class="available"></span> available
                 <span class="unavailable"></span> unavailable
@@ -123,4 +123,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

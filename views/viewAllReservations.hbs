@@ -24,8 +24,19 @@
             <td>
                 <div class="cont">
                     {{!-- change html --}}
-                    <form action="editTechh.html">
+                    <form action="/editReservationTech" method="POST">
+                        <input type="hidden" name="username" value="{{user}}">
+                        <input type="hidden" name="email" value="{{email}}">
+                        <input type="hidden" name="lab" value="{{computer_lab}}">
+                        <input type="hidden" name="time" value="{{time_slot}}">
+                        <input type="hidden" name="date" value="{{date_reserved}}">
+                        <input type="hidden" name="seat" value="{{seat_num}}">
                         <button type="submit" class="reserveBtn">Edit</button>
+                    </form>
+                    {{!-- <a
+                        href="/editReservationTech?username={{user}}&email={{email}}&date={{date_reserved}}&time={{time_slot}}&lab={{computer_lab}}&seat={{seat_num}}">Edit</a>
+                    <form action="/editReservationTech">
+                        <button type="submit" class="reserveBtn">Edit</button> --}}
                     </form>
                     <form action="deleteLab.html">
                         <button type="submit" class="reserveBtn">Delete</button>
