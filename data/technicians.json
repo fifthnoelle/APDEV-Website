@@ -7,7 +7,8 @@
   "username": "GumballW",
   "dlsu_email": "gumball.watterson@dlsu.edu.ph",
   "password": "Gumball1*",
-  "tech_code": "3fA2sD"
+  "tech_code": "3fA2sD",
+  "profileimg": "https://yt3.googleusercontent.com/ytc/AIdro_mwgqshGtEft6i8z6mdw5SeTi3GYlviMjA1ZSzsKQ=s900-c-k-c0x00ffffff-no-rj"
 },
 {
   "_id": {
@@ -18,7 +19,8 @@
   "username": "DarwinW",
   "dlsu_email": "darwin.watterson@dlsu.edu.ph",
   "password": "Darwin1*",
-  "tech_code": "5gH9bT"
+  "tech_code": "5gH9bT",
+  "profileimg": "https://i.pinimg.com/736x/7c/ee/4e/7cee4ed77622a0a08ce7f5103c69338d.jpg"
 },
 {
   "_id": {
@@ -29,7 +31,8 @@
   "username": "AnaisW",
   "dlsu_email": "anais.watterson@dlsu.edu.ph",
   "password": "Anais1*",
-  "tech_code": "7pR4mJ"
+  "tech_code": "7pR4mJ",
+  "profileimg": "https://static.wikia.nocookie.net/theamazingworldofgumball/images/1/10/Season_3_Anais.png/revision/latest/scale-to-width-down/1200?cb=20161108212344"
 },
 {
   "_id": {
@@ -40,7 +43,8 @@
   "username": "NicoleW",
   "dlsu_email": "nicole.watterson@dlsu.edu.ph",
   "password": "Nicole1*",
-  "tech_code": "2kL8sF"
+  "tech_code": "2kL8sF",
+  "profileimg": "https://static.wikia.nocookie.net/p__/images/8/84/Nicole_Watterson_%28Child_-_TAWOG%29.png/revision/latest?cb=20221124013522&path-prefix=protagonist"
 },
 {
   "_id": {
@@ -51,7 +55,8 @@
   "username": "RichardW",
   "dlsu_email": "richard.watterson@dlsu.edu.ph",
   "password": "Richard1*",
-  "tech_code": "9tZ6qA"
+  "tech_code": "9tZ6qA",
+  "profileimg": "https://static.wikia.nocookie.net/deathbattlefanon/images/3/35/DF1CC758-2F42-49F9-8D1C-8C02091BBAFB.png/revision/latest?cb=20220725015526"
 },
 {
   "_id": {
@@ -62,5 +67,6 @@
   "username": "PennyF",
   "dlsu_email": "penny.fitzgerald@dlsu.edu.ph",
   "password": "Penny1*",
-  "tech_code": "1sK7dE"
+  "tech_code": "1sK7dE",
+  "profileimg": "https://static.wikia.nocookie.net/theamazingworldofgumball/images/6/63/Penny_S2.png/revision/latest?cb=20170815163313"
 }]

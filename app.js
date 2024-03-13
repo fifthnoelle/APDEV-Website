@@ -15,7 +15,7 @@ server.engine("hbs", handlebars.engine({
 server.use(express.static('public'));
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/labs');
+mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 function errorFn(err) {
     console.log('Error found. Please trace!');
@@ -421,7 +421,7 @@ server.get('/userProfileStudent', function (req, resp) {
 
     const reservationSearchQuery = { user: req.session.username };
 
-    studentModel.find(studentSearchQuery).lean().then(function (student_data) {
+    studentModel.findOne(studentSearchQuery).lean().then(function (student_data) {
         console.log("Loading Student Data");
         console.log(student_data);
 
@@ -434,7 +434,10 @@ server.get('/userProfileStudent', function (req, resp) {
                 layout: 'index',
                 title: 'ILabs | Edit My Profile',
                 css: 'userprofile.css',
-                student_data: student_data,
+                first_name: student_data.first_name,
+                last_name: student_data.last_name,
+                id_num: student_data.id_num,
+                profileimg: student_data.profileimg,
                 reservation_data: reservation_data
             });
         }).catch(errorFn);
@@ -442,15 +445,28 @@ server.get('/userProfileStudent', function (req, resp) {
 });
 
 server.get('/userProfileTech', function (req, resp) {
-    const searchQuery = {};
 
-    techModel.find(searchQuery).lean().then(function (technician_data) {
-        resp.render('userProfileTech', {
-            layout: 'index',
-            title: 'ILabs | Edit My Profile',
-            css: 'userprofile.css',
-            technician_data: technician_data
-        });
+    techModel.findOne({ username: req.session.username }).lean().then(function (technician_data) {
+        console.log("Loading Technician Data");
+        console.log(technician_data);
+
+        reservationModel.find({}).lean().then(function (reserve_data) {
+            console.log("Loading Reservation Data");
+            console.log(reserve_data);
+
+            // Render
+            resp.render('userProfileTech', {
+                layout: 'index',
+                title: 'ILABS | Edit My Profile',
+                css: 'userprofile.css',
+                first_name: technician_data.first_name,
+                last_name: technician_data.last_name,
+                dlsu_email: technician_data.dlsu_email,
+                tech_code: technician_data.tech_code,
+                profileimg: technician_data.profileimg,
+                reserve_data: reserve_data
+            });
+        }).catch(errorFn);
     }).catch(errorFn);
 });
 
