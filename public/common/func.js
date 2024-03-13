@@ -28,15 +28,15 @@ function checkTime() {
 
 function validateForm() {
     let u_name = $("#username").val();
-    let email = $("email").val();
+    let email = $("#email").val();
     let selectedTime = $("#time").val();
     let selectedDate = $("#date").val();
     let selectedLab = $("#laboratory").val();
-    let selectedSeat = $("#laboratory").val();
+    let selectedSeat = chosen_seat;
 
 
     $.post('reserveFunction',
-        {username : u_name, email : email, lab : selectedLab, date : selectedDate, time : selectedTime, seat : selectedSeat} 
+        {username : u_name, email : email, time : selectedTime, date : selectedDate, lab : selectedLab, seat : selectedSeat},
     )
 }
 

@@ -219,8 +219,6 @@ server.post('/reserveFunction', function(req, resp) {
     const time = req.body.time;
     const chosen_seat = req.body.seat;
 
-
-
     const searchQuery = {
         username: u_name,
     };
@@ -237,14 +235,15 @@ server.post('/reserveFunction', function(req, resp) {
                 'username': u_name,
                 'email' : email,
                 'date' : date,
-                'jul' : lab,
+                'lab' : lab,
                 'time' : time,
                 'seat' : chosen_seat
             });
+            console.log("rendered");
         } else {
             console.log("no match :(");
             seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
-                resp.render('bookReserve', {
+                resp.render('sHome', {
                     layout: 'layoutReserve',
                     title: 'ILabs | Book Reserve',
                     'seat-data': seat_data,
