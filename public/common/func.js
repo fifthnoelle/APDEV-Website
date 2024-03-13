@@ -26,6 +26,10 @@ function checkTime() {
     return true;
 }
 
+function validateForm() {
+    
+}
+
 // BOOKING RESERVING
 $(document).ready(function () {
     for (let i = 1; i < 37; i++) {
