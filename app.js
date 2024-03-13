@@ -81,6 +81,13 @@ server.get('/', function (req, resp) {
     });
 });
 
+server.get('/signIn', function (req, resp) { //For logging out
+    resp.render('signIn', {
+        layout: 'layoutSignIn',
+        title: 'ILABS | Sign In',
+    });
+});
+
 server.get('/studentRegister', function (req, resp) {
     resp.render('studentRegister', {
         layout: 'index',
