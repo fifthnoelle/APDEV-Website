@@ -266,14 +266,27 @@ server.get('/viewSchedulesTech', function (req, resp) {
 
 
 server.get('/viewMyReservations', function (req, resp) {
-    const searchQuery = {};//user details query
+    const searchQuery = {user: req.sessions.username};//user details query
 
-    reservationModel.find(searchQuery).lean().then(function (my_reserve_data) {
+    reservationModel.find(searchQuery).lean().then(function(reserve_data){
         console.log('loading user reservations');
+
+        let my_reserve_data = new Array();
+        for(const item of reserve_data){
+            my_reserve_data.push({
+                computer_lab : item.computer_lab,
+                date: item.date,
+                time_slot: item.pass,
+                email: item.email,
+                user: item.user,
+                seat_num: item.seat_num
+            });
+        }
+
         resp.render('viewMyReservations', {
             layout: 'layoutReserve',
             title: 'ILabs | View My Reservations',
-            reserve_data: my_reserve_data
+            my_reserve_data: my_reserve_data
         });
     }).catch(errorFn);
 });
@@ -288,8 +301,8 @@ server.get('/viewAllReservations', function (req, resp) {
         for (const item of reserve_data) {
             all_reserve_data.push({
                 computer_lab: item.computer_lab,
-                date: item.date,
-                time_slot: item.pass,
+                date_reserved: item.date_reserved,
+                time_slot: item.time_slot,
                 email: item.email,
                 user: item.user,
                 seat_num: item.seat_num
