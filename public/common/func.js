@@ -98,6 +98,7 @@ $(document).ready(function () {
             let selectedTime = $("#time").val();
             let selectedDate = $("#date").val();
             let selectedLab = $("#lab").val();
+            alert("ok!" + selectedTime + selectedLab + selectedDate);
             $.post('load_seats',
                 { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
                 function (data, status) {

@@ -339,9 +339,6 @@ server.get('/reserveTech', function (req, resp) {
 
 server.get('/viewSchedules', function (req, resp) {
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
-        seat_data.forEach(function (seat) {
-            seat.availability = "available";
-        });
         resp.render('viewSchedules', {
             layout: 'layoutReserve',
             title: 'ILabs | View Schedules',
@@ -365,7 +362,7 @@ server.get('/viewSchedulesTech', function (req, resp) {
 
 
 server.get('/viewMyReservations', function (req, resp) {
-    const searchQuery = { user: req.sessions.username };//user details query
+    const searchQuery = { user: req.session.username };//user details query
 
     reservationModel.find(searchQuery).lean().then(function (reserve_data) {
         console.log('loading user reservations');
@@ -381,6 +378,8 @@ server.get('/viewMyReservations', function (req, resp) {
                 seat_num: item.seat_num
             });
         }
+
+        console.log(my_reserve_data);
 
         resp.render('viewMyReservations', {
             layout: 'layoutReserve',
