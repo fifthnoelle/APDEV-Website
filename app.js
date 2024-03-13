@@ -246,14 +246,27 @@ server.get('/viewMyReservations', function (req, resp) {
 });
 
 server.get('/viewAllReservations', function (req, resp) {
-    const searchQuery = {};//empty = all
+    //const searchQuery = {};//empty = all
 
-    reservationModel.find(searchQuery).lean().then(function(all_reserve_data){
+    reservationModel.find({}).lean().then(function(reserve_data){
         console.log('loading all reservations');
+
+        let all_reserve_data = new Array();
+        for(const item of reserve_data){
+            all_reserve_data.push({
+                computer_lab : item.computer_lab,
+                date: item.date,
+                time_slot: item.pass,
+                email: item.email,
+                user: item.user,
+                seat_num: item.seat_num
+            });
+        }
+
         resp.render('viewAllReservations', {
             layout: 'layoutReserve',
             title: 'ILabs | View All Reservations',
-            reserve_data: all_reserve_data
+            all_reserve_data: all_reserve_data
         });
     }).catch(errorFn);  
 });
