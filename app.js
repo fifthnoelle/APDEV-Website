@@ -104,28 +104,17 @@ server.get('/userLoginStudent', function (req, resp) {
     });
 });
 
-const acctSchema = new mongoose.Schema({
-    u_name: { "type": "String", "required": true },
-    pass: { "type": "String", "required": true }
-}, { versionKey: false })
-
-const accountModel = mongoose.model('account', acctSchema);
-
-function checkUser(searchQuery) {}
-
-console.log('find user....');
-server.post('/login-funck', function (req, resp) {
+console.log('find student user....');
+server.post('/s-login-funck', function (req, resp) {
     const u_name = String(req.body.username);
     const pass = String(req.body.password);
-    // Define the search query for the current user
     const searchQuery = {
-        u_name: u_name,
-        pass: pass
+        username: u_name,
+        password: pass
     };
 
-    accountModel.findOne(searchQuery).lean().then(function (account) {
-        console.log('find user....2');
-        if (account != undefined && account._id != null) {
+    studentModel.findOne(searchQuery).lean().then(function (student) {
+        if (student != undefined && student._id != null) {
             req.session.username = u_name;
             console.log('match');
             resp.render('sHome', {
@@ -143,12 +132,38 @@ server.post('/login-funck', function (req, resp) {
 });
 
 
-
 server.get('/userLoginTech', function (req, resp) {
     resp.render('userLoginTech', {
         layout: 'layoutLogin',
         title: 'ILABS | User Log-in',
     });
+});
+
+console.log('find technician user....');
+server.post('/t-login-funck', function (req, resp) {
+    const u_name = String(req.body.username);
+    const pass = String(req.body.password);
+    const searchQuery = {
+        username: u_name,
+        password: pass
+    };
+
+    techModel.findOne(searchQuery).lean().then(function (technician) {
+        if (technician != undefined && technician._id != null) {
+            req.session.username = u_name;
+            console.log('match');
+            resp.render('indexTech', {
+                layout: 'index',
+                title: 'ILABS | Lab Technician Homepage',
+                css: 'landing.css'
+            });
+        } else {
+            resp.render('logoutTech', {
+                layout: 'layoutLogout',
+                title: 'ILABS | Log-Out',
+            });
+        }
+    }).catch(errorFn);
 });
 
 server.get('/forgotPasswordTech', function (req, resp) {
@@ -372,7 +387,7 @@ server.get('/userProfileStudent', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.get('/userProfile/technician', function (req, resp) {
+server.get('/userProfileTech', function (req, resp) {
     const searchQuery = {};
 
     techModel.find(searchQuery).lean().then(function (technician_data) {
@@ -385,7 +400,7 @@ server.get('/userProfile/technician', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.get('/userProfile/student/edit', function (req, resp) {
+server.get('/editProfileStudent', function (req, resp) {
     const searchQuery = {};
 
     studentModel.find(searchQuery).lean().then(function (student_data) {
@@ -398,7 +413,7 @@ server.get('/userProfile/student/edit', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.get('/userProfile/technician/edit', function (req, resp) {
+server.get('/editProfileTech', function (req, resp) {
     const searchQuery = {};
 
     techModel.find(searchQuery).lean().then(function (technician_data) {
@@ -411,7 +426,7 @@ server.get('/userProfile/technician/edit', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.get('/userProfile/technician/deleteProfile', function (req, resp) {
+server.get('/deleteProfileTech', function (req, resp) {
     resp.render('deleteProfileTech', {
         layout: 'index',
         title: 'ILabs | Delete My Profile',
@@ -419,7 +434,7 @@ server.get('/userProfile/technician/deleteProfile', function (req, resp) {
     });
 });
 
-server.get('/userProfile/student/deleteProfile', function (req, resp) {
+server.get('/deleteProfileStudent', function (req, resp) {
     resp.render('deleteProfileStudent', {
         layout: 'index',
         title: 'ILabs | Delete My Profile',

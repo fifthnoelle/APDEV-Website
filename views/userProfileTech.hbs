@@ -6,13 +6,14 @@
         </div>
         <div class="profile-userinfo">
             <h1>{{firstname}} {{lastname}}</h1>
-            <h3>Lab Technician {{labnum}}</h3>
+            <h2>{{dlsu_email}}</h2>
+            <h3>Lab Technician {{tech_code}}</h3>
         </div>
         <div class="spacer">
 
         </div>
         <div class="profile-edit">
-            <a href="editprofileTech.html">
+            <a href="/editProfileTech">
                 <button class="pill" type="button">Edit Profile</button>
             </a>
         </div>
@@ -22,8 +23,8 @@
         <div class="body-myprofile">
         <strong>My Labs</strong>
         <ul>
-            <li><a href="ViewAllReservations.html">View Reservations</a></li>
-            <li><a href="deleteprofileTech.html">Delete Profile</a></li>
+            <li><a href="/viewAllReservations">View Reservations</a></li>
+            <li><a href="/deleteProfileTech">Delete Profile</a></li>
         </ul>
         </div>
         <hr>
@@ -63,15 +64,17 @@
                         <th>Seat Number</th>
                         <th></th>
                     </tr>
+                    {{#each my_reserve_data}}
                     <tr>
-                        <td>GK304B</td>
-                        <td>Feb 14, 2024</td>
-                        <td>8:00 - 9:30</td>
-                        <td>shaykintanar@gmail.com</td>
-                        <td>shayleneeK</td>
-                        <td>A01</td>
+                        <td>{{computer_lab}}</td>
+                        <td>{{date}}</td>
+                        <td>{{time_slot}}</td>
+                        <td>{{email}}</td>
+                        <td>{{user}}</td>
+                        <td>{{seat_num}}</td>
                         <td>
                             <div class="cont">
+                                {{!-- change html --}}
                                 <form action="editTechh.html">
                                     <button type="submit" class="reserveBtn">Edit</button>
                                     </form> 
@@ -81,78 +84,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>GK304B</td>
-                        <td>Feb 14, 2024</td>
-                        <td>8:00 - 9:30</td>
-                        <td>shaykintanar@gmail.com</td>
-                        <td>shayleneeK</td>
-                        <td>A01</td>
-                        <td>
-                            <div class="cont">
-                                <form action="editTechh.html">
-                                    <button type="submit" class="reserveBtn">Edit</button>
-                                    </form> 
-                                    <form action="deleteLab.html">
-                                        <button type="submit" class="reserveBtn">Delete</button>
-                                    </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>GK304B</td>
-                        <td>Feb 14, 2024</td>
-                        <td>8:00 - 9:30</td>
-                        <td>samantha*****@gmail.com</td>
-                        <td>samOneil</td>
-                        <td>A02</td>
-                        <td>
-                            <div class="cont">
-                                <form action="editTechh.html">
-                                    <button type="submit" class="reserveBtn">Edit</button>
-                                    </form> 
-                                    <form action="deleteLab.html">
-                                        <button type="submit" class="reserveBtn">Delete</button>
-                                    </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>GK304B</td>
-                        <td>Feb 14, 2024</td>
-                        <td>8:00 - 9:30</td>
-                        <td>samantha*****@gmail.com</td>
-                        <td>samOneil</td>
-                        <td>A02</td>
-                        <td>
-                            <div class="cont">
-                                <form action="editTechh.html">
-                                    <button type="submit" class="reserveBtn">Edit</button>
-                                    </form> 
-                                    <form action="deleteLab.html">
-                                        <button type="submit" class="reserveBtn">Delete</button>
-                                    </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>GK304B</td>
-                        <td>Feb 14, 2024</td>
-                        <td>8:00 - 9:30</td>
-                        <td>shaykintanar@gmail.com</td>
-                        <td>shayleneeK</td>
-                        <td>A01</td>
-                        <td>
-                            <div class="cont">
-                                <form action="editTechh.html">
-                                    <button type="submit" class="reserveBtn">Edit</button>
-                                    </form> 
-                                    <form action="deleteLab.html">
-                                        <button type="submit" class="reserveBtn">Delete</button>
-                                    </form>
-                            </div>
-                        </td>
-                    </tr>
+                    {{/each}}
                 </table>
             </div>
         </div>

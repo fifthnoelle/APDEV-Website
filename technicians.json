@@ -1,0 +1,66 @@
+[{
+  "_id": {
+    "$oid": "65f18bcec63551a93eb4271b"
+  },
+  "first_name": "Gumball",
+  "last_name": "Watterson",
+  "username": "GumballW",
+  "dlsu_email": "gumball.watterson@dlsu.edu.ph",
+  "password": "Gumball1*",
+  "tech_code": "3fA2sD"
+},
+{
+  "_id": {
+    "$oid": "65f18bdcc63551a93eb4271d"
+  },
+  "first_name": "Darwin",
+  "last_name": "Watterson",
+  "username": "DarwinW",
+  "dlsu_email": "darwin.watterson@dlsu.edu.ph",
+  "password": "Darwin1*",
+  "tech_code": "5gH9bT"
+},
+{
+  "_id": {
+    "$oid": "65f18beac63551a93eb4271f"
+  },
+  "first_name": "Anais",
+  "last_name": "Watterson",
+  "username": "AnaisW",
+  "dlsu_email": "anais.watterson@dlsu.edu.ph",
+  "password": "Anais1*",
+  "tech_code": "7pR4mJ"
+},
+{
+  "_id": {
+    "$oid": "65f18bf9c63551a93eb42721"
+  },
+  "first_name": "Nicole",
+  "last_name": "Watterson",
+  "username": "NicoleW",
+  "dlsu_email": "nicole.watterson@dlsu.edu.ph",
+  "password": "Nicole1*",
+  "tech_code": "2kL8sF"
+},
+{
+  "_id": {
+    "$oid": "65f18c07c63551a93eb42723"
+  },
+  "first_name": "Richard",
+  "last_name": "Watterson",
+  "username": "RichardW",
+  "dlsu_email": "richard.watterson@dlsu.edu.ph",
+  "password": "Richard1*",
+  "tech_code": "9tZ6qA"
+},
+{
+  "_id": {
+    "$oid": "65f18c17c63551a93eb42725"
+  },
+  "first_name": "Penny",
+  "last_name": "Fitzgerald",
+  "username": "PennyF",
+  "dlsu_email": "penny.fitzgerald@dlsu.edu.ph",
+  "password": "Penny1*",
+  "tech_code": "1sK7dE"
+}]
