@@ -344,7 +344,7 @@ server.get('/userProfileTech', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.get('/userProfile/student/edit', function (req, resp) {
+server.get('/editProfileStudent', function (req, resp) {
     const searchQuery = {};
 
     studentModel.find(searchQuery).lean().then(function (student_data) {
@@ -357,7 +357,7 @@ server.get('/userProfile/student/edit', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.get('/userProfile/technician/edit', function (req, resp) {
+server.get('/editProfileTech', function (req, resp) {
     const searchQuery = {};
 
     techModel.find(searchQuery).lean().then(function (technician_data) {
@@ -370,7 +370,7 @@ server.get('/userProfile/technician/edit', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.get('/userProfile/technician/deleteProfile', function (req, resp) {
+server.get('/deleteProfileTech', function (req, resp) {
     resp.render('deleteProfileTech', {
         layout: 'index',
         title: 'ILabs | Delete My Profile',
@@ -378,7 +378,7 @@ server.get('/userProfile/technician/deleteProfile', function (req, resp) {
     });
 });
 
-server.get('/userProfile/student/deleteProfile', function (req, resp) {
+server.get('/deleteProfileStudent', function (req, resp) {
     resp.render('deleteProfileStudent', {
         layout: 'index',
         title: 'ILabs | Delete My Profile',
