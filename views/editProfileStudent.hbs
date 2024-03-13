@@ -1,57 +1,23 @@
-    {{> navigationBarStudent}}
-    <div class="main">
-        <div class="title"><h1>Edit Student Profile</h1></div>
-        <div class="profile-img">
-            <img src="{{profileimg}}" class="profile-img">
-        </div>
-        <div class="form">
-            <div class="details">
-
-            <form class="form" id="form" onsubmit="return submitEditForm()" method="get">
-
-            <div class="name">
-                <div>
-                <b>First Name: </b><br><input class="form" type="text" id="change-first" value="{{firstname}}"/>
-                </div>
-                <div>
-                <b>Last Name: </b><br><input class="form" type="text" id="change-last" value="{{lastname}}"/>
-                </div>
+<div class="wrapper">
+    <h1 id="registertitle">Edit Student Account</h1>
+    <form onsubmit="">
+        <div class="register-container">
+            <div class="input-box">
+                <input type="text" placeholder="{{first_name}}" required>
+                <input type="text" placeholder="{{last_name}}" required>
             </div>
-
-            <div class="id-num">
-                <b>ID Number: </b><br><input class="form" type="text" id="change-id" value="{{idnum}}"/>
+            <div class="input-box">
+                <input type="text" placeholder="{{username}}" required>
             </div>
-
-            <div>
-                <b>E-mail:</b><input class="form" type="text" id="change-email" value="{{email}}"/>
+            <div class="input-box">
+                <input type="text" placeholder="Password" required>
+                <input type="text" placeholder="Confirm Password" required>
             </div>
-
-            <div> 
-                <b>Mobile Number: </b><br><input class="form" type="text" id="change-num" value="{{number}}"/>
-            <div><input type="submit" class="button" id="submit-profile" value="Submit"/></div>
-            </div>
-            </form>
-            </div>
-
-            <!-- Password details can be omitted if too much work -->
-            <br><br>
-            <div class="password">
-            <form class="form" id="password-form" onsubmit="return submitEditPassForm()" method="get">
-                <div>
-                    <b>New Password: </b><br>
-                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password"/>
-                </div>
-                <div>
-                    <b>Confirm New Password: </b><br>
-                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password to Confirm"/>
-                </div>
-                <div>
-                    <b>Current Password: </b><br>
-                    <input class="form" type="password" id="change-pw" placeholder="Enter Current Password"/>
-                </div>
-                <button class="button" id="submit-password">Change Password</button>
-            </form>
+            <button type="submit" class="btn">Make Changes to Account</button>
+            <button type="reset" class="btn">Reset</button>
+            <div class="login-link">
+                <a href="/userProfileStudent"><strong>Back to Profile</strong></a>
             </div>
         </div>
-        <div class="delete-account"><a href="/deleteProfileStudent"><button class="alert-button">Delete Account</button></a></div>
-    </div>
+    </form>
+</div>

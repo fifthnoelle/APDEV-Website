@@ -431,7 +431,7 @@ server.get('/userProfileStudent', function (req, resp) {
             // Render
             resp.render('userProfileStudent', {
                 layout: 'index',
-                title: 'ILabs | Edit My Profile',
+                title: 'ILABS | Edit My Profile',
                 css: 'userprofile.css',
                 first_name: student_data.first_name,
                 last_name: student_data.last_name,
@@ -470,27 +470,33 @@ server.get('/userProfileTech', function (req, resp) {
 });
 
 server.get('/editProfileStudent', function (req, resp) {
-    const searchQuery = {};
 
-    studentModel.find(searchQuery).lean().then(function (student_data) {
+    studentModel.findOne({ username: req.session.username }).lean().then(function (student_data) {
         resp.render('editProfileStudent', {
             layout: 'index',
-            title: 'ILabs | Edit My Profile',
-            css: 'userprofile.css',
-            student_data: student_data
+            title: 'ILABS | Edit My Profile',
+            css: 'userRegister.css',
+            first_name: student_data.first_name,
+            last_name: student_data.last_name,
+            username: student_data.username,
+            id_num: student_data.id_num,
+            dlsu_email: student_data.dlsu_email
         });
     }).catch(errorFn);
 });
 
 server.get('/editProfileTech', function (req, resp) {
-    const searchQuery = {};
 
-    techModel.find(searchQuery).lean().then(function (technician_data) {
-        resp.render('editProfileStudent', {
+    techModel.findOne({ username: req.session.username }).lean().then(function (technician_data) {
+        resp.render('editProfileTech', {
             layout: 'index',
-            title: 'ILabs | Edit My Profile',
-            css: 'userprofile.css',
-            technician_data: technician_data
+            title: 'ILABS | Edit My Profile',
+            css: 'userRegister.css',
+            first_name: technician_data.first_name,
+            last_name: technician_data.last_name,
+            username: technician_data.username,
+            tech_code: technician_data.tech_code,
+            dlsu_email: technician_data.dlsu_email
         });
     }).catch(errorFn);
 });
