@@ -26,54 +26,36 @@ server.use(express.static('public'));
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/labs');
 
-
-function errorFn(err) {
-    console.log('Error found. Please trace!');
-    console.error(err);
-}
-
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/labs');
-
-
 function errorFn(err) {
     console.log('Error found. Please trace!');
     console.error(err);
 }
 
 //initialize session
-app.use(session({
+server.use(session({
     secret: 'your_secret_key',
     resave: false,
     saveUninitialized: false
 }));
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/test');
-
-function errorFn(err) {
-    console.log('Error found. Please trace!');
-    console.error(err);
-}
-
 const techSchema = new mongoose.Schema({
-    first_name: { type: String, required: true},
-    last_name: { type: String, required: true},
-    username: { type: String, required: true},
-    tech_code: { type: String, required: true},
-    dlsu_email: { type: String, required: true},
-    password: { type: String, required: true},
-    profileimg: { type: String}
+    first_name: { type: String, required: true },
+    last_name: { type: String, required: true },
+    username: { type: String, required: true },
+    tech_code: { type: String, required: true },
+    dlsu_email: { type: String, required: true },
+    password: { type: String, required: true },
+    profileimg: { type: String }
 }, { versionKey: false });
 
 const studentSchema = new mongoose.Schema({
-    first_name: { type: String, required: true},
-    last_name: { type: String, required: true},
-    username: { type: String, required: true},
-    id_num: { type: String, required: true},
-    dlsu_email: { type: String, required: true},
-    password: { type: String, required: true},
-    profileimg: { type: String}
+    first_name: { type: String, required: true },
+    last_name: { type: String, required: true },
+    username: { type: String, required: true },
+    id_num: { type: String, required: true },
+    dlsu_email: { type: String, required: true },
+    password: { type: String, required: true },
+    profileimg: { type: String }
 }, { versionKey: false });
 
 const studentModel = mongoose.model('student', studentSchema);
@@ -108,7 +90,7 @@ server.get('/', function (req, resp) {
     });
 });
 
-server.get('/studentRegister', function(req, resp){
+server.get('/studentRegister', function (req, resp) {
     resp.render('studentRegister', {
         layout: 'index',
         title: 'ILABS | Sign-Up',
@@ -116,7 +98,7 @@ server.get('/studentRegister', function(req, resp){
     });
 });
 
-server.get('/techRegister', function(req, resp){
+server.get('/techRegister', function (req, resp) {
     resp.render('techRegister', {
         layout: 'index',
         title: 'ILABS | Sign-Up',
@@ -132,52 +114,51 @@ server.get('/userLoginStudent', function (req, resp) {
 });
 
 const acctSchema = new mongoose.Schema({
-    u_name: {"type": "String", "required": true},
-    pass: {"type": "String", "required": true}
+    u_name: { "type": "String", "required": true },
+    pass: { "type": "String", "required": true }
 }, { versionKey: false })
 
 const accountModel = mongoose.model('account', acctSchema);
 
 console.log('find user....');
-server.post('/login-funck', function(req, resp){
+server.post('/login-funck', function (req, resp) {
     const u_name = String(req.body.username);
     const pass = String(req.body.password);
-    console.log('Request Body:' + u_name + " " + pass);
-    console.log('find user....1');
-        // Define the search query for the current user
-        const searchQuery = {
-            u_name: u_name,
-            pass: pass
-        };
+    // Define the search query for the current user
+    const searchQuery = {
+        u_name: u_name,
+        pass: pass
+    };
 
-    accountModel.findOne(searchQuery).lean().then(function (account){
+    accountModel.findOne(searchQuery).lean().then(function (account) {
         console.log('find user....2');
-        if(account != undefined && account._id != null){
+        if (account != undefined && account._id != null) {
+            req.session.username = u_name;
             console.log('match');
-            resp.render('bookReserve',{
-                layout: 'layoutReserve',
-                title: 'ILabs | Book Reserve'
+            resp.render('sHome', {
+                layout: 'index',
+                title: 'ILABS | Student Homepage',
+                css: 'landing.css'
             });
-          }else{
-            console.log('do not match');
-            resp.render('logoutStudent',{
+        } else {
+            resp.render('logoutStudent', {
                 layout: 'layoutLogout',
                 title: 'ILABS | Log-Out'
             });
-          }
-        }).catch(errorFn);
+        }
+    }).catch(errorFn);
 });
 
 
 
-server.get('/userLoginTech', function(req, resp){
-    resp.render('userLoginTech',{
+server.get('/userLoginTech', function (req, resp) {
+    resp.render('userLoginTech', {
         layout: 'layoutLogin',
         title: 'ILABS | User Log-in',
     });
 });
 
-server.get('/forgotPasswordTech', function(req, resp){
+server.get('/forgotPasswordTech', function (req, resp) {
     resp.render('forgotPasswordTech', {
         layout: 'layoutLogin',
         title: 'ILABS | Forgot Password'
@@ -211,6 +192,7 @@ server.post('/load_seats', function (req, resp) {
 })
 
 server.get('/bookReserve', function (req, resp) {
+    console.log(req.session.username);
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         seat_data.forEach(function (seat) {
             seat.availability = "available";
@@ -241,7 +223,7 @@ server.get('/sHome', function (req, resp) {
     });
 });
 
-server.get('/indexTech', function(req, resp) {
+server.get('/indexTech', function (req, resp) {
     resp.render('indexTech', {
         layout: 'index',
         title: 'ILABS | Lab Technician Homepage',
@@ -293,26 +275,26 @@ server.get('/viewSchedulesTech', function (req, resp) {
 server.get('/viewMyReservations', function (req, resp) {
     const searchQuery = {};//user details query
 
-    reservationModel.find(searchQuery).lean().then(function(my_reserve_data){
+    reservationModel.find(searchQuery).lean().then(function (my_reserve_data) {
         console.log('loading user reservations');
         resp.render('viewMyReservations', {
             layout: 'layoutReserve',
             title: 'ILabs | View My Reservations',
             reserve_data: my_reserve_data
         });
-    }).catch(errorFn);  
+    }).catch(errorFn);
 });
 
 server.get('/viewAllReservations', function (req, resp) {
     //const searchQuery = {};//empty = all
 
-    reservationModel.find({}).lean().then(function(reserve_data){
+    reservationModel.find({}).lean().then(function (reserve_data) {
         console.log('loading all reservations');
 
         let all_reserve_data = new Array();
-        for(const item of reserve_data){
+        for (const item of reserve_data) {
             all_reserve_data.push({
-                computer_lab : item.computer_lab,
+                computer_lab: item.computer_lab,
                 date: item.date,
                 time_slot: item.pass,
                 email: item.email,
@@ -326,14 +308,14 @@ server.get('/viewAllReservations', function (req, resp) {
             title: 'ILabs | View All Reservations',
             all_reserve_data: all_reserve_data
         });
-    }).catch(errorFn);  
+    }).catch(errorFn);
 });
 
 server.get('/userProfileStudent', function (req, resp) {
     // blank search query
     const searchQuery = {};
 
-    studentModel.find(searchQuery).lean().then(function(student_data){
+    studentModel.find(searchQuery).lean().then(function (student_data) {
         resp.render('userProfileStudent', {
             layout: 'index',
             title: 'ILabs | Edit My Profile',
@@ -346,39 +328,39 @@ server.get('/userProfileStudent', function (req, resp) {
 server.get('/userProfile/technician', function (req, resp) {
     const searchQuery = {};
 
-    techModel.find(searchQuery).lean().then(function(technician_data){
+    techModel.find(searchQuery).lean().then(function (technician_data) {
         resp.render('userProfileTech', {
             layout: 'index',
             title: 'ILabs | Edit My Profile',
             css: 'userprofile.css',
             technician_data: technician_data
-    });
+        });
     }).catch(errorFn);
 });
 
 server.get('/userProfile/student/edit', function (req, resp) {
     const searchQuery = {};
 
-    studentModel.find(searchQuery).lean().then(function(student_data){
+    studentModel.find(searchQuery).lean().then(function (student_data) {
         resp.render('editProfileStudent', {
             layout: 'index',
             title: 'ILabs | Edit My Profile',
             css: 'userprofile.css',
             student_data: student_data
-    });
+        });
     }).catch(errorFn);
 });
 
 server.get('/userProfile/technician/edit', function (req, resp) {
     const searchQuery = {};
 
-    techModel.find(searchQuery).lean().then(function(technician_data){
+    techModel.find(searchQuery).lean().then(function (technician_data) {
         resp.render('editProfileStudent', {
             layout: 'index',
             title: 'ILabs | Edit My Profile',
             css: 'userprofile.css',
             technician_data: technician_data
-    });
+        });
     }).catch(errorFn);
 });
 
