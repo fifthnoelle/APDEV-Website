@@ -206,12 +206,22 @@ server.get('/bookReserve', function (req, resp) {
             layout: 'layoutReserve',
             title: 'ILabs | Book Reserve',
             'seat-data': seat_data,
-            'username' : req.session.username
+            'username': req.session.username
         });
     }).catch(errorFn);
 });
 
-server.post('/reserveFunction', function(req, resp) {
+server.get('/bookReserveTech', function (req, resp) {
+    seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        resp.render('bookReserveTech', {
+            layout: 'layoutReserve',
+            title: 'ILabs | Book Reserve',
+            'seat-data': seat_data,
+        });
+    }).catch(errorFn);
+});
+
+server.post('/reserveFunctionStudent', function (req, resp) {
     const u_name = req.body.username;
     const email = req.body.email;
     const lab = req.body.laboratory;
@@ -232,12 +242,12 @@ server.post('/reserveFunction', function(req, resp) {
                 layout: 'index',
                 title: 'ILABS | Reserve Successful',
                 css: 'landing.css',
-                'username': u_name,
-                'email' : email,
-                'date' : date,
-                'laboratory' : lab,
-                'time' : time,
-                'seat' : chosen_seat
+                username: u_name,
+                email: email,
+                date: date,
+                laboratory: lab,
+                time: time,
+                seat: chosen_seat
             });
             console.log("rendered");
         } else {
@@ -247,11 +257,37 @@ server.post('/reserveFunction', function(req, resp) {
                     layout: 'layoutReserve',
                     title: 'ILabs | Book Reserve',
                     'seat-data': seat_data,
-                    'username' : req.session.username
+                    'username': req.session.username
                 });
             }).catch(errorFn);
         }
     }).catch(errorFn);
+});
+
+server.post('/reserveFunctionTech', function (req, resp) {
+    const u_name = req.body.username;
+    const email = req.body.email;
+    const lab = req.body.laboratory;
+    const date = req.body.date;
+    const time = req.body.time;
+    const chosen_seat = req.body.seat_num;
+
+    console.log(req.body);
+
+
+    resp.render('reservationSuccessfulTech', {
+        layout: 'index',
+        title: 'ILABS | Reserve Successful',
+        css: 'landing.css',
+        username: u_name,
+        email: email,
+        date: date,
+        laboratory: lab,
+        time: time,
+        seat: chosen_seat
+    });
+    console.log("rendered");
+
 });
 
 server.get('/student-home', function (req, resp) {
@@ -321,15 +357,15 @@ server.get('/viewSchedulesTech', function (req, resp) {
 
 
 server.get('/viewMyReservations', function (req, resp) {
-    const searchQuery = {user: req.sessions.username};//user details query
+    const searchQuery = { user: req.sessions.username };//user details query
 
-    reservationModel.find(searchQuery).lean().then(function(reserve_data){
+    reservationModel.find(searchQuery).lean().then(function (reserve_data) {
         console.log('loading user reservations');
 
         let my_reserve_data = new Array();
-        for(const item of reserve_data){
+        for (const item of reserve_data) {
             my_reserve_data.push({
-                computer_lab : item.computer_lab,
+                computer_lab: item.computer_lab,
                 date: item.date,
                 time_slot: item.pass,
                 email: item.email,

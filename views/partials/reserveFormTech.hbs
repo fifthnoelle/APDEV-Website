@@ -1,21 +1,21 @@
 <div class="reserveForm">
-    <form action="reserveFunction" method="post">
+    <form action="reserveFunctionTech" method="post">
         <div class="formPersonal">
             <div class="formQuestion">
-                <label for="Name"><b>Name</b></label>
-                <input type="text" name="username">
+                <label for="username"><b>Name</b></label>
+                <input type="text" name="username" id="username">
             </div>
         </div>
         <div class="formPersonal">
             <div class="formQuestion">
                 <label for="email"><b>Email</b></label>
-                <input type="text">
+                <input name="email" id="email" type="text">
             </div>
         </div>
         <div class="formLab">
             <div class="formQuestion">
                 <label for="laboratory"><b>Computer Laboratory</b></label>
-                <select name="laboratory" id="lab">
+                <select name="laboratory" id="laboratory">
                     <option value="">-- Select Lab</option>
                     <option value="GK304A">GK304A</option>
                     <option value="GK304B">GK304B</option>
@@ -28,7 +28,7 @@
         <div class="formDateTime">
             <div class="formQuestion">
                 <label for="date"><b>Date</b></label>
-                <input type="date" id="date">
+                <input type="date" id="date" name="date">
             </div>
             <div class="formQuestion">
                 <label for="time"><b>Time</b></label>
@@ -41,6 +41,12 @@
                     <option value="16:00 - 17:30">16:00 - 17:30</option>
                     <option value="18:00 - 19:30">18:00 - 19:30</option>
                 </select>
+            </div>
+        </div>
+        <div class="formPersonal">
+            <div class="formQuestion">
+                <label for="seat_num"><b>Seat Number</b></label>
+                <input type="text" id="seat_num" name="seat_num">
             </div>
         </div>
         <input type="submit" class="submitBtn">
