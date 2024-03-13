@@ -1,0 +1,125 @@
+{{>navigationBarTech}}
+<div class="mainContent">
+    <div class="reminders">
+        {{>reminders}}
+    </div>
+    <div class="content">
+        <div class="reserveForm">
+            <form action="">
+                <div class="formPersonal">
+                    <div class="formQuestion">
+                        <label for="Name"><b>Name</b></label>
+                        <input type="text" value="Sam O'Neil">
+                    </div>
+                </div>
+                <div class="formPersonal">
+                    <div class="formQuestion">
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" value="samantha****@dlsu.edu.ph">
+                    </div>
+                </div>
+                <div class="formPersonal">
+                    <div class="formQuestion">
+                        <label for="Seatx"><b>Seat No.</b></label>
+                        <input type="text" value="1-1">
+                    </div>
+                </div>
+                <div class="formDateTime">
+                    <div class="formQuestion">
+                        <label for="date"><b>Date</b></label>
+                        <input type="calendar" id="date" name="date" placeholder="05/09/04">
+                    </div>
+                    <div class="formQuestion">
+                        <label for="time"><b>Time</b></label>
+                        <select name="time" id="time">
+                            <option value="1">8:00 - 9:30</option>
+                            <option value="2">10:00 - 11:30</option>
+                            <option value="3">12:00 - 13:30</option>
+                            <option value="4">14:00 - 15:30</option>
+                            <option value="5">16:00 - 17:30</option>
+                            <option value="6">18:00 - 19:30</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="submit" class="submitBtn">
+            </form>
+        </div>
+
+        <div class="seatsContainer">
+            <div class="legendContainer">
+                <span class="available"></span> available
+                <span class="unavailable"></span> unavailable
+            </div>
+            <div class="seats">
+                <div class="seatsColumn">
+                    <div class="seatsGroup">
+                        <span class="seat">1</span>
+                        <span class="seat">2</span>
+                        <span class="seat">3</span>
+                    </div>
+                    <div class="seatsGroup">
+                        <span class="seat">4</span>
+                        <span class="seat">5</span>
+                        <span class="seat">6</span>
+                    </div>
+                    <div class="seatsGroup">
+                        <span class="seat">7</span>
+                        <span class="seat">8</span>
+                        <span class="seat">9</span>
+                    </div>
+                </div>
+                <div class="seatsColumn">
+                    <div class="seatsGroup">
+                        <span class="seat">1</span>
+                        <span class="seat">2</span>
+                        <span class="seat">3</span>
+                    </div>
+                    <div class="seatsGroup">
+                        <span class="seat">4</span>
+                        <span class="seat">5</span>
+                        <span class="seat">6</span>
+                    </div>
+                    <div class="seatsGroup">
+                        <span class="seat">7</span>
+                        <span class="seat">8</span>
+                        <span class="seat">9</span>
+                    </div>
+                </div>
+                <div class="seatsColumn">
+                    <div class="seatsGroup">
+                        <span class="seat">1</span>
+                        <span class="seat">2</span>
+                        <span class="seat">3</span>
+                    </div>
+                    <div class="seatsGroup">
+                        <span class="seat">4</span>
+                        <span class="seat">5</span>
+                        <span class="seat">6</span>
+                    </div>
+                    <div class="seatsGroup">
+                        <span class="seat">7</span>
+                        <span class="seat">8</span>
+                        <span class="seat">9</span>
+                    </div>
+                </div>
+                <div class="seatsColumn">
+                    <div class="seatsGroup">
+                        <span class="seat">1</span>
+                        <span class="seat">2</span>
+                        <span class="seat">3</span>
+                    </div>
+                    <div class="seatsGroup">
+                        <span class="seat">4</span>
+                        <span class="seat">5</span>
+                        <span class="seat">6</span>
+                    </div>
+                    <div class="seatsGroup">
+                        <span class="seat">7</span>
+                        <span class="seat">8</span>
+                        <span class="seat">9</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
