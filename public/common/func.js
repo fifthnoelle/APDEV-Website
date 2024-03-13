@@ -32,11 +32,11 @@ function validateForm() {
     let selectedTime = $("#time").val();
     let selectedDate = $("#date").val();
     let selectedLab = $("#laboratory").val();
-    let selectedSeat = chosen_seat;
+    let selectedSeat = $("#laboratory").val();
+
 
     $.post('reserveFunction',
-        {u_name : String(u_name), email : String(email), lab : String(selectedLab), 
-        date : String(selectedDate), time : String(selectedTime), seat : String(selectedSeat)}
+        {username : u_name, email : email, lab : selectedLab, date : selectedDate, time : selectedTime, seat : selectedSeat} 
     )
 }
 
@@ -50,17 +50,15 @@ $(document).ready(function () {
             }
             else { //Valid
                 if (chosen_seat != "") {
-                    $(chosen_seat).css("background-color", "#0A502E");
-                    $(chosen_seat).css("color", "#F6EEF2");
+                    $("#" + chosen_seat).css("background-color", "#0A502E");
+                    $("#" + chosen_seat).css("color", "#F6EEF2");
                 }
-                chosen_seat = String("#A" + i.toString().padStart(2, '0'));
+                chosen_seat = String("A" + i.toString().padStart(2, '0'));
                 alert(chosen_seat);
                 $("#seat").text(chosen_seat);
                 $(this).css("background-color", "#d4e8d3");
                 $(this).css("color", "#0A502E");
             }
-
-
         });
     }
 

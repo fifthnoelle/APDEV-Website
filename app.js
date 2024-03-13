@@ -214,17 +214,17 @@ server.get('/bookReserve', function (req, resp) {
 server.post('/reserveFunction', function(req, resp) {
     const u_name = req.body.username;
     const email = req.body.email;
+    const lab = req.body.lab;
     const date = req.body.date;
-    const laboratory = req.body.laboratory;
     const time = req.body.time;
-    const seat = req.body.seat;
+    const chosen_seat = req.body.seat;
 
-    console.log(seat);
+
 
     const searchQuery = {
         username: u_name,
     };
-    console.log(searchQuery);
+    console.log(req.body);
 
     studentModel.findOne(searchQuery).lean().then(function (student) {
         console.log('find user....2');
@@ -237,9 +237,9 @@ server.post('/reserveFunction', function(req, resp) {
                 'username': u_name,
                 'email' : email,
                 'date' : date,
-                'laboratory' : laboratory,
+                'jul' : lab,
                 'time' : time,
-                'seat' : seat
+                'seat' : chosen_seat
             });
         } else {
             console.log("no match :(");
