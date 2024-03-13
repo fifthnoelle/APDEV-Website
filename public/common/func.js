@@ -20,27 +20,11 @@ function checkDate() {
 
 function checkTime() {
     let time = document.getElementById("time").value;
-    if(time == "") {
+    if (time == "") {
         return false;
     }
     return true;
 }
-
-/* function validateForm() {
-    let u_name = $("#username").val();
-    let email = $("#email").val();
-    let selectedTime = $("#time").val();
-    let selectedDate = $("#date").val();
-    let selectedLab = $("#laboratory").val();
-    let selectedSeat = chosen_seat;
-
-
-    $.post('reserveFunctionStudent',
-        {username : u_name, email : email, time : selectedTime, date : selectedDate, laboratory : selectedLab, seat_num : selectedSeat},
-    )
-
-    return true;
-} */
 
 // BOOKING RESERVING
 $(document).ready(function () {
@@ -63,7 +47,7 @@ $(document).ready(function () {
         });
     }
 
-    $("#seat_num").click(function() {
+    $("#seat_num").click(function () {
         alert("Please use the table on the right to select an available seat!");
     });
 
@@ -99,18 +83,18 @@ $(document).ready(function () {
 });
 
 //FILTERING SCHEDULES
-$(document).ready(function() {
-    $("#FilterSchedules").click(function() {
-        if(!checkLab()){
+$(document).ready(function () {
+    $("#FilterSchedules").click(function () {
+        if (!checkLab()) {
             alert("Please select a Laboratory!");
         }
-        else if(!checkDate()){
+        else if (!checkDate()) {
             alert("Please select a Date!");
         }
-        else if(!checkTime()){
+        else if (!checkTime()) {
             alert("Please select a TimeSlot!");
         }
-        else{
+        else {
             let selectedTime = $("#time").val();
             let selectedDate = $("#date").val();
             let selectedLab = $("#lab").val();

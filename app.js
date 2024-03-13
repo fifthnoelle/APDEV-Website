@@ -260,11 +260,12 @@ server.post('/reserveFunctionStudent', function (req, resp) {
         } else {
             console.log("no match :(");
             seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
-                resp.render('sHome', {
+                resp.render('bookReserve', {
                     layout: 'layoutReserve',
                     title: 'ILabs | Book Reserve',
                     'seat-data': seat_data,
-                    'username': req.session.username
+                    username: req.session.username,
+                    alert_message : "no matching user"
                 });
             }).catch(errorFn);
         }
