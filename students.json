@@ -1,0 +1,105 @@
+[{
+  "_id": {
+    "$oid": "65eea32f35067d1658d50bd3"
+  },
+  "first_name": "Princess",
+  "last_name": "BubbleGum",
+  "username": "PBubbleG",
+  "id_num": 12208566,
+  "dlsu_email": "bubblegum_princess@dlsu.edu.ph",
+  "password": "Marceline3*",
+  "profileimg": "https://ucarecdn.com/740223cd-f878-4fbe-9bc0-fe7be02a1e02/-/crop/270x270/157,0/-/preview/-/progressive/yes/-/format/auto/"
+},
+{
+  "_id": {
+    "$oid": "65eea35735067d1658d50bd5"
+  },
+  "first_name": "Finn",
+  "last_name": "Human",
+  "username": "FHuman",
+  "id_num": 12208567,
+  "dlsu_email": "finn_human@dlsu.edu.ph",
+  "password": "Adventure1*"
+},
+{
+  "_id": {
+    "$oid": "65eea36935067d1658d50bd7"
+  },
+  "first_name": "Jake",
+  "last_name": "Dog",
+  "username": "JDog",
+  "id_num": 12208568,
+  "dlsu_email": "jake_dog@dlsu.edu.ph",
+  "password": "Stretchy2*"
+},
+{
+  "_id": {
+    "$oid": "65eea37835067d1658d50bd9"
+  },
+  "first_name": "Marceline",
+  "last_name": "Vampire",
+  "username": "MVampire",
+  "id_num": 12208569,
+  "dlsu_email": "marceline_vampire@dlsu.edu.ph",
+  "password": "RockStar3*"
+},
+{
+  "_id": {
+    "$oid": "65eea39b35067d1658d50bdb"
+  },
+  "first_name": "Lumpy",
+  "last_name": "Space Princess",
+  "username": "LSP",
+  "id_num": 12208571,
+  "dlsu_email": "lumpy_space_princess@dlsu.edu.ph",
+  "password": "LumpOff5*",
+  "profileimg": "https://static.wikia.nocookie.net/adventuretimewithfinnandjake/images/f/f3/Lumpy_Space_Princess.png/revision/latest/scale-to-width-down/340?cb=20130322132848"
+},
+{
+  "_id": {
+    "$oid": "65eea3ad35067d1658d50bdd"
+  },
+  "first_name": "Ice",
+  "last_name": "King",
+  "username": "IceKing",
+  "id_num": 12208570,
+  "dlsu_email": "ice_king@dlsu.edu.ph",
+  "password": "Cold4*",
+  "profileimg": "https://vignette.wikia.nocookie.net/adventuretimewithfinnandjake/images/a/a4/Ice_King.png/revision/latest/scale-to-width-down/340?cb=20120824145741"
+},
+{
+  "_id": {
+    "$oid": "65f18e2ec63551a93eb42732"
+  },
+  "first_name": "Tree",
+  "last_name": "Trunks",
+  "username": "3Trunks",
+  "id_num": 12208582,
+  "dlsu_email": "tree.trunks@dlsu.edu.ph",
+  "password": "Tree1*",
+  "profileimg": "https://vignette.wikia.nocookie.net/adventuretimewithfinnandjake/images/7/77/Tree_Trunks.png/revision/latest/scale-to-width-down/340?cb=20130321022307"
+},
+{
+  "_id": {
+    "$oid": "65f18e47c63551a93eb42734"
+  },
+  "first_name": "Peppermint",
+  "last_name": "Butler",
+  "username": "PepperB",
+  "id_num": 12208581,
+  "dlsu_email": "peppermint.butler@dlsu.edu.ph",
+  "password": "Peppermint1*",
+  "profileimg": "https://vignette.wikia.nocookie.net/adventuretimewithfinnandjake/images/0/03/Peppermint_Butler.png/revision/latest/scale-to-width-down/340?cb=20130321022351"
+},
+{
+  "_id": {
+    "$oid": "65f18e5bc63551a93eb42736"
+  },
+  "first_name": "Flame",
+  "last_name": "Princess",
+  "username": "FlamePrincezz",
+  "id_num": 12208579,
+  "dlsu_email": "flame.princess@dlsu.edu.ph",
+  "password": "Flame1*",
+  "profileimg": "https://vignette.wikia.nocookie.net/adventuretimewithfinnandjake/images/0/09/Flame_Princess2.png/revision/latest/scale-to-width-down/340?cb=20130322133312"
+}]
