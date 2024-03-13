@@ -1,4 +1,4 @@
-computer_lab, date,time_slot, email,user,seat_num
+computer_lab,date_reserved,time_reserved, email,user,seat_num
 GK304B,14-Feb-24,8:00 - 9:30,shaykintanar@gmail.com,shayleneeK,A01
 GK304B,15-Feb-24,8:00 - 9:30,shaykintanar@gmail.com,shayleneeK,A01
 GK304B,14-Feb-24,10:00 - 11:30,samanthaoneil@gmail.com,samOneil,A02

@@ -273,7 +273,7 @@ server.get('/viewSchedulesTech', function (req, resp) {
 
 
 server.get('/viewMyReservations', function (req, resp) {
-    const searchQuery = {};//user details query
+    const searchQuery = {user: req.sessions.username};//user details query
 
     reservationModel.find(searchQuery).lean().then(function(reserve_data){
         console.log('loading user reservations');
@@ -282,9 +282,9 @@ server.get('/viewMyReservations', function (req, resp) {
         for(const item of reserve_data){
             my_reserve_data.push({
                 computer_lab : item.computer_lab,
-                date: item.date.toString(),
-                time_slot: item.pass.toString(),
-                email: item.email.toString(),
+                date: item.date,
+                time_slot: item.pass,
+                email: item.email,
                 user: item.user,
                 seat_num: item.seat_num
             });
@@ -307,9 +307,9 @@ server.get('/viewAllReservations', function (req, resp) {
         let all_reserve_data = new Array();
         for (const item of reserve_data) {
             all_reserve_data.push({
-                computer_lab : item.computer_lab,
-                date: item.date,
-                time_slot: item.pass,
+                computer_lab: item.computer_lab,
+                date_reserved: item.date_reserved,
+                time_slot: item.time_slot,
                 email: item.email,
                 user: item.user,
                 seat_num: item.seat_num
