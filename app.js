@@ -1,5 +1,6 @@
 // npm i express body-parser express-handlebars mongoose
 const express = require("express");
+const session = require('express-session');
 const server = express();
 
 const bodyParser = require("body-parser")
@@ -13,6 +14,13 @@ server.engine("hbs", handlebars.engine({
 }));
 
 server.use(express.static('public'));
+
+//initialize session
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: false
+}));
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/test');
