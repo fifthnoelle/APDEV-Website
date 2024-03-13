@@ -26,7 +26,7 @@ function checkTime() {
     return true;
 }
 
-function validateForm() {
+/* function validateForm() {
     let u_name = $("#username").val();
     let email = $("#email").val();
     let selectedTime = $("#time").val();
@@ -35,12 +35,12 @@ function validateForm() {
     let selectedSeat = chosen_seat;
 
 
-    $.post('reserveFunction',
-        {username : u_name, email : email, time : selectedTime, date : selectedDate, lab : selectedLab, seat : selectedSeat},
+    $.post('reserveFunctionStudent',
+        {username : u_name, email : email, time : selectedTime, date : selectedDate, laboratory : selectedLab, seat_num : selectedSeat},
     )
 
     return true;
-}
+} */
 
 // BOOKING RESERVING
 $(document).ready(function () {
