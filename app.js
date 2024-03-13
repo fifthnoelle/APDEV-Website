@@ -275,12 +275,25 @@ server.get('/viewSchedulesTech', function (req, resp) {
 server.get('/viewMyReservations', function (req, resp) {
     const searchQuery = {};//user details query
 
-    reservationModel.find(searchQuery).lean().then(function (my_reserve_data) {
+    reservationModel.find(searchQuery).lean().then(function(reserve_data){
         console.log('loading user reservations');
+
+        let my_reserve_data = new Array();
+        for(const item of reserve_data){
+            my_reserve_data.push({
+                computer_lab : item.computer_lab,
+                date: item.date.toString(),
+                time_slot: item.pass.toString(),
+                email: item.email.toString(),
+                user: item.user,
+                seat_num: item.seat_num
+            });
+        }
+
         resp.render('viewMyReservations', {
             layout: 'layoutReserve',
             title: 'ILabs | View My Reservations',
-            reserve_data: my_reserve_data
+            my_reserve_data: my_reserve_data
         });
     }).catch(errorFn);
 });
@@ -294,7 +307,7 @@ server.get('/viewAllReservations', function (req, resp) {
         let all_reserve_data = new Array();
         for (const item of reserve_data) {
             all_reserve_data.push({
-                computer_lab: item.computer_lab,
+                computer_lab : item.computer_lab,
                 date: item.date,
                 time_slot: item.pass,
                 email: item.email,
