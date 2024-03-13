@@ -38,6 +38,8 @@ function validateForm() {
     $.post('reserveFunction',
         {username : u_name, email : email, time : selectedTime, date : selectedDate, lab : selectedLab, seat : selectedSeat},
     )
+
+    return true;
 }
 
 // BOOKING RESERVING
@@ -54,13 +56,16 @@ $(document).ready(function () {
                     $("#" + chosen_seat).css("color", "#F6EEF2");
                 }
                 chosen_seat = String("A" + i.toString().padStart(2, '0'));
-                alert(chosen_seat);
-                $("#seat").text(chosen_seat);
+                $("#seat_num").val(chosen_seat);
                 $(this).css("background-color", "#d4e8d3");
                 $(this).css("color", "#0A502E");
             }
         });
     }
+
+    $("#seat_num").click(function() {
+        alert("Please use the table on the right to select an available seat!");
+    });
 
     // Event listener for time select
     $("#time").change(function () {
@@ -75,7 +80,6 @@ $(document).ready(function () {
             let selectedTime = $(this).val();
             let selectedDate = $("#date").val();
             let selectedLab = $("#laboratory").val();
-            alert(selectedLab);
             $.post('load_seats',
                 { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
                 function (data, status) {
@@ -114,7 +118,6 @@ $(document).ready(function() {
                 { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
                 function (data, status) {
                     if (status === 'success') {
-                        alert("Successful response received:");
                         data.reservations.forEach(function (reservation) {
                             let seat = reservation.seat_num;
                             $("#" + seat).css("background-color", "grey");

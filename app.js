@@ -214,10 +214,10 @@ server.get('/bookReserve', function (req, resp) {
 server.post('/reserveFunction', function(req, resp) {
     const u_name = req.body.username;
     const email = req.body.email;
-    const lab = req.body.lab;
+    const lab = req.body.laboratory;
     const date = req.body.date;
     const time = req.body.time;
-    const chosen_seat = req.body.seat;
+    const chosen_seat = req.body.seat_num;
 
     const searchQuery = {
         username: u_name,
@@ -235,7 +235,7 @@ server.post('/reserveFunction', function(req, resp) {
                 'username': u_name,
                 'email' : email,
                 'date' : date,
-                'lab' : lab,
+                'laboratory' : lab,
                 'time' : time,
                 'seat' : chosen_seat
             });

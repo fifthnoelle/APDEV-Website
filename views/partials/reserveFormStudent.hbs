@@ -1,5 +1,5 @@
 <div class="reserveForm">
-    <form onsubmit="return validateForm()">
+    <form action="reserveFunction" method="post">
         <div class="formPersonal">
             <div class="formQuestion">
                 <label for="username"><b>Name</b></label>
@@ -45,7 +45,8 @@
         </div>
         <div class="formPersonal">
             <div class="formQuestion">
-                <h4>Seat Num :</h4><h4 id="seat" name="seat"></h6>
+                <label for="seat_num"><b>Seat Number</b></label>
+                <input type="text" id="seat_num" name="seat_num">
             </div>
         </div>
         <input type="submit" class="submitBtn">
