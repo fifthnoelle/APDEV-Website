@@ -439,6 +439,7 @@ server.get('/userProfileStudent', function (req, resp) {
                 first_name: student_data.first_name,
                 last_name: student_data.last_name,
                 id_num: student_data.id_num,
+                dlsu_email: student_data.dlsu_email,
                 profileimg: student_data.profileimg,
                 reservation_data: reservation_data
             });
