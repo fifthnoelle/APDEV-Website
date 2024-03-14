@@ -52,4 +52,70 @@
   "email": "Tom@gmail.com",
   "user": "Jerry",
   "seat_num": "A36"
+},
+{
+  "_id": {
+    "$oid": "65f1fe4b39c08dcd74dbabda"
+  },
+  "computer_lab": "GK304B",
+  "date": "2024-03-30",
+  "time_slot": "8:00 - 9:30",
+  "email": "bubblegum_princess@dlsu.edu.ph",
+  "user": "PBubbleG",
+  "seat_num": "A02"
+},
+{
+  "_id": {
+    "$oid": "65f1fe7939c08dcd74dbabdb"
+  },
+  "computer_lab": "GK304B",
+  "date": "2024-03-30",
+  "time_slot": "8:00 - 9:30",
+  "email": "finn_human@dlsu.edu.ph",
+  "user": "FHuman",
+  "seat_num": "A07"
+},
+{
+  "_id": {
+    "$oid": "65f1feae39c08dcd74dbabdd"
+  },
+  "computer_lab": "GK304B",
+  "date": "2024-03-30",
+  "time_slot": "8:00 - 9:30",
+  "email": "marceline_vampire@dlsu.edu.ph",
+  "user": "MVampire",
+  "seat_num": "A03"
+},
+{
+  "_id": {
+    "$oid": "65f1febc39c08dcd74dbabde"
+  },
+  "computer_lab": "GK304B",
+  "date": "2024-03-31",
+  "time_slot": "8:00 - 9:30",
+  "email": "finn_human@dlsu.edu.ph",
+  "user": "FHuman",
+  "seat_num": "A27"
+},
+{
+  "_id": {
+    "$oid": "65f1fecc39c08dcd74dbabdf"
+  },
+  "computer_lab": "GK304B",
+  "date": "2024-03-29",
+  "time_slot": "8:00 - 9:30",
+  "email": "finn_human@dlsu.edu.ph",
+  "user": "FHuman",
+  "seat_num": "A01"
+},
+{
+  "_id": {
+    "$oid": "65f2034939c08dcd74dbabe3"
+  },
+  "computer_lab": "GK304B",
+  "date": "2024-03-28",
+  "time_slot": "8:00 - 9:30",
+  "email": "finn_human@dlsu.edu.ph",
+  "user": "FHuman",
+  "seat_num": "A01"
 }]
