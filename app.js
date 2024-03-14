@@ -269,7 +269,7 @@ server.post('/reserveFunctionStudent', function (req, resp) {
                     title: 'ILabs | Book Reserve',
                     'seat-data': seat_data,
                     username: req.session.username,
-                    alert_message : "no matching user"
+                    alert_message: "no matching user"
                 });
             }).catch(errorFn);
         }
@@ -303,50 +303,50 @@ server.post('/reserveFunctionTech', function (req, resp) {
 });
 
 server.get('/student-home', function (req, resp) {
-    if(req.session.username == "" || req.session.username == null) {
+    if (req.session.username == "" || req.session.username == null) {
         resp.render('signIn', {
             layout: 'layoutSignIn',
             title: 'ILABS | Sign In',
         });
     } else {
         resp.render('sHome', {
-        layout: 'index',
-        title: 'ILABS | Student Homepage',
-        css: 'landing.css'
-    });
-}
+            layout: 'index',
+            title: 'ILABS | Student Homepage',
+            css: 'landing.css'
+        });
+    }
 });
 
 server.get('/sHome', function (req, resp) {
     console.log(req.session.username);
-    if(req.session.username == "" || req.session.username == null) {
+    if (req.session.username == "" || req.session.username == null) {
         resp.render('signIn', {
             layout: 'layoutSignIn',
             title: 'ILABS | Sign In',
         });
     } else {
         resp.render('sHome', {
-        layout: 'index',
-        title: 'ILABS | Student Homepage',
-        css: 'landing.css'
-    });
+            layout: 'index',
+            title: 'ILABS | Student Homepage',
+            css: 'landing.css'
+        });
     }
-    
+
 });
 
 server.get('/indexTech', function (req, resp) {
-    if(req.session.username == "" || req.session.username == null) {
+    if (req.session.username == "" || req.session.username == null) {
         resp.render('signIn', {
             layout: 'layoutSignIn',
             title: 'ILABS | Sign In',
         });
-    } else { 
-    resp.render('indexTech', {
-        layout: 'index',
-        title: 'ILABS | Lab Technician Homepage',
-        css: 'landing.css'
-    });
-}
+    } else {
+        resp.render('indexTech', {
+            layout: 'index',
+            title: 'ILABS | Lab Technician Homepage',
+            css: 'landing.css'
+        });
+    }
 });
 
 server.get('/reserveStudent', function (req, resp) {
@@ -386,8 +386,8 @@ server.get('/viewSchedulesTech', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.get('/filterReservations', function(req,resp) {
-    const searchQuery = { user: req.session.username, computer_lab : req.body.lab, date : req.body.date, time : req.body.time };
+server.get('/filterReservations', function (req, resp) {
+    const searchQuery = { user: req.session.username, computer_lab: req.body.lab, date: req.body.date, time: req.body.time };
     reservationModel.find(searchQuery).lean().then(function (reserve_data) {
         console.log('loading user reservations');
 
@@ -576,23 +576,27 @@ server.post('/editReservationTech', function (req, resp) {
     const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
     console.log(reservationSearchQuery);
 
-
-        reservationModel.findOne(reservationSearchQuery).lean().then(function(reservation){
+    seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation) {
             console.log(reservation);
             resp.render('editReservationTech', {
                 layout: 'index',
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
-                username : req.session.username,
+                username: req.session.username,
                 dlsu_email: reservation.email,
                 seat_num: reservation.seat_num,
                 time_slot: reservation.time_slot,
-                date: reservation.date
+                date: reservation.date,
+                'seat-data': seat_data
             });
         }).catch(errorFn);
+    }).catch(errorFn);
+
+
 });
 
-server.get('/signIn', function(req, resp) {
+server.get('/signIn', function (req, resp) {
     resp.render('signIn', {
         layout: 'layoutSignIn',
         title: 'ILABS | Sign In',
