@@ -570,28 +570,25 @@ server.get('/deleteProfile=Success', function (req, resp) {
     });
 });
 
-server.get('/editReservationTech', function (req, resp) {
+server.post('/editReservationTech', function (req, resp) {
     const searchQuery = { username: req.session.username };
-    const reservationSearchQuery = { user: req.session.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
+    const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
     console.log(reservationSearchQuery);
 
-    studentModel.findOne(searchQuery).lean().then(function(student_data) {
-        console.log(student_data);
+
         reservationModel.findOne(reservationSearchQuery).lean().then(function(reservation){
             console.log(reservation);
             resp.render('editReservationTech', {
                 layout: 'index',
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
-                first_name: student_data.first_name,
-                last_name: student_data.last_name,
-                dlsu_email: student_data.dlsu_email,
+                username : req.session.username,
+                dlsu_email: reservation.email,
                 seat_num: reservation.seat_num,
                 time_slot: reservation.time_slot,
                 date: reservation.date
             });
         }).catch(errorFn);
-    }).catch(errorFn);
 });
 
 server.get('/signIn', function(req, resp) {
