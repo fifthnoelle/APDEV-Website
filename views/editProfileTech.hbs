@@ -1,24 +1,73 @@
+{{> navigationBarTech}}
 <div class="wrapper">
-    <h1 id="registertitle">Edit Technician Account</h1>
-    <form onsubmit="">
-        <div class="register-container">
-            <div class="input-box">
-                    <input type="text" placeholder="{{first_name}}" required>
-                    <input type="text" placeholder="{{last_name}}" required>
+    <div class="main">
+        <div class="title"><h1>Edit Technician Profile</h1></div>
+        <div class="profile-img">
+            <img src="{{profile_img}}" class="profile-img">
+        </div>
+        <div class="form">
+            <div class="details">
+            <div class="name">
+                <div>
+                <b>First Name: </b><br><input class="form" type="text" id="change-first" value="{{first_name}}"/>
+                </div>
+                <div>
+                <b>Last Name: </b><br><input class="form" type="text" id="change-last" value="{{last_name}}"/>
+                </div>
+            </div>
+
+            <div class="id-num">
+                <b>ID Number: </b><br><input class="form" type="text" id="change-id" value="{{id_num}}"/>
+            </div>
+            <div>
+                <b>E-mail:</b><input class="form" type="text" id="change-email" value="{{dlsu_email}}"/>
+            </div>
+            <div> 
+            <div><button type="submit" class="button" id="submit-profile">Edit Profile</button></div>
+            </div>
+            </div>
+            <!-- Password details can be omitted if too much work -->
+            <br><br>
+            <div class="password">
+                <div>
+                    <b>New Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password"/>
+                </div>
+                <div>
+                    <b>Confirm New Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password to Confirm"/>
+                </div>
+                <div>
+                    <b>Current Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter Current Password"/>
+                </div>
+                <button type="reset" class="button" id="submit-password">Change Password</button>
+            </div>
+        </div>
+        <div class="delete-account"><a href="/deleteprofileTech"><button class="button">Delete Account</button></a></div>
+        <div class="login-link"> <a href="/userProfileTech"><button class="button">Back to Profile</button></a></div>
+    </div>
+
+ <!--   <form onsubmit="">
+        <div class="main">
+            <div class="form">
+                    <input type="text" class="form" placeholder="{{first_name}}" required>
+                    <input type="text" class="form" placeholder="{{last_name}}" required>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="{{username}}" required>
-                    <input type="text" placeholder="{{tech_code}}" required>
+                    <input type="text" class="form" placeholder="{{username}}" required>
+                    <input type="text" class="form" placeholder="{{tech_code}}" required>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="Password" required>
-                    <input type="text" placeholder="Confirm Password" required>
+                    <input type="text" class="form" placeholder="Password" required>
+                    <input type="text" class="form" placeholder="Confirm Password" required>
                 </div>
-                <button type="submit" class="btn">Make Changes to Account</button>
-                <button type="reset" class="btn">Reset</button>
+                <button type="submit" class="button">Make Changes to Account</button>
+                <button type="reset" class="button">Reset</button>
                 <div class="login-link">
-                    <a href="/userProfileTech"><strong>Back to Profile</strong></a>
+                    <a href="/userProfileTech"><button class="button">Back to Profile</button></a>
                 </div>
         </div>
     </form>
 </div>
+-->

@@ -1,4 +1,55 @@
+{{> navigationBarTech}}
 <div class="wrapper">
+    <div class="main">
+        <div class="title"><h1>Edit Student Profile</h1></div>
+        <div class="profile-img">
+            <img src="{{profile_img}}" class="profile-img">
+        </div>
+        <div class="form">
+            <div class="details">
+            <div class="name">
+                <div>
+                <b>First Name: </b><br><input class="form" type="text" id="change-first" value="{{first_name}}"/>
+                </div>
+                <div>
+                <b>Last Name: </b><br><input class="form" type="text" id="change-last" value="{{last_name}}"/>
+                </div>
+            </div>
+
+            <div class="id-num">
+                <b>ID Number: </b><br><input class="form" type="text" id="change-id" value="{{id_num}}"/>
+            </div>
+            <div>
+                <b>E-mail:</b><input class="form" type="text" id="change-email" value="{{dlsu_email}}"/>
+            </div>
+            <div> 
+            <div><button type="submit" class="button" id="submit-profile">Edit Profile</button></div>
+            </div>
+            </div>
+            <!-- Password details can be omitted if too much work -->
+            <br><br>
+            <div class="password">
+                <div>
+                    <b>New Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password"/>
+                </div>
+                <div>
+                    <b>Confirm New Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter New Password to Confirm"/>
+                </div>
+                <div>
+                    <b>Current Password: </b><br>
+                    <input class="form" type="password" id="change-pw" placeholder="Enter Current Password"/>
+                </div>
+                <button type="reset" class="button" id="submit-password">Change Password</button>
+            </div>
+        </div>
+        <div class="delete-account"><a href="/deleteprofileStudent"><button class="button">Delete Account</button></a></div>
+        <div class="login-link"> <a href="/userProfileStudent"><button class="button">Back to Profile</button></a></div>
+    </div>
+
+
+<!--<div class="wrapper">
     <h1 id="registertitle">Edit Student Account</h1>
     <form onsubmit="">
         <div class="register-container">
@@ -21,3 +72,4 @@
         </div>
     </form>
 </div>
+-->

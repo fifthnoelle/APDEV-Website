@@ -475,12 +475,8 @@ server.get('/editProfileStudent', function (req, resp) {
         resp.render('editProfileStudent', {
             layout: 'index',
             title: 'ILABS | Edit My Profile',
-            css: 'userRegister.css',
-            first_name: student_data.first_name,
-            last_name: student_data.last_name,
-            username: student_data.username,
-            id_num: student_data.id_num,
-            dlsu_email: student_data.dlsu_email
+            css: 'editprofile.css',
+            student_data: student_data
         });
     }).catch(errorFn);
 });
@@ -491,12 +487,8 @@ server.get('/editProfileTech', function (req, resp) {
         resp.render('editProfileTech', {
             layout: 'index',
             title: 'ILABS | Edit My Profile',
-            css: 'userRegister.css',
-            first_name: technician_data.first_name,
-            last_name: technician_data.last_name,
-            username: technician_data.username,
-            tech_code: technician_data.tech_code,
-            dlsu_email: technician_data.dlsu_email
+            css: 'editprofile.css',
+            technician_data: technician_data
         });
     }).catch(errorFn);
 });
