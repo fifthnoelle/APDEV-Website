@@ -32,13 +32,28 @@
                     <div class="formQuestion">
                         <label for="time"><b>Time</b></label>
                         {{!-- not sure if this will be edited --}}
+                        {{!-- <select name="time" id="time">
+                            <option value="1" {{#if (eq TEMP.time_slot "8:00 - 9:30" )}}selected{{/if}}>8:00 - 9:30
+                            </option>
+                            <option value="2" {{#if (eq TEMP.time_slot "10:00 - 11:30" )}}selected{{/if}}>10:00 - 11:30
+                            </option>
+                            <option value="3" {{#if (eq TEMP.time_slot "12:00 - 13:30" )}}selected{{/if}}>12:00 - 13:30
+                            </option>
+                            <option value="4" {{#if (eq TEMP.time_slot "14:00 - 15:30" )}}selected{{/if}}>14:00 - 15:30
+                            </option>
+                            <option value="5" {{#if (eq TEMP.time_slot "16:00 - 17:30" )}}selected{{/if}}>16:00 - 17:30
+                            </option>
+                            <option value="6" {{#if (eq TEMP.time_slot "18:00 - 19:30" )}}selected{{/if}}>18:00 - 19:30
+                            </option>
+                        </select> --}}
                         <select name="time" id="time">
-                            <option value="1" {{#if (eq TEMP.time_slot "8:00 - 9:30")}}selected{{/if}}>8:00 - 9:30</option>
-                            <option value="2" {{#if (eq TEMP.time_slot "10:00 - 11:30")}}selected{{/if}}>10:00 - 11:30</option>
-                            <option value="3" {{#if (eq TEMP.time_slot "12:00 - 13:30")}}selected{{/if}}>12:00 - 13:30</option>
-                            <option value="4" {{#if (eq TEMP.time_slot "14:00 - 15:30")}}selected{{/if}}>14:00 - 15:30</option>
-                            <option value="5" {{#if (eq TEMP.time_slot "16:00 - 17:30")}}selected{{/if}}>16:00 - 17:30</option>
-                            <option value="6" {{#if (eq TEMP.time_slot "18:00 - 19:30")}}selected{{/if}}>18:00 - 19:30</option>
+                            <option value="">- -</option>
+                            <option value="8:00 - 9:30">8:00 - 9:30</option>
+                            <option value="10:00 - 11:30">10:00 - 11:30</option>
+                            <option value="12:00 - 13:30">12:00 - 13:30</option>
+                            <option value="14:00 - 15:30">14:00 - 15:30</option>
+                            <option value="16:00 - 17:30">16:00 - 17:30</option>
+                            <option value="18:00 - 19:30">18:00 - 19:30</option>
                         </select>
                     </div>
                 </div>
