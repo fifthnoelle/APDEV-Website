@@ -15,7 +15,7 @@ server.engine("hbs", handlebars.engine({
 server.use(express.static('public'));
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/test');
+mongoose.connect('mongodb://127.0.0.1:27017/labs');
 
 function errorFn(err) {
     console.log('Error found. Please trace!');
@@ -120,6 +120,8 @@ server.post('/s-login-funck', function (req, resp) {
         password: pass
     };
 
+    console.log(searchQuery);
+
     studentModel.findOne(searchQuery).lean().then(function (student) {
         if (student != undefined && student._id != null) {
             req.session.username = u_name;
@@ -130,6 +132,7 @@ server.post('/s-login-funck', function (req, resp) {
                 css: 'landing.css'
             });
         } else {
+            console.log("no match");
             resp.render('logoutStudent', {
                 layout: 'layoutLogout',
                 title: 'ILABS | Log-Out'
