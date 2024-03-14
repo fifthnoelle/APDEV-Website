@@ -8,26 +8,26 @@
             <form action="">
                 <div class="formPersonal">
                     <div class="formQuestion">
-                        <label for="Name"><b>Name</b></label>
-                        <input type="text" value="{{}} {{}}">
+                        <label for="Name"><b>User</b></label>
+                        <input type="text" value="{{username}}">
                     </div>
                 </div>
                 <div class="formPersonal">
                     <div class="formQuestion">
                         <label for="email"><b>Email</b></label>
-                        <input type="text" value="{{}}">
+                        <input type="text" value="{{dlsu_email}}">
                     </div>
                 </div>
                 <div class="formPersonal">
                     <div class="formQuestion">
                         <label for="Seatx"><b>Seat No.</b></label>
-                        <input type="text" value="{{}}">
+                        <input type="text" value="{{seat_num}}">
                     </div>
                 </div>
                 <div class="formDateTime">
                     <div class="formQuestion">
                         <label for="date"><b>Date</b></label>
-                        <input type="calendar" id="date" name="date" placeholder="05/09/04">
+                        <input type="calendar" id="date" name="date" placeholder="{{date}}">
                     </div>
                     <div class="formQuestion">
                         <label for="time"><b>Time</b></label>
@@ -60,82 +60,5 @@
                 <input type="submit" class="submitBtn">
             </form>
         </div>
-
-        <div class="seatsContainer">
-            <div class="legendContainer">
-                <span class="available"></span> available
-                <span class="unavailable"></span> unavailable
-            </div>
-            <div class="seats">
-                <div class="seatsColumn">
-                    <div class="seatsGroup">
-                        <span class="seat">1</span>
-                        <span class="seat">2</span>
-                        <span class="seat">3</span>
-                    </div>
-                    <div class="seatsGroup">
-                        <span class="seat">4</span>
-                        <span class="seat">5</span>
-                        <span class="seat">6</span>
-                    </div>
-                    <div class="seatsGroup">
-                        <span class="seat">7</span>
-                        <span class="seat">8</span>
-                        <span class="seat">9</span>
-                    </div>
-                </div>
-                <div class="seatsColumn">
-                    <div class="seatsGroup">
-                        <span class="seat">1</span>
-                        <span class="seat">2</span>
-                        <span class="seat">3</span>
-                    </div>
-                    <div class="seatsGroup">
-                        <span class="seat">4</span>
-                        <span class="seat">5</span>
-                        <span class="seat">6</span>
-                    </div>
-                    <div class="seatsGroup">
-                        <span class="seat">7</span>
-                        <span class="seat">8</span>
-                        <span class="seat">9</span>
-                    </div>
-                </div>
-                <div class="seatsColumn">
-                    <div class="seatsGroup">
-                        <span class="seat">1</span>
-                        <span class="seat">2</span>
-                        <span class="seat">3</span>
-                    </div>
-                    <div class="seatsGroup">
-                        <span class="seat">4</span>
-                        <span class="seat">5</span>
-                        <span class="seat">6</span>
-                    </div>
-                    <div class="seatsGroup">
-                        <span class="seat">7</span>
-                        <span class="seat">8</span>
-                        <span class="seat">9</span>
-                    </div>
-                </div>
-                <div class="seatsColumn">
-                    <div class="seatsGroup">
-                        <span class="seat">1</span>
-                        <span class="seat">2</span>
-                        <span class="seat">3</span>
-                    </div>
-                    <div class="seatsGroup">
-                        <span class="seat">4</span>
-                        <span class="seat">5</span>
-                        <span class="seat">6</span>
-                    </div>
-                    <div class="seatsGroup">
-                        <span class="seat">7</span>
-                        <span class="seat">8</span>
-                        <span class="seat">9</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{>seatTable}}
 </div>

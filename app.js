@@ -595,6 +595,28 @@ server.post('/editReservationTech', function (req, resp) {
 
 });
 
+server.get('/editReservationStudent', function(req, resp) {
+    const reservationSearchQuery = { user: req.session.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
+
+    seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation) {
+            console.log(reservation);
+            resp.render('editReservationTech', {
+                layout: 'index',
+                title: 'ILABS | Edit Reservation',
+                css: 'reserveStyle.css',
+                username: reservation.user,
+                dlsu_email: reservation.email,
+                seat_num: reservation.seat_num,
+                time_slot: reservation.time_slot,
+                date: reservation.date,
+                'seat-data': seat_data
+            });
+        }).catch(errorFn);
+    }).catch(errorFn);
+
+});
+
 server.get('/signIn', function (req, resp) {
     resp.render('signIn', {
         layout: 'layoutSignIn',
