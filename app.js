@@ -582,7 +582,7 @@ server.post('/editReservationTech', function (req, resp) {
                 layout: 'index',
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
-                username: req.session.username,
+                username: reservation.user,
                 dlsu_email: reservation.email,
                 seat_num: reservation.seat_num,
                 time_slot: reservation.time_slot,
