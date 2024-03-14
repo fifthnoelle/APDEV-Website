@@ -385,7 +385,26 @@ server.get('/viewSchedulesTech', function (req, resp) {
     }).catch(errorFn);
 });
 
+server.get('/filterReservations', function(req,resp) {
+    const searchQuery = { user: req.session.username, computer_lab : req.body.lab, date : req.body.date, time : req.body.time };
+    reservationModel.find(searchQuery).lean().then(function (reserve_data) {
+        console.log('loading user reservations');
 
+        let filtered_reservations = new Array();
+        for (const item of reserve_data) {
+            filtered_reservations.push({
+                computer_lab: item.computer_lab,
+                date_reserved: item.date,
+                time_slot: item.time_slot,
+                email: item.email,
+                user: item.user,
+                seat_num: item.seat_num
+            });
+        }
+        resp.send(filtered_reservations);
+    }).catch(errorFn);
+
+})
 server.get('/viewMyReservations', function (req, resp) {
     const searchQuery = { user: req.session.username };//user details query
 

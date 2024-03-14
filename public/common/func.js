@@ -26,37 +26,6 @@ function checkTime() {
     return true;
 }
 
-function filter() {
-    if (!checkLab()) {
-        alert("Please select a Laboratory!");
-    }
-    else if (!checkDate()) {
-        alert("Please select a Date!");
-    }
-    else if (!checkTime()) {
-        alert("Please select a TimeSlot!");
-    }
-    else {
-        let selectedTime = $("#time").val();
-        let selectedDate = $("#date").val();
-        let selectedLab = $("#laboratory").val();
-        alert("ok!" + selectedTime + selectedLab + selectedDate);
-        $.post('load_seats',
-            { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
-            function (data, status) {
-                if (status === 'success') {
-                    data.reservations.forEach(function (reservation) {
-                        let seat = reservation.seat_num;
-                        $("#" + seat).css("background-color", "grey");
-                        $("#" + seat).css("color", "#F6EEF2");
-                    });
-                } else {
-                    console.error("Error:", status);
-                }
-            });
-    }
-}
-
 // BOOKING RESERVING
 $(document).ready(function () {
     for (let i = 1; i < 37; i++) {
@@ -128,9 +97,9 @@ $(document).ready(function () {
         else {
             let selectedTime = $("#time").val();
             let selectedDate = $("#date").val();
-            let selectedLab = $("#lab").val();
+            let selectedLab = $("#laboratory").val();
             alert("ok!" + selectedTime + selectedLab + selectedDate);
-            $.post('load_seats',
+            $.post('filterReservations',
                 { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
                 function (data, status) {
                     if (status === 'success') {
