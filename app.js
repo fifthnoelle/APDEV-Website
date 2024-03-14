@@ -302,28 +302,50 @@ server.post('/reserveFunctionTech', function (req, resp) {
 });
 
 server.get('/student-home', function (req, resp) {
-    console.log('Student home loaded!')
-    resp.render('sHome', {
+    if(req.session.username == "" || req.session.username == null) {
+        resp.render('signIn', {
+            layout: 'layoutSignIn',
+            title: 'ILABS | Sign In',
+        });
+    } else {
+        resp.render('sHome', {
         layout: 'index',
         title: 'ILABS | Student Homepage',
         css: 'landing.css'
     });
+}
 });
 
 server.get('/sHome', function (req, resp) {
-    resp.render('sHome', {
+    console.log(req.session.username);
+    if(req.session.username == "" || req.session.username == null) {
+        resp.render('signIn', {
+            layout: 'layoutSignIn',
+            title: 'ILABS | Sign In',
+        });
+    } else {
+        resp.render('sHome', {
         layout: 'index',
         title: 'ILABS | Student Homepage',
         css: 'landing.css'
     });
+    }
+    
 });
 
 server.get('/indexTech', function (req, resp) {
+    if(req.session.username == "" || req.session.username == null) {
+        resp.render('signIn', {
+            layout: 'layoutSignIn',
+            title: 'ILABS | Sign In',
+        });
+    } else { 
     resp.render('indexTech', {
         layout: 'index',
         title: 'ILABS | Lab Technician Homepage',
         css: 'landing.css'
     });
+}
 });
 
 server.get('/reserveStudent', function (req, resp) {
