@@ -530,32 +530,24 @@ server.get('/deleteProfile=Success', function (req, resp) {
 });
 
 server.get('/editReservationTech', function (req, resp) {
-    const username = req.session.username;
-    const reservationSearchQuery = { computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
+    const searchQuery = { username: req.session.username };
+    const reservationSearchQuery = { user: req.session.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
     console.log(reservationSearchQuery);
 
-    reservationModel.find(reservationSearchQuery).lean().then(function (reserve_data) {
-        console.log("Loading Part 1");
-        resp.json({ reservations: reserve_data });
-        console.log("Finished Loading Part 1");
-    }).catch(errorFn);
-
-    // Find the user and reservation
-    reservationModel.findOne({ user: username }).lean().then(function (reservation) {
-        studentModel.findOne({ username }).lean().then(function (student) {
-            // Combine 
-            const combinedData = { reservation, student };
-
-            console.log(combinedData);
-            console.log("Finished Loading Account/Reservation");
-
-            // Render
-            resp.json({ reservation: combinedData });
+    studentModel.findOne(searchQuery).lean().then(function(student_data) {
+        console.log(student_data);
+        reservationModel.findOne(reservationSearchQuery).lean().then(function(reservation){
+            console.log(reservation);
             resp.render('editReservationTech', {
                 layout: 'index',
-                title: "ILABS | Edit Reservations (Technician)",
-                css: "reserveStyle.css",
-                combinedData: combinedData
+                title: 'ILABS | Edit Reservation',
+                css: 'reserveStyle.css',
+                first_name: student_data.first_name,
+                last_name: student_data.last_name,
+                dlsu_email: student_data.dlsu_email,
+                seat_num: reservation.seat_num,
+                time_slot: reservation.time_slot,
+                date: reservation.date
             });
         }).catch(errorFn);
     }).catch(errorFn);
