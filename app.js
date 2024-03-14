@@ -7,6 +7,7 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
 const handlebars = require("express-handlebars");
+const helpers = require('handlebars-helpers')();
 server.set("view engine", "hbs");
 server.engine("hbs", handlebars.engine({
     extname: "hbs"
