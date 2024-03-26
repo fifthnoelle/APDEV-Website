@@ -530,6 +530,34 @@ server.get('/editProfileStudent', function (req, resp) {
     }).catch(errorFn);
 });
 
+server.post('/editProfileFunctionStudent', function (req, resp) {
+    
+    studentModel.findOne({ username: req.session.username }).then(function (student_data) {
+        student_data.first_name = req.body.first_name;
+        student_data.last_name = req.body.last_name;
+        student_data.username = req.body.username;
+        req.session.username = req.body.username;
+        student_data.id_num = req.body.id_num;
+
+        console.log('edited');
+        console.log(student_data);
+
+        student_data.save().then(function(result) {
+            if(result){
+                console.log('saved');
+                resp.render('alertPage', {
+                    layout: 'index',
+                    title: 'ILABS | Edit Successful',
+                    css: 'editprofile.css',
+                    alert: 'Edit Saved and Successful',
+                    redirect_page: 'Profile Page',
+                    redirect_url: '/userProfileStudent'
+                })
+            }
+        }).catch(errorFn);
+    }).catch(errorFn);
+});
+
 server.get('/editProfileTech', function (req, resp) {
 
     techModel.findOne({ username: req.session.username }).lean().then(function (technician_data) {
@@ -544,6 +572,8 @@ server.get('/editProfileTech', function (req, resp) {
             dlsu_email: technician_data.dlsu_email
         });
     }).catch(errorFn);
+
+    techModel
 });
 
 server.get('/deleteProfileTech', function (req, resp) {
