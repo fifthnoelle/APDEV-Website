@@ -1,24 +1,26 @@
 <div class="wrapper">
     <h1 id="registertitle">Edit Technician Account</h1>
-    <form onsubmit="">
+    <form action="editProfileFunctionTech" method="post">
         <div class="register-container">
             <div class="input-box">
-                    <input type="text" name="first_name" placeholder="{{first_name}}" required>
-                    <input type="text" name="last_name" placeholder="{{last_name}}" required>
-                </div>
-                <div class="input-box">
-                    <input type="text" name="username" placeholder="{{username}}" required>
-                    <input type="text" name="tech_code" placeholder="{{tech_code}}" required>
-                </div>
-                <div class="input-box">
-                    <input type="text" name="password1" placeholder="Password" required>
-                    <input type="text" name="password2" placeholder="Confirm Password" required>
-                </div>
-                <button type="submit" class="btn">Make Changes to Account</button>
-                <button type="reset" class="btn">Reset</button>
-                <div class="login-link">
-                    <a href="/userProfileTech"><strong>Back to Profile</strong></a>
-                </div>
+                <input type="text" name="first_name" value="{{first_name}}" required>
+                <input type="text" name="last_name" value="{{last_name}}" required>
+            </div>
+            <div class="input-box">
+                <input type="text" name="username" value="{{username}}" required>
+                <input type="text" name="id_num" value="{{tech_code}}" required>
+            </div>
+            <button type="submit" class="btn">Make Changes to Account</button>
+    </form>
+    <form action="editProfilePasswordTech" method="post">
+            <div class="input-box">
+                <input type="password" name="password1" placeholder="Password">
+                <input type="password" name="password2" placeholder="Confirm Password">
+            </div>
+            <button type="submit" class="btn">Make Changes to Account</button>
+            <div class="login-link">
+                <a href="/userProfileStudent"><strong>Back to Profile</strong></a>
+            </div>
         </div>
     </form>
 </div>
