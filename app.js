@@ -245,20 +245,29 @@ server.post('/reserveFunctionStudent', function (req, resp) {
     console.log(req.body);
 
     studentModel.findOne(searchQuery).lean().then(function (student) {
-        console.log('find user....2');
         if (student != undefined && student._id != null) {
-            console.log('match');
-            resp.render('reservationSuccessfulStudent', {
-                layout: 'index',
-                title: 'ILABS | Reserve Successful',
-                css: 'landing.css',
-                username: u_name,
+            const reserveInstance = reservationModel({
+                date : date,
+                computer_lab: lab,
+                time_slot: time,
                 email: email,
-                date: date,
-                laboratory: lab,
-                time: time,
-                seat: chosen_seat
+                user: u_name,
+                seat_num: chosen_seat
             });
+            reserveInstance.save().then(function(result) {
+                resp.render('reservationSuccessfulStudent', {
+                    layout: 'index',
+                    title: 'ILABS | Reserve Successful',
+                    css: 'landing.css',
+                    username: u_name,
+                    email: email,
+                    date: date,
+                    laboratory: lab,
+                    time: time,
+                    seat: chosen_seat
+                }); 
+            }).catch(errorFn);
+            console.log('match');
             console.log("rendered");
         } else {
             console.log("no match :(");
@@ -284,19 +293,30 @@ server.post('/reserveFunctionTech', function (req, resp) {
     const chosen_seat = req.body.seat_num;
 
     console.log(req.body);
-
-
-    resp.render('reservationSuccessfulTech', {
-        layout: 'index',
-        title: 'ILABS | Reserve Successful',
-        css: 'landing.css',
-        username: u_name,
+    const reserveInstance = reservationModel({
+        date : date,
+        computer_lab: lab,
+        time_slot: time,
         email: email,
-        date: date,
-        laboratory: lab,
-        time: time,
-        seat: chosen_seat
+        user: u_name,
+        seat_num: chosen_seat
     });
+    reserveInstance.save().then(function(result) {
+        resp.render('reservationSuccessfulTech', {
+            layout: 'index',
+            title: 'ILABS | Reserve Successful',
+            css: 'landing.css',
+            username: u_name,
+            email: email,
+            date: date,
+            laboratory: lab,
+            time: time,
+            seat: chosen_seat
+        });
+    }).catch(errorFn);
+
+
+    
     console.log("rendered");
 
 });
@@ -605,7 +625,7 @@ server.get('/editReservationStudent', function(req, resp) {
                 layout: 'index',
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
-                username: reservation.user?.username,
+                username: reservation.user,
                 dlsu_email: reservation.email,
                 seat_num: reservation.seat_num,
                 time_slot: reservation.time_slot,

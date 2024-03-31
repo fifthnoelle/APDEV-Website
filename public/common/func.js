@@ -64,6 +64,11 @@ $(document).ready(function () {
             let selectedTime = $(this).val();
             let selectedDate = $("#date").val();
             let selectedLab = $("#laboratory").val();
+            for(let u = 1; u < 37; u++) {
+                if($("#A" + u.toString().padStart(2, '0')).css("background-color") === "rgb(128, 128, 128)") {
+                    $("#A" + u.toString().padStart(2, '0')).css("background-color", "#0A502E");
+                }
+            }
             $.post('load_seats',
                 { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
                 function (data, status) {
