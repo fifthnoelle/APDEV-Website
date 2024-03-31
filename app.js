@@ -564,14 +564,14 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
         console.error("Passwords don't match!");
         console.log('changes not saved');
 
-        resp.render('alertPage', {
+        /*resp.render('alertPage', {
             layout: 'index',
             title: 'ILABS | Edit Unsuccessful',
             css: 'editprofile.css',
             alert: "Passwords don't match! Please try again.",
             redirect_page: 'Edit Profile Page',
             redirect_url: '/editProfileStudent'
-        })
+        })*/
         return;
     }
     studentModel.findOne({ username: req.session.username }).then(function (student_data) {
@@ -647,14 +647,14 @@ server.post('/editProfilePasswordTech', function (req, resp) {
         console.error("Passwords don't match!");
         console.log('changes not saved');
 
-        resp.render('alertPage', {
+        /*resp.render('alertPage', {
             layout: 'index',
             title: 'ILABS | Edit Unsuccessful',
             css: 'editprofile.css',
             alert: "Passwords don't match! Please try again.",
             redirect_page: 'Edit Profile Page',
             redirect_url: '/editProfileStudent'
-        })
+        })*/
         
         return;
     }
@@ -673,7 +673,7 @@ server.post('/editProfilePasswordTech', function (req, resp) {
                     css: 'editprofile.css',
                     alert: 'Edit Saved and Successful',
                     redirect_page: 'Profile Page',
-                    redirect_url: '/userProfileStudent'
+                    redirect_url: '/userProfileTech'
                 })
             }
         }).catch(errorFn);

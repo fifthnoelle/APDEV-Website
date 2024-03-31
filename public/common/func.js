@@ -115,3 +115,60 @@ $(document).ready(function () {
         }
     }); 
 });
+
+//PASSWORD VALIDATION
+$(document).ready(function() {
+    const submitButton = $('#editPasswordForm button[type="submit"]');
+
+    function validatePasswords(){
+      const password1 = $('#password1').val();
+      const password2 = $('#password2').val();
+  
+        $('#password-error').text('');
+
+      if (password1 === '') {
+        $('#password-error').text('Please enter a password.').show();
+        return false;
+      }else if (password2 === '') {
+        $('#password-error').text('Please confirm your password.').show();
+        return false;
+      }else if (password1 !== password2) {
+        $('#password-error').text('Passwords don\'t match!').show(); 
+        return false;
+      }else if(password1.length<5){
+        $('#password-error').text('Password character minimum of 5!').show(); 
+        return false;
+      }
+      else {
+        $('#password-error').text('').hide(); 
+      }
+
+      console.log('Passwords valid!')
+      return true;
+    }
+
+    submitButton.prop('disabled', true);
+
+    $('#password1').keyup(validatePasswords);
+
+    $('#password2').keyup(function() {
+        if (validatePasswords()) {
+          submitButton.prop('disabled', false); 
+        } else {
+          submitButton.prop('disabled', true); 
+        }
+    });
+
+    
+
+    $('#editPasswordForm').submit(function(event) {
+        if (!validatePasswords()) {
+          event.preventDefault(); 
+        }
+    });
+
+    });
+
+
+    //insert form validation
+ 
