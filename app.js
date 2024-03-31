@@ -550,6 +550,72 @@ server.get('/editProfileStudent', function (req, resp) {
     }).catch(errorFn);
 });
 
+server.post('/editProfileFunctionStudent', function (req, resp) {
+    
+    studentModel.findOne({ username: req.session.username }).then(function (student_data) {
+        student_data.first_name = req.body.first_name;
+        student_data.last_name = req.body.last_name;
+        student_data.username = req.body.username;
+        req.session.username = req.body.username;
+        student_data.id_num = req.body.id_num;
+
+        console.log('edited');
+        console.log(student_data);
+
+        student_data.save().then(function(result) {
+            if(result){
+                console.log('saved');
+                resp.render('alertPage', {
+                    layout: 'index',
+                    title: 'ILABS | Edit Successful',
+                    css: 'editprofile.css',
+                    alert: 'Edit Saved and Successful',
+                    redirect_page: 'Profile Page',
+                    redirect_url: '/userProfileStudent'
+                })
+            }
+        }).catch(errorFn);
+    }).catch(errorFn);
+});
+
+server.post('/editProfilePasswordStudent', function (req, resp) {
+
+    if (req.body.password1 !== req.body.password2) {
+        console.error("Passwords don't match!");
+        console.log('changes not saved');
+
+        /*resp.render('alertPage', {
+            layout: 'index',
+            title: 'ILABS | Edit Unsuccessful',
+            css: 'editprofile.css',
+            alert: "Passwords don't match! Please try again.",
+            redirect_page: 'Edit Profile Page',
+            redirect_url: '/editProfileStudent'
+        })*/
+        return;
+    }
+    studentModel.findOne({ username: req.session.username }).then(function (student_data) {
+        student_data.password = req.body.password1;
+
+        console.log('edited');
+        console.log(student_data);
+
+        student_data.save().then(function(result) {
+            if(result){
+                console.log('saved');
+                resp.render('alertPage', {
+                    layout: 'index',
+                    title: 'ILABS | Edit Password Successful',
+                    css: 'editprofile.css',
+                    alert: 'Edit Saved and Successful',
+                    redirect_page: 'Profile Page',
+                    redirect_url: '/userProfileStudent'
+                })
+            }
+        }).catch(errorFn);
+    }).catch(errorFn);
+});
+
 server.get('/editProfileTech', function (req, resp) {
 
     techModel.findOne({ username: req.session.username }).lean().then(function (technician_data) {
@@ -563,6 +629,74 @@ server.get('/editProfileTech', function (req, resp) {
             tech_code: technician_data.tech_code,
             dlsu_email: technician_data.dlsu_email
         });
+    }).catch(errorFn);
+
+});
+
+server.post('/editProfileFunctionTech', function (req, resp) {
+    
+    techModel.findOne({ username: req.session.username }).then(function (technician_data) {
+        technician_data.first_name = req.body.first_name;
+        technician_data.last_name = req.body.last_name;
+        technician_data.username = req.body.username;
+        req.session.username = req.body.username;
+        technician_data.id_num = req.body.id_num;
+
+        console.log('edited');
+        console.log(technician_data);
+
+        technician_data.save().then(function(result) {
+            if(result){
+                console.log('saved');
+                resp.render('alertPage', {
+                    layout: 'index',
+                    title: 'ILABS | Edit Successful',
+                    css: 'editprofile.css',
+                    alert: 'Edit Saved and Successful',
+                    redirect_page: 'Profile Page',
+                    redirect_url: '/userProfileTech'
+                })
+            }
+        }).catch(errorFn);
+    }).catch(errorFn);
+});
+
+server.post('/editProfilePasswordTech', function (req, resp) {
+
+    if (req.body.password1 !== req.body.password2) {
+        console.error("Passwords don't match!");
+        console.log('changes not saved');
+
+        /*resp.render('alertPage', {
+            layout: 'index',
+            title: 'ILABS | Edit Unsuccessful',
+            css: 'editprofile.css',
+            alert: "Passwords don't match! Please try again.",
+            redirect_page: 'Edit Profile Page',
+            redirect_url: '/editProfileStudent'
+        })*/
+        
+        return;
+    }
+    techModel.findOne({ username: req.session.username }).then(function (technician_data) {
+        technician_data.password = req.body.password1;
+
+        console.log('edited');
+        console.log(technician_data);
+
+        technician_data.save().then(function(result) {
+            if(result){
+                console.log('saved');
+                resp.render('alertPage', {
+                    layout: 'index',
+                    title: 'ILABS | Edit Password Successful',
+                    css: 'editprofile.css',
+                    alert: 'Edit Saved and Successful',
+                    redirect_page: 'Profile Page',
+                    redirect_url: '/userProfileTech'
+                })
+            }
+        }).catch(errorFn);
     }).catch(errorFn);
 });
 
