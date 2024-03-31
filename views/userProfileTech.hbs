@@ -1,91 +1,97 @@
 {{> navigationBarTech}}
 <span class="spacer"></span>
-    <div class="profile-box">
-        <div class="profile-photo">
-            <img src="{{profileimg}}" class="rounded-image">
-        </div>
-        <div class="profile-userinfo">
-            <h1>{{first_name}} {{last_name}}</h1>
-            <h2>{{dlsu_email}}</h2>
-            <h3>Lab Technician: {{tech_code}}</h3>
-        </div>
-        <div class="spacer">
-
-        </div>
-        <div class="profile-edit">
-            <a href="/editProfileTech">
-                <button class="pill" type="button">Edit Profile</button>
-            </a>
-        </div>
+<div class="profile-box">
+    <div class="profile-photo">
+        <img src="{{profileimg}}" class="rounded-image">
     </div>
-    <!-- Body of Profile Page -->
-    <div class="profile-body">
-        <div class="body-myprofile">
+    <div class="profile-userinfo">
+        <h1>{{first_name}} {{last_name}}</h1>
+        <h2>{{dlsu_email}}</h2>
+        <h3>Lab Technician: {{tech_code}}</h3>
+    </div>
+    <div class="spacer">
+
+    </div>
+    <div class="profile-edit">
+        <a href="/editProfileTech">
+            <button class="pill" type="button">Edit Profile</button>
+        </a>
+    </div>
+</div>
+<!-- Body of Profile Page -->
+<div class="profile-body">
+    <div class="body-myprofile">
         <strong>My Labs</strong>
         <ul>
             <li><a href="/viewAllReservations">View Reservations</a></li>
             <li><a href="/deleteProfileTech">Delete Profile</a></li>
         </ul>
-        </div>
-        <hr>
-        <div>
-            <div class="mainContent">
-                <h1>Reservations</h1>
-                <div class="filterContainer">
-                    <h4>Filter</h4>
-                    <form action="">
-                        <label for="date">Date</label>
-                        <input type="date">
-                        <label for="compLab">Comp. Lab</label>
-                        <select name="compLab" id="compLab">
-                            <option value="--">-- Select Lab</option>
-                            <option value="GK304A">GK304A</option>
-                            <option value="GK503B">GK503B</option>
-                        </select>
-                        <label for="time">Time</label>
-                        <select name="time" id="time">
-                            <option value="1">8:00 - 9:30</option>
-                            <option value="2">10:00 - 11:30</option>
-                            <option value="3">12:00 - 13:30</option>
-                            <option value="4">14:00 - 15:30</option>
-                            <option value="5">16:00 - 17:30</option>
-                            <option value="6">18:00 - 19:30</option>
-                        </select>
-                        <input type="submit" class="reserveBtn" value="Filter">
-                    </form>
-                </div>
-                <table id="reservations">
-                    <tr>
-                        <th>Computer Lab</th>
-                        <th>Date</th>
-                        <th>Time Slot</th>
-                        <th>Email</th>
-                        <th>User</th>
-                        <th>Seat Number</th>
-                        <th></th>
-                    </tr>
-                    {{#each reserve_data}}
-                    <tr>
-                        <td>{{computer_lab}}</td>
-                        <td>{{date}}</td>
-                        <td>{{time_slot}}</td>
-                        <td>{{email}}</td>
-                        <td>{{user}}</td>
-                        <td>{{seat_num}}</td>
-                        <td>
-                            <div class="cont">
-                                {{!-- change html --}}
-                                <form action="/editReservationTech">
-                                    <button type="submit" class="reserveBtn">Edit</button>
-                                    </form> 
-                                    <form action="deleteLab.html">
-                                        <button type="submit" class="reserveBtn">Delete</button>
-                                    </form>
-                            </div>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </table>
+    </div>
+    <hr>
+    <div>
+        <div class="mainContent">
+            <h1>Reservations</h1>
+            <div class="filterContainer">
+                <h4>Filter</h4>
+                <form action="">
+                    <label for="date">Date</label>
+                    <input type="date">
+                    <label for="compLab">Comp. Lab</label>
+                    <select name="compLab" id="compLab">
+                        <option value="--">-- Select Lab</option>
+                        <option value="GK304A">GK304A</option>
+                        <option value="GK503B">GK503B</option>
+                    </select>
+                    <label for="time">Time</label>
+                    <select name="time" id="time">
+                        <option value="1">8:00 - 9:30</option>
+                        <option value="2">10:00 - 11:30</option>
+                        <option value="3">12:00 - 13:30</option>
+                        <option value="4">14:00 - 15:30</option>
+                        <option value="5">16:00 - 17:30</option>
+                        <option value="6">18:00 - 19:30</option>
+                    </select>
+                    <input type="submit" class="reserveBtn" value="Filter">
+                </form>
             </div>
+            <table id="reservations">
+                <tr>
+                    <th>Computer Lab</th>
+                    <th>Date</th>
+                    <th>Time Slot</th>
+                    <th>Email</th>
+                    <th>User</th>
+                    <th>Seat Number</th>
+                    <th></th>
+                </tr>
+                {{#each reserve_data}}
+                <tr>
+                    <td>{{computer_lab}}</td>
+                    <td>{{date}}</td>
+                    <td>{{time_slot}}</td>
+                    <td>{{email}}</td>
+                    <td>{{user}}</td>
+                    <td>{{seat_num}}</td>
+                    <td>
+                        <div class="cont">
+                            {{!-- change html --}}
+                            <form action="/editReservationTech" method="post">
+                                <input type="hidden" name="username" value="{{user}}">
+                                <input type="hidden" name="email" value="{{email}}">
+                                <input type="hidden" name="lab" value="{{computer_lab}}">
+                                <input type="hidden" name="time" value="{{time_slot}}">
+                                <input type="hidden" name="date" value="{{date_reserved}}">
+                                <input type="hidden" name="seat" value="{{seat_num}}">
+                                <button type="submit" class="reserveBtn">Edit</button>
+                            </form>
+                            <form action="deleteLab.html">
+                                <button type="submit" class="reserveBtn">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
         </div>
     </div>
+</div>
