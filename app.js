@@ -210,6 +210,17 @@ server.post('/load_seats', function (req, resp) {
     }).catch(errorFn)
 })
 
+server.post('/load_reservationInfo', function (req, resp) {
+    console.log("view");
+    const reservationSearchQuery = {computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time, seat_num : req.body.seat};
+    console.log(reservationSearchQuery);
+
+    reservationModel.findOne(reservationSearchQuery).lean().then(function (reserve_data) {
+        console.log(reserve_data);
+        resp.json({ reservations: reserve_data });
+    }).catch(errorFn)
+})
+
 server.get('/bookReserve', function (req, resp) {
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         resp.render('bookReserve', {
@@ -398,7 +409,7 @@ server.get('/viewSchedulesTech', function (req, resp) {
             seat.availability = "available";
         });
         resp.render('viewSchedulesTech', {
-            layout: 'layoutReserve',
+            layout: 'layoutReserveView',
             title: 'ILabs | View Schedules',
             'seat-data': seat_data
         });

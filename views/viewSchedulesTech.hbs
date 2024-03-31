@@ -2,5 +2,10 @@
 <div class="mainContent">
     <h1>View Schedules</h1>
     {{>filterSchedules}}
-    {{>seatTable}}
+    <div class="mainContainer">
+        {{>seatTable}}
+        <div class="reserveInfoContainer" id="reserveInfo">
+            <h3>Reservation Details </h3><hr>
+        </div>
+    </div>
 </div>
