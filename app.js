@@ -245,29 +245,20 @@ server.post('/reserveFunctionStudent', function (req, resp) {
     console.log(req.body);
 
     studentModel.findOne(searchQuery).lean().then(function (student) {
+        console.log('find user....2');
         if (student != undefined && student._id != null) {
-            const reserveInstance = reservationModel({
-                date : date,
-                computer_lab: lab,
-                time_slot: time,
-                email: email,
-                user: u_name,
-                seat_num: chosen_seat
-            });
-            reserveInstance.save().then(function(result) {
-                resp.render('reservationSuccessfulStudent', {
-                    layout: 'index',
-                    title: 'ILABS | Reserve Successful',
-                    css: 'landing.css',
-                    username: u_name,
-                    email: email,
-                    date: date,
-                    laboratory: lab,
-                    time: time,
-                    seat: chosen_seat
-                }); 
-            }).catch(errorFn);
             console.log('match');
+            resp.render('reservationSuccessfulStudent', {
+                layout: 'index',
+                title: 'ILABS | Reserve Successful',
+                css: 'landing.css',
+                username: u_name,
+                email: email,
+                date: date,
+                laboratory: lab,
+                time: time,
+                seat: chosen_seat
+            });
             console.log("rendered");
         } else {
             console.log("no match :(");
@@ -293,30 +284,19 @@ server.post('/reserveFunctionTech', function (req, resp) {
     const chosen_seat = req.body.seat_num;
 
     console.log(req.body);
-    const reserveInstance = reservationModel({
-        date : date,
-        computer_lab: lab,
-        time_slot: time,
+
+
+    resp.render('reservationSuccessfulTech', {
+        layout: 'index',
+        title: 'ILABS | Reserve Successful',
+        css: 'landing.css',
+        username: u_name,
         email: email,
-        user: u_name,
-        seat_num: chosen_seat
+        date: date,
+        laboratory: lab,
+        time: time,
+        seat: chosen_seat
     });
-    reserveInstance.save().then(function(result) {
-        resp.render('reservationSuccessfulTech', {
-            layout: 'index',
-            title: 'ILABS | Reserve Successful',
-            css: 'landing.css',
-            username: u_name,
-            email: email,
-            date: date,
-            laboratory: lab,
-            time: time,
-            seat: chosen_seat
-        });
-    }).catch(errorFn);
-
-
-    
     console.log("rendered");
 
 });
@@ -550,72 +530,6 @@ server.get('/editProfileStudent', function (req, resp) {
     }).catch(errorFn);
 });
 
-server.post('/editProfileFunctionStudent', function (req, resp) {
-    
-    studentModel.findOne({ username: req.session.username }).then(function (student_data) {
-        student_data.first_name = req.body.first_name;
-        student_data.last_name = req.body.last_name;
-        student_data.username = req.body.username;
-        req.session.username = req.body.username;
-        student_data.id_num = req.body.id_num;
-
-        console.log('edited');
-        console.log(student_data);
-
-        student_data.save().then(function(result) {
-            if(result){
-                console.log('saved');
-                resp.render('alertPage', {
-                    layout: 'index',
-                    title: 'ILABS | Edit Successful',
-                    css: 'editprofile.css',
-                    alert: 'Edit Saved and Successful',
-                    redirect_page: 'Profile Page',
-                    redirect_url: '/userProfileStudent'
-                })
-            }
-        }).catch(errorFn);
-    }).catch(errorFn);
-});
-
-server.post('/editProfilePasswordStudent', function (req, resp) {
-
-    if (req.body.password1 !== req.body.password2) {
-        console.error("Passwords don't match!");
-        console.log('changes not saved');
-
-        /*resp.render('alertPage', {
-            layout: 'index',
-            title: 'ILABS | Edit Unsuccessful',
-            css: 'editprofile.css',
-            alert: "Passwords don't match! Please try again.",
-            redirect_page: 'Edit Profile Page',
-            redirect_url: '/editProfileStudent'
-        })*/
-        return;
-    }
-    studentModel.findOne({ username: req.session.username }).then(function (student_data) {
-        student_data.password = req.body.password1;
-
-        console.log('edited');
-        console.log(student_data);
-
-        student_data.save().then(function(result) {
-            if(result){
-                console.log('saved');
-                resp.render('alertPage', {
-                    layout: 'index',
-                    title: 'ILABS | Edit Password Successful',
-                    css: 'editprofile.css',
-                    alert: 'Edit Saved and Successful',
-                    redirect_page: 'Profile Page',
-                    redirect_url: '/userProfileStudent'
-                })
-            }
-        }).catch(errorFn);
-    }).catch(errorFn);
-});
-
 server.get('/editProfileTech', function (req, resp) {
 
     techModel.findOne({ username: req.session.username }).lean().then(function (technician_data) {
@@ -629,74 +543,6 @@ server.get('/editProfileTech', function (req, resp) {
             tech_code: technician_data.tech_code,
             dlsu_email: technician_data.dlsu_email
         });
-    }).catch(errorFn);
-
-});
-
-server.post('/editProfileFunctionTech', function (req, resp) {
-    
-    techModel.findOne({ username: req.session.username }).then(function (technician_data) {
-        technician_data.first_name = req.body.first_name;
-        technician_data.last_name = req.body.last_name;
-        technician_data.username = req.body.username;
-        req.session.username = req.body.username;
-        technician_data.id_num = req.body.id_num;
-
-        console.log('edited');
-        console.log(technician_data);
-
-        technician_data.save().then(function(result) {
-            if(result){
-                console.log('saved');
-                resp.render('alertPage', {
-                    layout: 'index',
-                    title: 'ILABS | Edit Successful',
-                    css: 'editprofile.css',
-                    alert: 'Edit Saved and Successful',
-                    redirect_page: 'Profile Page',
-                    redirect_url: '/userProfileTech'
-                })
-            }
-        }).catch(errorFn);
-    }).catch(errorFn);
-});
-
-server.post('/editProfilePasswordTech', function (req, resp) {
-
-    if (req.body.password1 !== req.body.password2) {
-        console.error("Passwords don't match!");
-        console.log('changes not saved');
-
-        /*resp.render('alertPage', {
-            layout: 'index',
-            title: 'ILABS | Edit Unsuccessful',
-            css: 'editprofile.css',
-            alert: "Passwords don't match! Please try again.",
-            redirect_page: 'Edit Profile Page',
-            redirect_url: '/editProfileStudent'
-        })*/
-        
-        return;
-    }
-    techModel.findOne({ username: req.session.username }).then(function (technician_data) {
-        technician_data.password = req.body.password1;
-
-        console.log('edited');
-        console.log(technician_data);
-
-        technician_data.save().then(function(result) {
-            if(result){
-                console.log('saved');
-                resp.render('alertPage', {
-                    layout: 'index',
-                    title: 'ILABS | Edit Password Successful',
-                    css: 'editprofile.css',
-                    alert: 'Edit Saved and Successful',
-                    redirect_page: 'Profile Page',
-                    redirect_url: '/userProfileTech'
-                })
-            }
-        }).catch(errorFn);
     }).catch(errorFn);
 });
 
@@ -725,7 +571,7 @@ server.get('/deleteProfile=Success', function (req, resp) {
 });
 
 server.post('/editReservationTech', function (req, resp) {
-    const searchQuery = { username: req.session.username };
+    //const searchQuery = { username: req.session.username };
     const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
     console.log(reservationSearchQuery);
 
@@ -749,13 +595,14 @@ server.post('/editReservationTech', function (req, resp) {
 
 });
 
-server.get('/editReservationStudent', function(req, resp) {
+server.post('/editReservationStudent', function(req, resp) {
     const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
+    console.log(reservationSearchQuery);
 
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation) {
             console.log(reservation);
-            resp.render('editReservationTech', {
+            resp.render('editReservationStudent', {
                 layout: 'index',
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
