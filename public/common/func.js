@@ -173,7 +173,3 @@ $(document).ready(function() {
     });
 
     });
-
-
-    //insert form validation
- 
