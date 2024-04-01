@@ -96,6 +96,27 @@ server.get('/studentRegister', function (req, resp) {
     });
 });
 
+server.post('/createStudentAccount', function(req, resp) {
+    const studentInstance = studentModel({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        username: req.body.username,
+        id_num: req.body.id_num,
+        dlsu_email: req.body.dlsu_email,
+        password: req.body.password,
+        profileimg: req.body.profileimg
+    });
+
+    studentInstance.save().then(function(login) {
+        console.log('Student Account Created!');
+        resp.render('createSuccess', {
+            layout: 'index',
+            title: 'ILABS | Account Creation',
+            css: 'userRegister.css'
+        });
+    }).catch(errorFn);
+});
+
 server.get('/techRegister', function (req, resp) {
     resp.render('techRegister', {
         layout: 'index',
