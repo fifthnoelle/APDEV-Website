@@ -22,6 +22,7 @@ server.use(express.static('public'));
 const defaultprofileimg = '/common/defaultimg.png';
 
 const mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/labs');
 
 function errorFn(err) {
     console.log('Error found. Please trace!');
@@ -103,61 +104,51 @@ server.get('/studentRegister', function (req, resp) {
 });
 
 server.post('/studentRegister', function (req, resp) {
-    const { first_name, last_name, username, id_num, dlsu_email, password, confirmedPassword } = req.body;
+    const form = document.getElementById('form-create');
+    const searchQuery = {
+        username: form.username
+    };
 
-    // Check if passwords match
-    if (password !== confirmedPassword) {
-        messages.push('Passwords must match!');
-        return;
-    }
-
-    // Check if password meets complexity requirements
-    if (!/(?=.*[A-Z])(?=.*[!@#$%^&*])/.test(password)) {
-        messages.push('Password must contain at least one capital letter and one special character');
-        return;
-    }
-
-    // Check if email ends with @dlsu.edu.ph
-    if (!dlsu_email.endsWith('@dlsu.edu.ph')) {
-        messages.push('Email is invalid.');
-        return;
-    }
-
-    // Check if ID number is exactly 8 digits long
-    if (id_num.length !== 8 || isNaN(id_num)) {
-        messages.push('ID number must be exactly 8 digits long');
-        return;
-    }
-
-    // Hash the password
-    bcrypt.hash(password, 10, (err, hashedPW) => {
-        if (err) {
-            console.log('Error hashing password');
+    studentModel.find(searchQuery).lean().then(function (studentData) {
+        if (studentData.username === form.username) {
+            // if this errors then dont continue with the rest
+            /// how do i show an error message here and not allow the user to submit the form?
+            resp.status(400).send('Username already exists');
             return;
-        }
-
-        const studentData = new studentModel({
-            first_name,
-            last_name,
-            username,
-            id_num,
-            dlsu_email,
-            password: hashedPW
-        });
-
-        studentData.save()
-            .then(() => {
-                console.log('Student Account Created!');
-                resp.render('createSuccessStudent', {
-                    layout: 'index',
-                    title: 'ILABS | Account Creation',
-                    css: 'userRegister.css'
+        } else {
+            let validInputs = checkInputs(form);
+            if (validInputs === 4) {
+                bcrypt.hash(password, 10, (err, hashedPW) => {
+                    if (err) {
+                        console.log('Error hashing password');
+                        return;
+                    }
+            
+                    const studentData = new studentModel({
+                        first_name: first_name,
+                        last_name: last_name,
+                        username: username,
+                        id_num: id_num,
+                        dlsu_email: dlsu_email,
+                        password: hashedPW
+                    });
+            
+                    studentData.save()
+                        .then(() => {
+                            console.log('Student Account Created!');
+                            resp.render('createSuccessStudent', {
+                                layout: 'index',
+                                title: 'ILABS | Account Creation',
+                                css: 'userRegister.css'
+                            });
+                        })
+                        .catch((err) => {
+                            console.error('Error creating student account:', err);
+                            resp.status(500).send('Error creating student account');
+                        });
                 });
-            })
-            .catch((err) => {
-                console.error('Error creating student account:', err);
-                resp.status(500).send('Error creating student account');
-            });
+            }
+        }
     });
 });
   

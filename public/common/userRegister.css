@@ -29,9 +29,10 @@ body {
     max-width: 500px;
     background: white;
     color: var(--clr-primary);
+    margin-top: 15px;
     padding: 30px;
     border-radius: 30px;
-    border: 1px solid var(--clr-primary);
+    border: 2px solid var(--clr-primary);
     font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
@@ -154,4 +155,35 @@ body {
 
 .wrapper .login-link a:hover{
     text-decoration: underline;
+}
+
+.form-control {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.form-control small  {
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.form-control.form-control.success small {
+    visibility: visible;
+    color: #2ecc71;
+}
+
+.form-control.form-control.error small {
+    visibility: visible;
+    color: #e74c3c;
+}
+
+.form-control.success input {
+    border-color: #2ecc71;
+}
+
+.form-control.error input {
+    border-color: #e74c3c;
 }
