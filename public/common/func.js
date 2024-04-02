@@ -175,23 +175,20 @@ $(document).ready(function() {
     });
 
     $(document).ready(function() {
-        const form = document.getElementById('form-create');
-
         $('#form-create').submit(function(event) {
             event.preventDefault();
     
-            const formData = new FormData(form);
-
+            const formData = new FormData(this);
+    
             fetch('/studentRegister', {
                 method: 'POST',
                 body: formData
             })
-                .then(response => response.text())
-                .then(message => {
-                    alert(message); // Show the message in a pop-up
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            .then(response => {
+                alert('Registration successful');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
     });

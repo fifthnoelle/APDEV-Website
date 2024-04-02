@@ -200,7 +200,7 @@ server.post('/studentRegister', function (req, resp) {
             }
         } else if (studentData.username === tempModel.username) {
             // if this errors then dont continue with the rest
-            alert("Username already exists!");
+            resp.status(400).send('Username already exists');
         }
     });
 });
