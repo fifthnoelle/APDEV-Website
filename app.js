@@ -22,7 +22,7 @@ server.use(express.static('public'));
 const defaultprofileimg = '/common/defaultimg.png';
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/labs');
+mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 function errorFn(err) {
     console.log('Error found. Please trace!');
@@ -103,47 +103,104 @@ server.get('/studentRegister', function (req, resp) {
     });
 });
 
+// Registration Validation Functions
+function setErrorFor(input, message) {
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small');
+    formControl.className = 'form-control error';
+    small.innerText = message;
+}
+
+function setSuccessFor(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control success';
+}
+
 server.post('/studentRegister', function (req, resp) {
-    const form = document.getElementById('form-create');
+
+    const tempModel = new studentModel({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        username: req.body.username,
+        id_num: req.body.id_num,
+        dlsu_email: req.body.dlsu_email,
+        password: req.body.PW,
+        profileimg: req.body.profileimg
+    });
+
     const searchQuery = {
-        username: form.username
+        username: tempModel.username
     };
 
-    studentModel.find(searchQuery).lean().then(function (studentData) {
-        if (studentData.username === form.username) {
-            // if this errors then dont continue with the rest
-            resp.status(400).send('Username already exists');
-            return;
-        } else {
-            let validInputs = checkInputs(form);
+    if (!tempModel.profileimg) {
+        tempModel.profileimg = defaultprofileimg;
+    }
+
+    console.log(tempModel);
+
+    studentModel.findOne(searchQuery).lean().then(function (studentData) {
+        if (!studentData) {
+            let counter = 0;
+
+            if (!/[A-Z]/.test(tempModel.PW) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(PW)) {
+                setErrorFor(tempModel.PW, 'Password must contain at least one capital letter and at least one special character');
+            } else {
+                setSuccessFor(tempModel.PW);
+                counter++; // 1
+            }
+
+            if(id_num.length <= 7){
+                setErrorFor(tempModel.id_num, 'Invalid Input. ID Number must be 8 digits.');
+            } else {
+                setSuccessFor(tempModel.id_num);
+                counter++; // 2
+            }
+
+            if(!tempModel.dlsu_email.endsWith('@dlsu.edu.ph')) {
+                setErrorFor(tempModel.dlsu_email, 'Not a valid email');
+            } else {
+                setSuccessFor(tempModel.dlsu_email);
+                counter++; // 3
+            }
+
+            if(tempModel.password === req.body.CPW) {
+                setErrorFor(req.body.CPW, 'Passwords do not match!');
+            } else {
+                setSuccessFor(req.body.CPW);
+                counter++; // 4
+            }
+            // matching it to four because there were four times it should be incremented to ensure the validity of the inputs
             if (validInputs === 4) {
-                bcrypt.hash(password, 10, (err, hashedPW) => {
+                bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
                     if (err) {
                         console.log('Error hashing password');
                         return;
                     }
-            
-                    const studentData = new studentModel({
-                        first_name: first_name,
-                        last_name: last_name,
-                        username: username,
-                        id_num: id_num,
-                        dlsu_email: dlsu_email,
-                        password: hashedPW
-                    });
-            
-                    studentData.save()
-                        .then(() => {
-                            console.log('Student Account Created!');
-                            resp.render('createSuccessStudent', {
-                                layout: 'index',
-                                title: 'ILABS | Account Creation',
-                                css: 'userRegister.css'
-                            });
-                        })
-                        .catch(errorFn);
                 });
+
+                const studentInstance = new studentModel ({
+                    first_name: tempModel.first_name,
+                    last_name: tempModel.last_name,
+                    username: tempModel.username,
+                    id_num: tempModel.id_num,
+                    dlsu_email: tempModel.dlsu_email,
+                    password: hashedPW,
+                    profileimg: tempModel.profileimg
+                });
+
+                studentInstance.save().then(function(register) {
+                    console.log('Account Created!');
+                    console.log('studentInstance');
+                    resp.render('createSuccessStudent', {
+                        layout: 'index',
+                        title: 'ILABS | Register Success!',
+                        css: 'userRegistration.css'
+                    });
+                }).catch(errorFn);
             }
+        } else if (studentData.username === tempModel.username) {
+            // if this errors then dont continue with the rest
+            alert("Username already exists!");
         }
     });
 });

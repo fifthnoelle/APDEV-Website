@@ -174,64 +174,6 @@ $(document).ready(function() {
 
     });
 
-    // Create Account Input Validation
-    function checkInputs(form) {
-        let counter = 0;
-        const first_name = form.querySelector('#first_name').value;
-        const last_name = form.querySelector('#last_name');
-        const username = form.querySelector('#username').value;
-        const id_num = form.querySelector('#id_num').value;
-        const dlsu_email = form.querySelector('#dlsu_email').value;
-        const PW  = form.querySelector('#PW').value;
-        const CPW = form.querySelector('#CPW').value;
-
-        if (!/[A-Z]/.test(PW) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(PW)) {
-            setErrorFor(PW, 'Password must contain at least one capital letter and at least one special character');
-        } else {
-            setSuccessFor(PW);
-            counter++;
-        }
-
-        if(id_num.length <= 7){
-            setErrorFor(id_num, 'Invalid Input. ID Number must be 8 digits.');
-        } else {
-            setSuccessFor(id_num);
-            counter++;
-        }
-
-        if(!confirmDlsuEmail(dlsu_email)) {
-            setErrorFor(dlsu_email, 'Not a valid email');
-        } else {
-            setSuccessFor(dlsu_email);
-            counter++;
-        }
-
-        if(PW === CPW) {
-            setErrorFor(CPW, 'Passwords do not match!');
-        } else {
-            setSuccessFor(CPW);
-            counter++;
-        }
-
-        return counter; // there are 4 conditions so counter must be 4 to successfully add to database
-    }
-
-    function setErrorFor(input, message) {
-        const formControl = input.parentElement;
-        const small = formControl.querySelector('small');
-        formControl.className = 'form-control error';
-        small.innerText = message;
-    }
-    
-    function setSuccessFor(input) {
-        const formControl = input.parentElement;
-        formControl.className = 'form-control success';
-    }
-
-    function confirmDlsuEmail(email) {
-        return email.endsWith('@dlsu.edu.ph');
-    }
-
     $(document).ready(function() {
         const form = document.getElementById('form-create');
 
