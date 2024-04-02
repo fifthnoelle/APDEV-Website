@@ -26,6 +26,18 @@ function checkTime() {
     return true;
 }
 
+function setErrorFor(input, message) {
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small');
+    formControl.className = 'form-control error';
+    small.innerText = message;
+}
+
+function setSuccessFor(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control success';
+}
+
 // BOOKING RESERVING
 $(document).ready(function () {
     for (let i = 1; i < 37; i++) {
@@ -173,6 +185,55 @@ $(document).ready(function() {
     });
 
     });
+
+// CHECKING VALID INPUTS
+    $(document).ready(function() {
+        $('#form-create').submit(function(event) {
+            event.preventDefault();
+    
+            const first_name = $('#first_name').val();
+            const last_name = $('#last_name').val();
+            const username = $('#username').val();
+            const id_num = $('#id_num').val();
+            const dlsu_email = $('#dlsu_email').val();
+            const password = $('#PW').val();
+            const confirm_password = $('#CPW').val();
+            let validInputs = 0;
+    
+            if (!/[A-Z]/.test(password) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) {
+                setErrorFor($('#PW'), 'Password must contain at least one capital letter and at least one special character');
+            } else {
+                setSuccessFor($('#PW'));
+                validInputs++;
+            }
+    
+            if (id_num.length !== 8) {
+                setErrorFor($('#id_num'), 'Invalid Input. ID Number must be 8 digits.');
+            } else {
+                setSuccessFor($('#id_num'));
+                validInputs++;
+            }
+    
+            if (!dlsu_email.endsWith('@dlsu.edu.ph')) {
+                setErrorFor($('#dlsu_email'), 'Not a valid email');
+            } else {
+                setSuccessFor($('#dlsu_email'));
+                validInputs++;
+            }
+    
+            if (password !== confirm_password) {
+                setErrorFor($('#CPW'), 'Passwords do not match!');
+            } else {
+                setSuccessFor($('#CPW'));
+                validInputs++;
+            }
+    
+            if (validInputs === 4) {
+                this.submit();
+            }
+        });
+    });
+    
 
     $(document).ready(function() {
         $('#form-create').submit(function(event) {

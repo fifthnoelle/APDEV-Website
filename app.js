@@ -103,18 +103,6 @@ server.get('/studentRegister', function (req, resp) {
     });
 });
 
-// Registration Validation Functions
-function setErrorFor(input, message) {
-    const formControl = input.parentElement;
-    const small = formControl.querySelector('small');
-    formControl.className = 'form-control error';
-    small.innerText = message;
-}
-
-function setSuccessFor(input) {
-    const formControl = input.parentElement;
-    formControl.className = 'form-control success';
-}
 
 server.post('/studentRegister', function (req, resp) {
 
@@ -140,44 +128,12 @@ server.post('/studentRegister', function (req, resp) {
 
     studentModel.findOne(searchQuery).lean().then(function (studentData) {
         if (!studentData) {
-            let counter = 0;
-
-            if (!/[A-Z]/.test(tempModel.PW) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(PW)) {
-                setErrorFor(tempModel.PW, 'Password must contain at least one capital letter and at least one special character');
-            } else {
-                setSuccessFor(tempModel.PW);
-                counter++; // 1
-            }
-
-            if(id_num.length <= 7){
-                setErrorFor(tempModel.id_num, 'Invalid Input. ID Number must be 8 digits.');
-            } else {
-                setSuccessFor(tempModel.id_num);
-                counter++; // 2
-            }
-
-            if(!tempModel.dlsu_email.endsWith('@dlsu.edu.ph')) {
-                setErrorFor(tempModel.dlsu_email, 'Not a valid email');
-            } else {
-                setSuccessFor(tempModel.dlsu_email);
-                counter++; // 3
-            }
-
-            if(tempModel.password === req.body.CPW) {
-                setErrorFor(req.body.CPW, 'Passwords do not match!');
-            } else {
-                setSuccessFor(req.body.CPW);
-                counter++; // 4
-            }
-            // matching it to four because there were four times it should be incremented to ensure the validity of the inputs
-            if (validInputs === 4) {
-                bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
-                    if (err) {
-                        console.log('Error hashing password');
-                        return;
-                    }
-                });
-
+            bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
+                if (err) {
+                    console.log('Error hashing password');
+                    return;
+                }
+            
                 const studentInstance = new studentModel ({
                     first_name: tempModel.first_name,
                     last_name: tempModel.last_name,
@@ -187,20 +143,20 @@ server.post('/studentRegister', function (req, resp) {
                     password: hashedPW,
                     profileimg: tempModel.profileimg
                 });
-
+            
                 studentInstance.save().then(function(register) {
                     console.log('Account Created!');
-                    console.log('studentInstance');
+                    console.log(studentInstance);
                     resp.render('createSuccessStudent', {
                         layout: 'index',
                         title: 'ILABS | Register Success!',
                         css: 'userRegistration.css'
                     });
                 }).catch(errorFn);
-            }
-        } else if (studentData.username === tempModel.username) {
-            // if this errors then dont continue with the rest
-            resp.status(400).send('Username already exists');
+            });
+            } else if (studentData.username === tempModel.username) {
+                // if this errors then dont continue with the rest
+                resp.status(400).send('Username already exists');
         }
     });
 });
