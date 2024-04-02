@@ -112,7 +112,6 @@ server.post('/studentRegister', function (req, resp) {
     studentModel.find(searchQuery).lean().then(function (studentData) {
         if (studentData.username === form.username) {
             // if this errors then dont continue with the rest
-            /// how do i show an error message here and not allow the user to submit the form?
             resp.status(400).send('Username already exists');
             return;
         } else {
@@ -142,10 +141,7 @@ server.post('/studentRegister', function (req, resp) {
                                 css: 'userRegister.css'
                             });
                         })
-                        .catch((err) => {
-                            console.error('Error creating student account:', err);
-                            resp.status(500).send('Error creating student account');
-                        });
+                        .catch(errorFn);
                 });
             }
         }
