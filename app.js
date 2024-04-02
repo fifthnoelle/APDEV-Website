@@ -1,3 +1,6 @@
+// install command:
+// npm i express body-parser express-handlebars express-session bcrypt mongoose handlebars-helpers
+
 const express = require("express");
 const session = require('express-session');
 const server = express();
@@ -12,10 +15,13 @@ server.engine("hbs", handlebars.engine({
     extname: "hbs"
 }));
 
+const bcrypt = require('bcrypt');
+
 server.use(express.static('public'));
 
+const defaultprofileimg = '/common/defaultimg.png';
+
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/labs');
 
 function errorFn(err) {
     console.log('Error found. Please trace!');
@@ -96,25 +102,72 @@ server.get('/studentRegister', function (req, resp) {
     });
 });
 
-server.post('/createStudentAccount', function(req, resp) {
-    const studentInstance = studentModel({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        username: req.body.username,
-        id_num: req.body.id_num,
-        dlsu_email: req.body.dlsu_email,
-        password: req.body.password,
-        profileimg: req.body.profileimg
-    });
+server.post('/studentRegister', function (req, resp) {
+    const { first_name, last_name, username, id_num, dlsu_email, password, confirmedPassword } = req.body;
 
-    studentInstance.save().then(function(login) {
-        console.log('Student Account Created!');
-        resp.render('createSuccess', {
-            layout: 'index',
-            title: 'ILABS | Account Creation',
-            css: 'userRegister.css'
+    // Check if passwords match
+    if (password !== confirmedPassword) {
+        messages.push('Passwords must match!');
+        return;
+    }
+
+    // Check if password meets complexity requirements
+    if (!/(?=.*[A-Z])(?=.*[!@#$%^&*])/.test(password)) {
+        messages.push('Password must contain at least one capital letter and one special character');
+        return;
+    }
+
+    // Check if email ends with @dlsu.edu.ph
+    if (!dlsu_email.endsWith('@dlsu.edu.ph')) {
+        messages.push('Email is invalid.');
+        return;
+    }
+
+    // Check if ID number is exactly 8 digits long
+    if (id_num.length !== 8 || isNaN(id_num)) {
+        messages.push('ID number must be exactly 8 digits long');
+        return;
+    }
+
+    // Hash the password
+    bcrypt.hash(password, 10, (err, hashedPW) => {
+        if (err) {
+            console.log('Error hashing password');
+            return;
+        }
+
+        const studentData = new studentModel({
+            first_name,
+            last_name,
+            username,
+            id_num,
+            dlsu_email,
+            password: hashedPW
         });
-    }).catch(errorFn);
+
+        studentData.save()
+            .then(() => {
+                console.log('Student Account Created!');
+                resp.render('createSuccessStudent', {
+                    layout: 'index',
+                    title: 'ILABS | Account Creation',
+                    css: 'userRegister.css'
+                });
+            })
+            .catch((err) => {
+                console.error('Error creating student account:', err);
+                resp.status(500).send('Error creating student account');
+            });
+    });
+});
+  
+
+server.get('/createSuccessStudent', function(req, resp) {
+    resp.render('createSuccessStudent', {
+        layout: 'index',
+        title: 'ILABS | Account Creation Successful',
+        css: 'userRegister.css'
+    });
 });
 
 server.get('/techRegister', function (req, resp) {

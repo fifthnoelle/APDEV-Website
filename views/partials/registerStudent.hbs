@@ -1,20 +1,20 @@
 <h1 id="registertitle">Register Student Account</h1>
-    <form onsubmit="">
+    <form action="/studentRegister" method="post">
             <div class="register-container">
                 <div class="input-box">
-                    <input type="text" placeholder="First Name" required>
-                    <input type="text" placeholder="Last Name" required>
+                    <input type="text" placeholder="First Name" name="first_name" required>
+                    <input type="text" placeholder="Last Name" name="last_name" required>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="Username" required>
-                    <input type="text" placeholder="ID Number" required>
+                    <input type="text" placeholder="Username" name="username" required>
+                    <input type="text" placeholder="ID Number" name="id_num" required>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="DLSU Email" required>
+                    <input type="text" placeholder="DLSU Email" name="dlsu_email" required>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="Password" required>
-                    <input type="text" placeholder="Confirm Password" required>
+                    <input type="text" placeholder="Password" name="PW" required>
+                    <input type="text" placeholder="Confirm Password" name="CPW" required>
                 </div>
                 <button type="submit" class="btn">Register Account</button>
                 <button type="reset" class="btn">Reset</button>
