@@ -24,8 +24,8 @@ const defaultprofileimg = '/common/defaultimg.png';
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 
-//let uri = "mongodb+srv://samanthaoneil:WkvdF4yzhZ0JoVec@cluster0.wezgvio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-let uri = ""
+let uri = "mongodb+srv://samanthaoneil:WkvdF4yzhZ0JoVec@cluster0.wezgvio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+// let uri = ""
 //mongoose.connect(uri);
 
 mongoose.connect(uri)
@@ -302,7 +302,6 @@ server.post('/s-login-funck', function (req, resp) {
     }).catch(errorFn);
 });
 
-
 server.get('/userLoginTech', function (req, resp) {
     resp.render('userLoginTech', {
         layout: 'layoutLogin',
@@ -310,28 +309,48 @@ server.get('/userLoginTech', function (req, resp) {
     });
 });
 
-console.log('find technician user....');
-server.post('/t-login-funck', function (req, resp) {
-    const u_name = String(req.body.username);
-    const pass = String(req.body.password);
-    const searchQuery = {
-        username: u_name,
-        password: pass
-    };
 
-    techModel.findOne(searchQuery).lean().then(function (technician) {
+server.post('/t-login-funck', function (req, resp) {
+    const username = req.body.username;
+    console.log('TECH INPUT: ' + username);
+    const pass = req.body.password;
+
+    techModel.findOne({ username: username }).lean().then(function (technician) {
+        console.log('Finding user');
+        console.log(technician);
         if (technician != undefined && technician._id != null) {
-            req.session.username = u_name;
-            console.log('match');
-            resp.render('indexTech', {
-                layout: 'index',
-                title: 'ILABS | Lab Technician Homepage',
-                css: 'landing.css'
-            });
+            req.session.username = username;
+            console.log(technician.username);
+            if (technician) {
+                bcrypt.compare(pass, technician.password, function (err, res) {
+                    if (res) {
+                        console.log('match');
+                        resp.render('indexTech', {
+                            layout: 'index',
+                            title: 'ILABS | Technician Homepage',
+                            css: 'landing.css'
+                        });
+                    } else {
+                        console.log("username not found");
+                        resp.render('userLoginTech', {
+                            layout: 'layoutLogin',
+                            title: 'ILABS | User Log-in',
+                        });
+                    }
+                });
+            }            
+            else {
+                console.log("username not found");
+                resp.render('userLoginTech', {
+                    layout: 'layoutLogin',
+                    title: 'ILABS | User Log-in',
+                });
+            }
         } else {
+            console.log("no match");
             resp.render('logoutTech', {
                 layout: 'layoutLogout',
-                title: 'ILABS | Log-Out',
+                title: 'ILABS | Log-Out'
             });
         }
     }).catch(errorFn);
