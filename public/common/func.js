@@ -190,10 +190,7 @@ $(document).ready(function() {
     $(document).ready(function() {
         $('#form-create').submit(function(event) {
             event.preventDefault();
-    
-            const first_name = $('#first_name').val();
-            const last_name = $('#last_name').val();
-            const username = $('#username').val();
+
             const id_num = $('#id_num').val();
             const dlsu_email = $('#dlsu_email').val();
             const password = $('#PW').val();

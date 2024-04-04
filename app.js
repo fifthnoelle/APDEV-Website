@@ -170,6 +170,8 @@ server.get('/createSuccessStudent', function(req, resp) {
     });
 });
 
+server.get('/deleteProfile', function(req, resp) {})
+
 server.get('/techRegister', function (req, resp) {
     resp.render('techRegister', {
         layout: 'index',
@@ -185,32 +187,39 @@ server.get('/userLoginStudent', function (req, resp) {
     });
 });
 
-console.log('find student user....');
 server.post('/s-login-funck', function (req, resp) {
-    const u_name = String(req.body.username);
-    const pass = String(req.body.password);
-    const searchQuery = {
-        username: u_name,
-        password: pass
-    };
+    const username = req.body.username;
+    console.log('INPUT: ' + username);
+    const pass = req.body.password;
 
-    console.log(searchQuery);
-
-    studentModel.findOne(searchQuery).lean().then(function (student) {
+    studentModel.findOne({ username: username }).lean().then(function(student){
+        console.log('Finding user');
+        console.log(student);
         if (student != undefined && student._id != null) {
-            req.session.username = u_name;
-            console.log('match');
-            resp.render('sHome', {
+            console.log(student.username);
+            if (student) {
+            bcrypt.compare(pass, student.password, function(err, resp) {
+                console.log('match');
+                resp.render('sHome', {
                 layout: 'index',
                 title: 'ILABS | Student Homepage',
                 css: 'landing.css'
+                });
             });
+            }
+            else {
+                console.log("username not found");
+                resp.render('userLoginStudent', {
+                    layout: 'layoutLogin',
+                    title: 'ILABS | User Log-in',
+                });
+            }
         } else {
-            console.log("no match");
-            resp.render('logoutStudent', {
-                layout: 'layoutLogout',
-                title: 'ILABS | Log-Out'
-            });
+          console.log("no match");
+          resp.render('logoutStudent', {
+            layout: 'layoutLogout',
+            title: 'ILABS | Log-Out'
+          });
         }
     }).catch(errorFn);
 });
@@ -562,7 +571,7 @@ server.get('/userProfileStudent', function (req, resp) {
         console.log("Loading Student Data");
         console.log(student_data);
 
-        reservationModel.find(reservationSearchQuery).lean().then(function (reservation_data) {
+        reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation_data) {
             console.log("Loading Reservation Data");
             console.log(reservation_data);
             console.log(student_data);
@@ -571,11 +580,7 @@ server.get('/userProfileStudent', function (req, resp) {
                 layout: 'index',
                 title: 'ILABS | Edit My Profile',
                 css: 'userprofile.css',
-                first_name: student_data.first_name,
-                last_name: student_data.last_name,
-                id_num: student_data.id_num,
-                dlsu_email: student_data.dlsu_email,
-                profileimg: student_data.profileimg,
+                student_data: student_data,
                 reservation_data: reservation_data
             });
         }).catch(errorFn);
