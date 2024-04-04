@@ -5,29 +5,33 @@
     </div>
     <div class="content">
         <div class="reserveForm">
-            <form action="">
+            <form action="/editReservationFuncStud"  method="post">
                 <div class="formPersonal">
                     <div class="formQuestion">
                         <label for="Name"><b>Name</b></label>
-                        <input type="text" value="{{username}}">
+                        <input type="text" name = "username" placeholder="{{user}}">
+                        <input type="hidden" name="ogusername" value="{{user}}">
                     </div>
                 </div>
                 <div class="formPersonal">
                     <div class="formQuestion">
                         <label for="email"><b>Email</b></label>
-                        <input type="text" value="{{dlsu_email}}">
+                        <input type="text" name = "email" value="{{dlsu_email}}">
+                         <input type="hidden" name = "ogemail" value="{{dlsu_email}}">
                     </div>
                 </div>
                 <div class="formPersonal">
                     <div class="formQuestion">
-                        <label for="Seatx"><b>Seat No.</b></label>
-                        <input type="text" value="{{seat_num}}">
+                        <label for="seat_num"><b>Seat Number</b></label>
+                        <input type="text" name = "seat_num" id="seat_num" placeholder="{{seat_num}}" required>
+                         <input type="hidden" name = "ogseat_num" value="{{seat_num}}">
                     </div>
                 </div>
                 <div class="formDateTime">
                     <div class="formQuestion">
                         <label for="date"><b>Date</b></label>
-                        <input type="calendar" id="date" name="date" placeholder="{{date}}">
+                        <input type="calendar" id="date" name="date" placeholder="{{date}}" required>
+                        <input type="hidden" name="ogdate" value="{{date}}">
                     </div>
                     <div class="formQuestion">
                         <label for="time"><b>Time</b></label>
@@ -46,7 +50,8 @@
                             <option value="6" {{#if (eq TEMP.time_slot "18:00 - 19:30" )}}selected{{/if}}>18:00 - 19:30
                             </option>
                         </select> --}}
-                        <select name="time" id="time">
+                        <input type="hidden" name = "ogtime_slot"  value="{{time_slot}}">
+                        <select name="time_slot" name = "time_slot"  id="time_slot"  value="{{time_slot}}"required>
                             <option value="">- -</option>
                             <option value="8:00 - 9:30">8:00 - 9:30</option>
                             <option value="10:00 - 11:30">10:00 - 11:30</option>
