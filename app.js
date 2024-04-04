@@ -713,6 +713,7 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
         }).catch(errorFn);
     }).catch(errorFn);
 });
+});
 
 
 //EDIT PROFILE TECH
@@ -804,6 +805,7 @@ server.post('/editProfilePasswordTech', function (req, resp) {
             }
         }).catch(errorFn);
     }).catch(errorFn);
+});
 });
 
 server.get('/deleteProfileTech', function (req, resp) {
