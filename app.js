@@ -198,7 +198,7 @@ server.post('/s-login-funck', function (req, resp) {
         if (student != undefined && student._id != null) {
             console.log(student.username);
             if (student) {
-            bcrypt.compare(pass, student.password, function(err, resp) {
+            bcrypt.compare(pass, student.password, function(err, res) {
                 console.log('match');
                 resp.render('sHome', {
                 layout: 'index',
