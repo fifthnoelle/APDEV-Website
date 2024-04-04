@@ -24,8 +24,8 @@ const defaultprofileimg = '/common/defaultimg.png';
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 
-let uri = "mongodb+srv://shaylenekintanar:shaypw@ccapdev-website.9kkxda3.mongodb.net/CCAPDEV"
-
+// let uri = "mongodb+srv://samanthaoneil:WkvdF4yzhZ0JoVec@cluster0.wezgvio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+let uri = ""
 
 //mongoose.connect(uri);
 
@@ -610,7 +610,11 @@ server.get('/userProfileStudent', function (req, resp) {
                 layout: 'index',
                 title: 'ILABS | Edit My Profile',
                 css: 'userprofile.css',
-                student_data: student_data,
+                first_name: student_data.first_name,
+                last_name: student_data.last_name,
+                dlsu_email: student_data.dlsu_email,
+                id_num: student_data.id_num,
+                profileimg: student_data.profileimg,
                 reservation_data: reservation_data
             });
         }).catch(errorFn);
