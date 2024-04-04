@@ -142,8 +142,8 @@ server.post('/studentRegister', function (req, resp) {
                     console.log('Error hashing password');
                     return;
                 }
-            
-                const studentInstance = new studentModel ({
+
+                const studentInstance = new studentModel({
                     first_name: tempModel.first_name,
                     last_name: tempModel.last_name,
                     username: tempModel.username,
@@ -152,8 +152,8 @@ server.post('/studentRegister', function (req, resp) {
                     password: hashedPW,
                     profileimg: tempModel.profileimg
                 });
-            
-                studentInstance.save().then(function(register) {
+
+                studentInstance.save().then(function (register) {
                     console.log('Account Created!');
                     console.log(studentInstance);
                     resp.render('createSuccessStudent', {
@@ -163,15 +163,15 @@ server.post('/studentRegister', function (req, resp) {
                     });
                 }).catch(errorFn);
             });
-            } else if (studentData.username === tempModel.username) {
-                // if this errors then dont continue with the rest
-                resp.status(400).send('Username already exists');
+        } else if (studentData.username === tempModel.username) {
+            // if this errors then dont continue with the rest
+            resp.status(400).send('Username already exists');
         }
     });
 });
-  
 
-server.get('/createSuccessStudent', function(req, resp) {
+
+server.get('/createSuccessStudent', function (req, resp) {
     resp.render('createSuccessStudent', {
         layout: 'index',
         title: 'ILABS | Account Creation Successful',
@@ -179,7 +179,7 @@ server.get('/createSuccessStudent', function(req, resp) {
     });
 });
 
-server.get('/deleteProfile', function(req, resp) {})
+server.get('/deleteProfile', function (req, resp) { })
 
 server.get('/techRegister', function (req, resp) {
     resp.render('techRegister', {
@@ -201,20 +201,21 @@ server.post('/s-login-funck', function (req, resp) {
     console.log('INPUT: ' + username);
     const pass = req.body.password;
 
-    studentModel.findOne({ username: username }).lean().then(function(student){
+    studentModel.findOne({ username: username }).lean().then(function (student) {
         console.log('Finding user');
         console.log(student);
         if (student != undefined && student._id != null) {
+            req.session.username = username;
             console.log(student.username);
             if (student) {
-            bcrypt.compare(pass, student.password, function(err, res) {
-                console.log('match');
-                resp.render('sHome', {
-                layout: 'index',
-                title: 'ILABS | Student Homepage',
-                css: 'landing.css'
+                bcrypt.compare(pass, student.password, function (err, res) {
+                    console.log('match');
+                    resp.render('sHome', {
+                        layout: 'index',
+                        title: 'ILABS | Student Homepage',
+                        css: 'landing.css'
+                    });
                 });
-            });
             }
             else {
                 console.log("username not found");
@@ -224,11 +225,11 @@ server.post('/s-login-funck', function (req, resp) {
                 });
             }
         } else {
-          console.log("no match");
-          resp.render('logoutStudent', {
-            layout: 'layoutLogout',
-            title: 'ILABS | Log-Out'
-          });
+            console.log("no match");
+            resp.render('logoutStudent', {
+                layout: 'layoutLogout',
+                title: 'ILABS | Log-Out'
+            });
         }
     }).catch(errorFn);
 });
@@ -304,7 +305,7 @@ server.post('/load_seats', function (req, resp) {
 
 server.post('/load_reservationInfo', function (req, resp) {
     console.log("view");
-    const reservationSearchQuery = {computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time, seat_num : req.body.seat};
+    const reservationSearchQuery = { computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time, seat_num: req.body.seat };
     console.log(reservationSearchQuery);
 
     reservationModel.findOne(reservationSearchQuery).lean().then(function (reserve_data) {
@@ -350,14 +351,14 @@ server.post('/reserveFunctionStudent', function (req, resp) {
     studentModel.findOne(searchQuery).lean().then(function (student) {
         if (student != undefined && student._id != null) {
             const reserveInstance = reservationModel({
-                date : date,
+                date: date,
                 computer_lab: lab,
                 time_slot: time,
                 email: email,
                 user: u_name,
                 seat_num: chosen_seat
             });
-            reserveInstance.save().then(function(result) {
+            reserveInstance.save().then(function (result) {
                 resp.render('reservationSuccessfulStudent', {
                     layout: 'index',
                     title: 'ILABS | Reserve Successful',
@@ -368,7 +369,7 @@ server.post('/reserveFunctionStudent', function (req, resp) {
                     laboratory: lab,
                     time: time,
                     seat: chosen_seat
-                }); 
+                });
             }).catch(errorFn);
             console.log('match');
             console.log("rendered");
@@ -397,14 +398,14 @@ server.post('/reserveFunctionTech', function (req, resp) {
 
     console.log(req.body);
     const reserveInstance = reservationModel({
-        date : date,
+        date: date,
         computer_lab: lab,
         time_slot: time,
         email: email,
         user: u_name,
         seat_num: chosen_seat
     });
-    reserveInstance.save().then(function(result) {
+    reserveInstance.save().then(function (result) {
         resp.render('reservationSuccessfulTech', {
             layout: 'index',
             title: 'ILABS | Reserve Successful',
@@ -419,7 +420,7 @@ server.post('/reserveFunctionTech', function (req, resp) {
     }).catch(errorFn);
 
 
-    
+
     console.log("rendered");
 
 });
@@ -530,6 +531,7 @@ server.get('/filterReservations', function (req, resp) {
 })
 server.get('/viewMyReservations', function (req, resp) {
     const searchQuery = { user: req.session.username };//user details query
+    console.log("search query for view" + searchQuery);
 
     reservationModel.find(searchQuery).lean().then(function (reserve_data) {
         console.log('loading user reservations');
@@ -651,7 +653,7 @@ server.get('/editProfileStudent', function (req, resp) {
 });
 
 server.post('/editProfileFunctionStudent', function (req, resp) {
-    
+
     studentModel.findOne({ username: req.session.username }).then(function (student_data) {
         student_data.first_name = req.body.first_name;
         student_data.last_name = req.body.last_name;
@@ -662,8 +664,8 @@ server.post('/editProfileFunctionStudent', function (req, resp) {
         console.log('edited');
         console.log(student_data);
 
-        student_data.save().then(function(result) {
-            if(result){
+        student_data.save().then(function (result) {
+            if (result) {
                 console.log('saved');
                 resp.render('alertPage', {
                     layout: 'index',
@@ -688,40 +690,40 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
 
     bcrypt.hash(req.body.password1, 10, (err, hashedPW) => {
         if (err) {
-          console.error('Error hashing password:', err);
-          resp.render('alertPage', {
-            layout: 'index',
-            title: 'ILABS | Hashing Unsuccessful',
-            css: 'editprofile.css',
-            alert: 'Error Hashing Password',
-            redirect_page: 'Edit Profile Page',
-            redirect_url: '/editProfileStudent'
-        })
-          return;
+            console.error('Error hashing password:', err);
+            resp.render('alertPage', {
+                layout: 'index',
+                title: 'ILABS | Hashing Unsuccessful',
+                css: 'editprofile.css',
+                alert: 'Error Hashing Password',
+                redirect_page: 'Edit Profile Page',
+                redirect_url: '/editProfileStudent'
+            })
+            return;
         }
 
-    studentModel.findOne({ username: req.session.username }).then(function (student_data) {
-        student_data.password = req.body.password1;
-        student_data.password = hashedPW;
+        studentModel.findOne({ username: req.session.username }).then(function (student_data) {
+            student_data.password = req.body.password1;
+            student_data.password = hashedPW;
 
-        console.log('edited');
-        console.log(student_data);
+            console.log('edited');
+            console.log(student_data);
 
-        student_data.save().then(function(result) {
-            if(result){
-                console.log('saved');
-                resp.render('alertPage', {
-                    layout: 'index',
-                    title: 'ILABS | Edit Password Successful',
-                    css: 'editprofile.css',
-                    alert: 'Edit Saved and Successful',
-                    redirect_page: 'Profile Page',
-                    redirect_url: '/userProfileStudent'
-                })
-            }
+            student_data.save().then(function (result) {
+                if (result) {
+                    console.log('saved');
+                    resp.render('alertPage', {
+                        layout: 'index',
+                        title: 'ILABS | Edit Password Successful',
+                        css: 'editprofile.css',
+                        alert: 'Edit Saved and Successful',
+                        redirect_page: 'Profile Page',
+                        redirect_url: '/userProfileStudent'
+                    })
+                }
+            }).catch(errorFn);
         }).catch(errorFn);
-    }).catch(errorFn);
-});
+    });
 });
 
 
@@ -744,7 +746,7 @@ server.get('/editProfileTech', function (req, resp) {
 });
 
 server.post('/editProfileFunctionTech', function (req, resp) {
-    
+
     techModel.findOne({ username: req.session.username }).then(function (technician_data) {
         technician_data.first_name = req.body.first_name;
         technician_data.last_name = req.body.last_name;
@@ -755,8 +757,8 @@ server.post('/editProfileFunctionTech', function (req, resp) {
         console.log('edited');
         console.log(technician_data);
 
-        technician_data.save().then(function(result) {
-            if(result){
+        technician_data.save().then(function (result) {
+            if (result) {
                 console.log('saved');
                 resp.render('alertPage', {
                     layout: 'index',
@@ -776,45 +778,45 @@ server.post('/editProfilePasswordTech', function (req, resp) {
     if (req.body.password1 !== req.body.password2) {
         console.error("Passwords don't match!");
         console.log('changes not saved');
-        
+
         return;
     }
 
     bcrypt.hash(req.body.password1, 10, (err, hashedPW) => {
         if (err) {
-          console.error('Error hashing password:', err);
-          resp.render('alertPage', {
-            layout: 'index',
-            title: 'ILABS | Hashing Unsuccessful',
-            css: 'editprofile.css',
-            alert: 'Error Hashing Password',
-            redirect_page: 'Edit Profile Page',
-            redirect_url: '/editProfileTech'
-        })
-          return;
+            console.error('Error hashing password:', err);
+            resp.render('alertPage', {
+                layout: 'index',
+                title: 'ILABS | Hashing Unsuccessful',
+                css: 'editprofile.css',
+                alert: 'Error Hashing Password',
+                redirect_page: 'Edit Profile Page',
+                redirect_url: '/editProfileTech'
+            })
+            return;
         }
 
-    techModel.findOne({ username: req.session.username }).then(function (technician_data) {
-        //technician_data.password = req.body.password1;
-        technician_data.password = hashedPW;
-        console.log('edited');
-        console.log(technician_data);
+        techModel.findOne({ username: req.session.username }).then(function (technician_data) {
+            //technician_data.password = req.body.password1;
+            technician_data.password = hashedPW;
+            console.log('edited');
+            console.log(technician_data);
 
-        technician_data.save().then(function(result) {
-            if(result){
-                console.log('saved');
-                resp.render('alertPage', {
-                    layout: 'index',
-                    title: 'ILABS | Edit Password Successful',
-                    css: 'editprofile.css',
-                    alert: 'Edit Saved and Successful',
-                    redirect_page: 'Profile Page',
-                    redirect_url: '/userProfileTech'
-                })
-            }
+            technician_data.save().then(function (result) {
+                if (result) {
+                    console.log('saved');
+                    resp.render('alertPage', {
+                        layout: 'index',
+                        title: 'ILABS | Edit Password Successful',
+                        css: 'editprofile.css',
+                        alert: 'Edit Saved and Successful',
+                        redirect_page: 'Profile Page',
+                        redirect_url: '/userProfileTech'
+                    })
+                }
+            }).catch(errorFn);
         }).catch(errorFn);
-    }).catch(errorFn);
-});
+    });
 });
 
 server.get('/deleteProfileTech', function (req, resp) {
@@ -866,7 +868,7 @@ server.post('/editReservationTech', function (req, resp) {
 
 });
 
-server.post('/editReservationStudent', function(req, resp) {
+server.post('/editReservationStudent', function (req, resp) {
     const searchQuery = { username: req.session.username };
     const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
     console.log(reservationSearchQuery);
