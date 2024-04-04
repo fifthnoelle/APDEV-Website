@@ -24,9 +24,8 @@ const defaultprofileimg = '/common/defaultimg.png';
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 
-// let uri = "mongodb+srv://samanthaoneil:WkvdF4yzhZ0JoVec@cluster0.wezgvio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+//let uri = "mongodb+srv://samanthaoneil:WkvdF4yzhZ0JoVec@cluster0.wezgvio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 let uri = ""
-
 //mongoose.connect(uri);
 
 mongoose.connect(uri)
@@ -173,11 +172,17 @@ server.post('/studentRegister', function (req, resp) {
 
 server.get('/createSuccessStudent', function (req, resp) {
     resp.render('createSuccessStudent', {
-        layout: 'index',
-        title: 'ILABS | Account Creation Successful',
-        css: 'userRegister.css'
+        layout: 'layoutSignIn',
+        title: 'ILABS | Student Registered!',
     });
 });
+
+server.get('/createSuccessTech', function (req, resp) {
+    resp.render('createSuccessTech', {
+        layout: 'layoutSignIn',
+        title: 'ILABS | Technician Registered!',
+    })
+})
 
 server.get('/deleteProfile', function (req, resp) { })
 
@@ -186,6 +191,61 @@ server.get('/techRegister', function (req, resp) {
         layout: 'index',
         title: 'ILABS | Sign-Up',
         css: 'userRegister.css'
+    });
+});
+
+server.post('/techRegister', function (req, resp) {
+    const tempModel = new techModel({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        username: req.body.username,
+        tech_code: req.body.tech_code,
+        dlsu_email: req.body.dlsu_email,
+        password: req.body.PW,
+        profileimg: req.body.profileimg
+    });
+
+    const searchQuery = {
+        username: tempModel.username
+    };
+
+    if (!tempModel.profileimg) {
+        tempModel.profileimg = defaultprofileimg;
+    }
+
+    console.log(tempModel);
+
+    techModel.findOne(searchQuery).lean().then(function (tech_data) {
+        if (!tech_data) {
+            bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
+                if (err) {
+                    console.log('Error hashing password');
+                    return;
+                }
+
+                const techInstance = new techModel({
+                    first_name: tempModel.first_name,
+                    last_name: tempModel.last_name,
+                    username: tempModel.username,
+                    tech_code: tempModel.tech_code,
+                    dlsu_email: tempModel.dlsu_email,
+                    password: hashedPW,
+                    profileimg: tempModel.profileimg
+                });
+
+                techInstance.save().then(function (register) {
+                    console.log('Technician Account Created!');
+                    console.log(techInstance);
+                    resp.render('createSuccessTech', {
+                        layout: 'index',
+                        title: 'ILABS | Register Success!',
+                        css: 'userRegistration.css'
+                    });
+                }).catch(errorFn);
+            }); 
+        } else if (tech_data.username === tempModel.username) {
+            resp.status(400).send('Username already exists');
+        }
     });
 });
 
