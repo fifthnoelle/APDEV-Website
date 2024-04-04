@@ -233,7 +233,7 @@ $(document).ready(function() {
           submitButton.prop('disabled', true); 
         }
     });
-
+});
     
 
     $('#editPasswordForm').submit(function(event) {
