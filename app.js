@@ -811,6 +811,7 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
             })
             return;
         }
+    });
 
         studentModel.findOne({ username: req.session.username }).then(function (student_data) {
             student_data.password = req.body.password1;
@@ -834,7 +835,6 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
             }).catch(errorFn);
         }).catch(errorFn);
     });
-});
 
 
 //EDIT PROFILE TECH
@@ -905,6 +905,7 @@ server.post('/editProfilePasswordTech', function (req, resp) {
             })
             return;
         }
+    });
 
         techModel.findOne({ username: req.session.username }).then(function (technician_data) {
             //technician_data.password = req.body.password1;
@@ -927,7 +928,6 @@ server.post('/editProfilePasswordTech', function (req, resp) {
             }).catch(errorFn);
         }).catch(errorFn);
     });
-});
 
 server.get('/deleteProfileTech', function (req, resp) {
     resp.render('deleteProfileTech', {
