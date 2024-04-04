@@ -22,7 +22,7 @@ server.use(express.static('public'));
 const defaultprofileimg = '/common/defaultimg.png';
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/test');
+mongoose.connect('mongodb://127.0.0.1:27017/labs');
 
 function errorFn(err) {
     console.log('Error found. Please trace!');
@@ -823,13 +823,15 @@ server.post('/editReservationTech', function (req, resp) {
 
 });
 
-server.get('/editReservationStudent', function(req, resp) {
+server.post('/editReservationStudent', function(req, resp) {
+    const searchQuery = { username: req.session.username };
     const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
 
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation) {
             console.log(reservation);
-            resp.render('editReservationTech', {
+            console.log(req.body.username);
+            resp.render('editReservationStudent', {
                 layout: 'index',
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
