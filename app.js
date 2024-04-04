@@ -155,7 +155,8 @@ server.post('/studentRegister', function (req, resp) {
                 studentInstance.save().then(function (register) {
                     console.log('Account Created!');
                     console.log(studentInstance);
-                    resp.render('createSuccessStudent', {
+                    // its not rendering the correct page ???
+                    resp.render('createStudent', {
                         layout: 'index',
                         title: 'ILABS | Register Success!',
                         css: 'userRegistration.css'
@@ -169,22 +170,40 @@ server.post('/studentRegister', function (req, resp) {
     });
 });
 
-
-server.get('/createSuccessStudent', function (req, resp) {
-    resp.render('createSuccessStudent', {
-        layout: 'layoutSignIn',
-        title: 'ILABS | Student Registered!',
+server.get('/studentRegister', function (req, resp) {
+    resp.render('studentRegister', {
+        layout: 'index',
+        title: 'ILABS | Sign-Up',
+        css: 'userRegister.css'
     });
 });
 
-server.get('/createSuccessTech', function (req, resp) {
-    resp.render('createSuccessTech', {
-        layout: 'layoutSignIn',
-        title: 'ILABS | Technician Registered!',
-    })
-})
+server.get('/createStudent', function (req, resp) {
+    resp.render('createStudent', {
+        layout: 'index',
+        title: 'ILABS | Student Registered!',
+        css: 'userRegister.css'
+    });
+});
 
-server.get('/deleteProfile', function (req, resp) { })
+server.get('/createTech', function (req, resp) {
+    resp.render('createTech', {
+        layout: 'layoutLogin',
+        title: 'ILABS | Technician Registered!',
+        css: 'userRegister.css'
+    });
+});
+
+server.get('/deleteProfile', function (req, resp){
+
+});
+
+server.post('/deleteProfile', function (req, resp) {
+    // get password and confirmed password
+    // check if matching with bycrypt compare
+    // find by id and delete (not pressable button unless both inputs are valid)
+    // render starting page
+});
 
 server.get('/techRegister', function (req, resp) {
     resp.render('techRegister', {
@@ -236,7 +255,7 @@ server.post('/techRegister', function (req, resp) {
                 techInstance.save().then(function (register) {
                     console.log('Technician Account Created!');
                     console.log(techInstance);
-                    resp.render('createSuccessTech', {
+                    resp.render('createTech', {
                         layout: 'index',
                         title: 'ILABS | Register Success!',
                         css: 'userRegistration.css'
