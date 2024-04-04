@@ -674,19 +674,26 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
     if (req.body.password1 !== req.body.password2) {
         console.error("Passwords don't match!");
         console.log('changes not saved');
-
-        /*resp.render('alertPage', {
-            layout: 'index',
-            title: 'ILABS | Edit Unsuccessful',
-            css: 'editprofile.css',
-            alert: "Passwords don't match! Please try again.",
-            redirect_page: 'Edit Profile Page',
-            redirect_url: '/editProfileStudent'
-        })*/
         return;
     }
+
+    bcrypt.hash(req.body.password1, 10, (err, hashedPW) => {
+        if (err) {
+          console.error('Error hashing password:', err);
+          resp.render('alertPage', {
+            layout: 'index',
+            title: 'ILABS | Hashing Unsuccessful',
+            css: 'editprofile.css',
+            alert: 'Error Hashing Password',
+            redirect_page: 'Edit Profile Page',
+            redirect_url: '/editProfileStudent'
+        })
+          return;
+        }
+
     studentModel.findOne({ username: req.session.username }).then(function (student_data) {
         student_data.password = req.body.password1;
+        student_data.password = hashedPW;
 
         console.log('edited');
         console.log(student_data);
@@ -759,21 +766,27 @@ server.post('/editProfilePasswordTech', function (req, resp) {
     if (req.body.password1 !== req.body.password2) {
         console.error("Passwords don't match!");
         console.log('changes not saved');
-
-        /*resp.render('alertPage', {
-            layout: 'index',
-            title: 'ILABS | Edit Unsuccessful',
-            css: 'editprofile.css',
-            alert: "Passwords don't match! Please try again.",
-            redirect_page: 'Edit Profile Page',
-            redirect_url: '/editProfileStudent'
-        })*/
         
         return;
     }
-    techModel.findOne({ username: req.session.username }).then(function (technician_data) {
-        technician_data.password = req.body.password1;
 
+    bcrypt.hash(req.body.password1, 10, (err, hashedPW) => {
+        if (err) {
+          console.error('Error hashing password:', err);
+          resp.render('alertPage', {
+            layout: 'index',
+            title: 'ILABS | Hashing Unsuccessful',
+            css: 'editprofile.css',
+            alert: 'Error Hashing Password',
+            redirect_page: 'Edit Profile Page',
+            redirect_url: '/editProfileTech'
+        })
+          return;
+        }
+
+    techModel.findOne({ username: req.session.username }).then(function (technician_data) {
+        //technician_data.password = req.body.password1;
+        technician_data.password = hashedPW;
         console.log('edited');
         console.log(technician_data);
 

@@ -46,6 +46,10 @@ div.password{
 	gap: 10px;
 }
 
+#password-error{
+	color: maroon !important;
+}
+
 .name{
 	display: flex;
 	flex-direction: row;
