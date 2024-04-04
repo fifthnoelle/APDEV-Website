@@ -204,16 +204,14 @@ $(document).ready(function() {
       if (password1 === '') {
         $('#password-error').text('Please enter a password.').show();
         return false;
-      }else if (!/[A-Z]/.test(password1) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password1)) {
-        $('#password-error').text('Password must contain at least one capital letter and at least one special character').show();
       }else if (password2 === '') {
         $('#password-error').text('Please confirm your password.').show();
         return false;
       }else if (password1 !== password2) {
         $('#password-error').text('Passwords don\'t match!').show(); 
         return false;
-      }else if(password1.length<5){
-        $('#password-error').text('Password character minimum of 5!').show(); 
+      }else if(password1.length<8){
+        $('#password-error').text('Password character minimum of 8!').show(); 
         return false;
       }
       else {
@@ -242,8 +240,6 @@ $(document).ready(function() {
         if (!validatePasswords()) {
           event.preventDefault(); 
         }
-    });
-
     });
 
 // CHECKING VALID INPUTS
