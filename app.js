@@ -209,14 +209,22 @@ server.post('/s-login-funck', function (req, resp) {
             console.log(student.username);
             if (student) {
                 bcrypt.compare(pass, student.password, function (err, res) {
-                    console.log('match');
-                    resp.render('sHome', {
-                        layout: 'index',
-                        title: 'ILABS | Student Homepage',
-                        css: 'landing.css'
-                    });
+                    if (res) {
+                        console.log('match');
+                        resp.render('sHome', {
+                            layout: 'index',
+                            title: 'ILABS | Student Homepage',
+                            css: 'landing.css'
+                        });
+                    } else {
+                        console.log("username not found");
+                        resp.render('userLoginStudent', {
+                            layout: 'layoutLogin',
+                            title: 'ILABS | User Log-in',
+                        });
+                    }
                 });
-            }
+            }            
             else {
                 console.log("username not found");
                 resp.render('userLoginStudent', {
