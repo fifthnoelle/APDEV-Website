@@ -1,0 +1,21 @@
+{{> navigationBarTech}}
+ <section>
+        <div class="mainCont">
+            <span class="headerbox"><h1>Delete</h1></span>
+        <div class="deleteCont">
+            <form class="text1" action="/deleting"  method="post">
+                <input type="hidden" name="username" value="{{user}}">
+                <input type="hidden" name="email" value="{{email}}">
+                <input type="hidden" name="lab" value="{{computer_lab}}">
+                <input type="hidden" name="time" value="{{time_slot}}">
+                <input type="hidden" name="date" value="{{date}}">
+                <input type="hidden" name="seat" value="{{seat_num}}">
+                <h4> Reason for deleting reservation:</h4>
+                 <!--<input type="text" maxlength="300" class="height">-->
+                <textarea id="text1" name="text1" rows="4" cols="80"></textarea> 
+                <input type="submit" class="submitBtn" value="Submit"> 
+            </form>
+        </div>
+        
+        </div>
+    </section>
