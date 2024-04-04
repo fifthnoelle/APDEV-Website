@@ -1,20 +1,24 @@
 <div class="wrapper">
     <h1 id="registertitle">Edit Student Account</h1>
-    <form onsubmit="">
+    <form action="editProfileFunctionStudent" method="post">
         <div class="register-container">
             <div class="input-box">
-                <input type="text" placeholder="{{first_name}}" required>
-                <input type="text" placeholder="{{last_name}}" required>
+                <input type="text" name="first_name" value="{{first_name}}" required>
+                <input type="text" name="last_name" value="{{last_name}}" required>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="{{username}}" required>
-            </div>
-            <div class="input-box">
-                <input type="text" placeholder="Password" required>
-                <input type="text" placeholder="Confirm Password" required>
+                <input type="text" name="username" value="{{username}}" required>
+                <input type="text" name="id_num" value="{{id_num}}" required>
             </div>
             <button type="submit" class="btn">Make Changes to Account</button>
-            <button type="reset" class="btn">Reset</button>
+    </form>
+    <form action="editProfilePasswordStudent" method="post" id="editPasswordForm">
+            <div class="input-box">
+                <input type="password" name="password1" id="password1" placeholder="Password">
+                <input type="password" name="password2" id="password2" placeholder="Confirm Password">
+                <div id="password-error"></div>
+            </div>
+            <button type="submit" class="btn" disabled>Change Password</button>
             <div class="login-link">
                 <a href="/userProfileStudent"><strong>Back to Profile</strong></a>
             </div>

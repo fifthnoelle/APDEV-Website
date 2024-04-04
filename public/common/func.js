@@ -204,6 +204,8 @@ $(document).ready(function() {
       if (password1 === '') {
         $('#password-error').text('Please enter a password.').show();
         return false;
+      }else if (!/[A-Z]/.test(password1) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password1)) {
+        $('#password-error').text('Password must contain at least one capital letter and at least one special character').show();
       }else if (password2 === '') {
         $('#password-error').text('Please confirm your password.').show();
         return false;
