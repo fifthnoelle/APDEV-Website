@@ -22,7 +22,16 @@ server.use(express.static('public'));
 const defaultprofileimg = '/common/defaultimg.png';
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/labs');
+const { MongoClient } = require('mongodb');
+
+let uri = "mongodb+srv://shaylenekintanar:shaypw@ccapdev-website.9kkxda3.mongodb.net/CCAPDEV"
+
+
+//mongoose.connect(uri);
+
+mongoose.connect(uri)
+    .then(() => console.log("Connected to MongoDB Atlas"))
+    .catch(error => console.error("Error connecting to MongoDB Atlas:", error));
 
 function errorFn(err) {
     console.log('Error found. Please trace!');
