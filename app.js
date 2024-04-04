@@ -1,3 +1,6 @@
+// install command:
+// npm i express body-parser express-handlebars express-session bcrypt mongoose handlebars-helpers
+
 const express = require("express");
 const session = require('express-session');
 const server = express();
@@ -12,7 +15,11 @@ server.engine("hbs", handlebars.engine({
     extname: "hbs"
 }));
 
+const bcrypt = require('bcrypt');
+
 server.use(express.static('public'));
+
+const defaultprofileimg = '/common/defaultimg.png';
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/labs');
@@ -96,6 +103,75 @@ server.get('/studentRegister', function (req, resp) {
     });
 });
 
+
+server.post('/studentRegister', function (req, resp) {
+
+    const tempModel = new studentModel({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        username: req.body.username,
+        id_num: req.body.id_num,
+        dlsu_email: req.body.dlsu_email,
+        password: req.body.PW,
+        profileimg: req.body.profileimg
+    });
+
+    const searchQuery = {
+        username: tempModel.username
+    };
+
+    if (!tempModel.profileimg) {
+        tempModel.profileimg = defaultprofileimg;
+    }
+
+    console.log(tempModel);
+
+    studentModel.findOne(searchQuery).lean().then(function (studentData) {
+        if (!studentData) {
+            bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
+                if (err) {
+                    console.log('Error hashing password');
+                    return;
+                }
+            
+                const studentInstance = new studentModel ({
+                    first_name: tempModel.first_name,
+                    last_name: tempModel.last_name,
+                    username: tempModel.username,
+                    id_num: tempModel.id_num,
+                    dlsu_email: tempModel.dlsu_email,
+                    password: hashedPW,
+                    profileimg: tempModel.profileimg
+                });
+            
+                studentInstance.save().then(function(register) {
+                    console.log('Account Created!');
+                    console.log(studentInstance);
+                    resp.render('createSuccessStudent', {
+                        layout: 'index',
+                        title: 'ILABS | Register Success!',
+                        css: 'userRegistration.css'
+                    });
+                }).catch(errorFn);
+            });
+            } else if (studentData.username === tempModel.username) {
+                // if this errors then dont continue with the rest
+                resp.status(400).send('Username already exists');
+        }
+    });
+});
+  
+
+server.get('/createSuccessStudent', function(req, resp) {
+    resp.render('createSuccessStudent', {
+        layout: 'index',
+        title: 'ILABS | Account Creation Successful',
+        css: 'userRegister.css'
+    });
+});
+
+server.get('/deleteProfile', function(req, resp) {})
+
 server.get('/techRegister', function (req, resp) {
     resp.render('techRegister', {
         layout: 'index',
@@ -111,32 +187,39 @@ server.get('/userLoginStudent', function (req, resp) {
     });
 });
 
-console.log('find student user....');
 server.post('/s-login-funck', function (req, resp) {
-    const u_name = String(req.body.username);
-    const pass = String(req.body.password);
-    const searchQuery = {
-        username: u_name,
-        password: pass
-    };
+    const username = req.body.username;
+    console.log('INPUT: ' + username);
+    const pass = req.body.password;
 
-    console.log(searchQuery);
-
-    studentModel.findOne(searchQuery).lean().then(function (student) {
+    studentModel.findOne({ username: username }).lean().then(function(student){
+        console.log('Finding user');
+        console.log(student);
         if (student != undefined && student._id != null) {
-            req.session.username = u_name;
-            console.log('match');
-            resp.render('sHome', {
+            console.log(student.username);
+            if (student) {
+            bcrypt.compare(pass, student.password, function(err, resp) {
+                console.log('match');
+                resp.render('sHome', {
                 layout: 'index',
                 title: 'ILABS | Student Homepage',
                 css: 'landing.css'
+                });
             });
+            }
+            else {
+                console.log("username not found");
+                resp.render('userLoginStudent', {
+                    layout: 'layoutLogin',
+                    title: 'ILABS | User Log-in',
+                });
+            }
         } else {
-            console.log("no match");
-            resp.render('logoutStudent', {
-                layout: 'layoutLogout',
-                title: 'ILABS | Log-Out'
-            });
+          console.log("no match");
+          resp.render('logoutStudent', {
+            layout: 'layoutLogout',
+            title: 'ILABS | Log-Out'
+          });
         }
     }).catch(errorFn);
 });
@@ -499,7 +582,7 @@ server.get('/userProfileStudent', function (req, resp) {
         console.log("Loading Student Data");
         console.log(student_data);
 
-        reservationModel.find(reservationSearchQuery).lean().then(function (reservation_data) {
+        reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation_data) {
             console.log("Loading Reservation Data");
             console.log(reservation_data);
             console.log(student_data);
@@ -508,11 +591,7 @@ server.get('/userProfileStudent', function (req, resp) {
                 layout: 'index',
                 title: 'ILABS | Edit My Profile',
                 css: 'userprofile.css',
-                first_name: student_data.first_name,
-                last_name: student_data.last_name,
-                id_num: student_data.id_num,
-                dlsu_email: student_data.dlsu_email,
-                profileimg: student_data.profileimg,
+                student_data: student_data,
                 reservation_data: reservation_data
             });
         }).catch(errorFn);
@@ -627,12 +706,14 @@ server.post('/editReservationTech', function (req, resp) {
 });
 
 server.post('/editReservationStudent', function(req, resp) {
+    const searchQuery = { username: req.session.username };
     const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
     console.log(reservationSearchQuery);
 
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation) {
             console.log(reservation);
+            console.log(req.body.username);
             resp.render('editReservationStudent', {
                 layout: 'index',
                 title: 'ILABS | Edit Reservation',

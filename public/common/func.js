@@ -26,6 +26,18 @@ function checkTime() {
     return true;
 }
 
+function setErrorFor(input, message) {
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small');
+    formControl.className = 'form-control error';
+    small.innerText = message;
+}
+
+function setSuccessFor(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control success';
+}
+
 // BOOKING RESERVING
 $(document).ready(function () {
     for (let i = 1; i < 37; i++) {
@@ -179,3 +191,120 @@ $(document).ready(function () {
         alert('Deleted!');
     });
 });
+//PASSWORD VALIDATION
+$(document).ready(function() {
+    const submitButton = $('#editPasswordForm button[type="submit"]');
+
+    function validatePasswords(){
+      const password1 = $('#password1').val();
+      const password2 = $('#password2').val();
+  
+        $('#password-error').text('');
+
+      if (password1 === '') {
+        $('#password-error').text('Please enter a password.').show();
+        return false;
+      }else if (password2 === '') {
+        $('#password-error').text('Please confirm your password.').show();
+        return false;
+      }else if (password1 !== password2) {
+        $('#password-error').text('Passwords don\'t match!').show(); 
+        return false;
+      }else if(password1.length<5){
+        $('#password-error').text('Password character minimum of 5!').show(); 
+        return false;
+      }
+      else {
+        $('#password-error').text('').hide(); 
+      }
+
+      console.log('Passwords valid!')
+      return true;
+    }
+
+    submitButton.prop('disabled', true);
+
+    $('#password1').keyup(validatePasswords);
+
+    $('#password2').keyup(function() {
+        if (validatePasswords()) {
+          submitButton.prop('disabled', false); 
+        } else {
+          submitButton.prop('disabled', true); 
+        }
+    });
+
+    
+
+    $('#editPasswordForm').submit(function(event) {
+        if (!validatePasswords()) {
+          event.preventDefault(); 
+        }
+    });
+
+    });
+
+// CHECKING VALID INPUTS
+    $(document).ready(function() {
+        $('#form-create').submit(function(event) {
+            event.preventDefault();
+
+            const id_num = $('#id_num').val();
+            const dlsu_email = $('#dlsu_email').val();
+            const password = $('#PW').val();
+            const confirm_password = $('#CPW').val();
+            let validInputs = 0;
+    
+            if (!/[A-Z]/.test(password) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) {
+                setErrorFor($('#PW'), 'Password must contain at least one capital letter and at least one special character');
+            } else {
+                setSuccessFor($('#PW'));
+                validInputs++;
+            }
+    
+            if (id_num.length !== 8) {
+                setErrorFor($('#id_num'), 'Invalid Input. ID Number must be 8 digits.');
+            } else {
+                setSuccessFor($('#id_num'));
+                validInputs++;
+            }
+    
+            if (!dlsu_email.endsWith('@dlsu.edu.ph')) {
+                setErrorFor($('#dlsu_email'), 'Not a valid email');
+            } else {
+                setSuccessFor($('#dlsu_email'));
+                validInputs++;
+            }
+    
+            if (password !== confirm_password) {
+                setErrorFor($('#CPW'), 'Passwords do not match!');
+            } else {
+                setSuccessFor($('#CPW'));
+                validInputs++;
+            }
+    
+            if (validInputs === 4) {
+                this.submit();
+            }
+        });
+    });
+    
+
+    $(document).ready(function() {
+        $('#form-create').submit(function(event) {
+            event.preventDefault();
+    
+            const formData = new FormData(this);
+    
+            fetch('/studentRegister', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                alert('Registration successful');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });

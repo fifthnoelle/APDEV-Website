@@ -1,20 +1,47 @@
 <h1 id="registertitle">Register Student Account</h1>
-    <form onsubmit="">
+    <form action="/studentRegister" method="post" id="form-create">
             <div class="register-container">
                 <div class="input-box">
-                    <input type="text" placeholder="First Name" required>
-                    <input type="text" placeholder="Last Name" required>
+                    <div class="form-control">
+                        <input type="text" placeholder="First Name" name="first_name" id="first_name" required>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control">
+                        <input type="text" placeholder="Last Name" name="last_name" id="last_name" required>
+                        <small>Error Message</small>
+                    </div>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="Username" required>
-                    <input type="text" placeholder="ID Number" required>
+                    <div class="form-control">
+                        <input type="text" placeholder="Username" name="username" id="username" required>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control">
+                        <input type="text" placeholder="ID Number" name="id_num" id="id_num" required>
+                        <small>Error Message</small>
+                    </div>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="DLSU Email" required>
+                    <div class="form-control">
+                        <input type="text" placeholder="DLSU Email" name="dlsu_email" id="dlsu_email" required>
+                        <small>Error Message</small>
+                    </div>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="Password" required>
-                    <input type="text" placeholder="Confirm Password" required>
+                    <div class="form-control">
+                        <input type="text" placeholder="URL of Profile Photo" name="profileimg" id="profileimg">
+                        <small>Error Message</small>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="form-control">
+                        <input type="text" placeholder="Password" name="PW" id="PW" required>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control">
+                        <input type="text" placeholder="Confirm Password" name="CPW" id="CPW" required>
+                        <small>Error Message</small>
+                    </div>
                 </div>
                 <button type="submit" class="btn">Register Account</button>
                 <button type="reset" class="btn">Reset</button>
