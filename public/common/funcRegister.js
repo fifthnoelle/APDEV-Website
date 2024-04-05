@@ -1,5 +1,8 @@
 // CHECKING VALID INPUTS - student
 $(document).ready(function () {
+    $('#id_num').on('input', function () {
+        console.log('Input detected');
+    });
     $('#form-createS').submit(function (event) {
 
         const submit = $('#form-createS .btn[type="submit"]');
