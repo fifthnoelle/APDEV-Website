@@ -188,7 +188,7 @@ server.post('/studentRegister', function (req, resp) {
 
 server.get('/studentRegister', function (req, resp) {
     resp.render('studentRegister', {
-        layout: 'index',
+        layout: 'layoutRegister',
         title: 'ILABS | Sign-Up',
         css: 'userRegister.css'
     });
