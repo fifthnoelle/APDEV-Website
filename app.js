@@ -626,7 +626,7 @@ server.get('/editProfileStudent', function (req, resp) {
 
 server.post('/editReservationFuncStud', function(req, resp){
     console.log(req.body); 
-    const reservationSearchQuery = {user: req.body.username, date: req.body.ogdate, time_slot: req.body.ogtime_slot, seat_num: req.body.ogseat_num }
+    const reservationSearchQuery = {user: req.body.username, date: req.body.ogdate, time: req.body.ogtime, seat_num: req.body.ogseat_num }
     console.log('test11');  
     console.log(reservationSearchQuery); 
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
@@ -635,7 +635,7 @@ server.post('/editReservationFuncStud', function(req, resp){
             reservation.user = req.body.username;
             reservation.seat_num = req.body.seat_num;
             reservation.date = req.body.date;
-            reservation.time_slot = req.body.time_slot;
+            reservation.time = req.body.time;
             console.log('edited');
             console.log(reservation);
 
@@ -926,8 +926,8 @@ server.post('/editReservationStudent', function(req, resp) {
                 ogemail: reservation.email,
                 seat_num: reservation.seat_num,
                 ogseat_num: reservation.seat_num,
-                time_slot: reservation.time_slot,
-                ogtime_slot: reservation.time_slot,
+                time: reservation.time_slot,
+                ogtime: reservation.time_slot,
                 date: reservation.date,
                 ogdate: reservation.date,
                 'seat-data': seat_data,
