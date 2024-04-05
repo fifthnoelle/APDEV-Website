@@ -146,8 +146,7 @@ server.post('/studentRegister', function (req, resp) {
     console.log(tempModel);
 
     studentModel.findOne(searchQuery).lean().then(function (studentData) {
-        if (!studentData) {
-            if (req.body.PW == req.body.CPW) {    
+        if (!studentData) {    
                 bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
                     if (err) {
                         console.log('Error hashing password');
@@ -175,13 +174,6 @@ server.post('/studentRegister', function (req, resp) {
                         });
                     }).catch(errorFn);
                 });
-            } else {
-                resp.render('createStudent', {
-                    layout: 'index',
-                    title: 'ILABS | Student Registered!',
-                    css: 'userRegister.css'
-                });
-            }
         } else if (studentData.username === tempModel.username) {
             // if this errors then dont continue with the rest
             console.log('Username is taken');
@@ -374,7 +366,7 @@ server.post('/techRegister', function (req, resp) {
 
     techModel.findOne(searchQuery).lean().then(function (tech_data) {
         if (!tech_data) {
-            if (tempModel.PW == tempModel.CPW) {
+
                 bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
                     if (err) {
                         console.log('Error hashing password');
@@ -401,14 +393,7 @@ server.post('/techRegister', function (req, resp) {
                         });
                     }).catch(errorFn);
                 });
-            } else {
-                resp.render('techRegister', {
-                    layout: 'layoutRegister',
-                    title: 'ILABS | Sign-Up',
-                    error: 'Passwords dont match!'
-                });
-            }
-        } else if (tech_data.username === tempModel.username) {
+            } else if (tech_data.username === tempModel.username) {
             resp.status(400).send('Username already exists');
         }
     });
