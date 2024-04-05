@@ -110,6 +110,7 @@ server.get('/studentRegister', function (req, resp) {
 
 
 server.post('/studentRegister', function (req, resp) {
+    let errorCounter = 0;
 
     const tempModel = new studentModel({
         first_name: req.body.first_name,
@@ -133,33 +134,47 @@ server.post('/studentRegister', function (req, resp) {
 
     studentModel.findOne(searchQuery).lean().then(function (studentData) {
         if (!studentData) {
-            bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
-                if (err) {
-                    console.log('Error hashing password');
-                    return;
-                }
+            // if (!/[A-Z]/.test(tempModel.PW) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(tempModel.PW)) {
+            //     errorCounter++;
+            // }
+            // if (tempModel.id_num.length !== 8) {
+            //     errorCounter++;
+            // }
+            // if (!tempModel.dlsu_email.endsWith('@dlsu.edu.ph')) {
+            //     errorCounter++;
+            // }
+            // if (tempModel.PW !== tempModel.CPW) {
+            //     errorCounter++;
+            // }
+            // if (errorCounter == 0) {    
+                bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
+                    if (err) {
+                        console.log('Error hashing password');
+                        return;
+                    }
 
-                const studentInstance = new studentModel({
-                    first_name: tempModel.first_name,
-                    last_name: tempModel.last_name,
-                    username: tempModel.username,
-                    id_num: tempModel.id_num,
-                    dlsu_email: tempModel.dlsu_email,
-                    password: hashedPW,
-                    profileimg: tempModel.profileimg
-                });
-
-                studentInstance.save().then(function (register) {
-                    console.log('Account Created!');
-                    console.log(studentInstance);
-                    // its not rendering the correct page ???
-                    resp.render('createStudent', {
-                        layout: 'index',
-                        title: 'ILABS | Register Success!',
-                        css: 'userRegistration.css'
+                    const studentInstance = new studentModel({
+                        first_name: tempModel.first_name,
+                        last_name: tempModel.last_name,
+                        username: tempModel.username,
+                        id_num: tempModel.id_num,
+                        dlsu_email: tempModel.dlsu_email,
+                        password: hashedPW,
+                        profileimg: tempModel.profileimg
                     });
-                }).catch(errorFn);
-            });
+
+                    studentInstance.save().then(function (register) {
+                        console.log('Account Created!');
+                        console.log(studentInstance);
+                        // its not rendering the correct page ???
+                        resp.render('createStudent', {
+                            layout: 'index',
+                            title: 'ILABS | Register Success!',
+                            css: 'userRegistration.css'
+                        });
+                    }).catch(errorFn);
+                });
+            // }
         } else if (studentData.username === tempModel.username) {
             // if this errors then dont continue with the rest
             console.log('Username is taken');
