@@ -1,29 +1,15 @@
-//Global Variables
-let chosen_seat = "";
+const { compare } = require("bcrypt");
 
-//Helper Functions
-function checkLab() {
-    let laboratory = document.getElementById("laboratory").value;
-    if (laboratory == "") {
-        return false;
-    }
-    return true;
+function setErrorFor(input, message) {
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small');
+    formControl.className = 'form-control error';
+    small.innerText = message;
 }
 
-function checkDate() {
-    let date = document.getElementById("date").value;
-    if (date == "") {
-        return false;
-    }
-    return true;
-}
-
-function checkTime() {
-    let time = document.getElementById("time").value;
-    if (time == "") {
-        return false;
-    }
-    return true;
+function setSuccessFor(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control success';
 }
 
 // BOOKING RESERVING
@@ -86,45 +72,112 @@ $(document).ready(function () {
         }
     });
 
+    $("#time_slot").change(function () {
+        if (!checkDate()) {
+           alert("Please select a date!");
+           $("#time_slot").val("");
+       } else { //VALID
+           let selectedTime = $(this).val();
+           let selectedDate = $("#date").val();
+           let selectedLab = $("#oglab").val();
+           for(let u = 1; u < 37; u++) {
+               if($("#A" + u.toString().padStart(2, '0')).css("background-color") === "rgb(128, 128, 128)") {
+                   $("#A" + u.toString().padStart(2, '0')).css("background-color", "#0A502E");
+               }
+           }
+           $.post('load_seats',
+               {lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
+               function (data, status) {
+                   if (status === 'success') {
+                       alert("Successful response received:");
+                       data.reservations.forEach(function (reservation) {
+                           let seat = reservation.seat_num;
+                           $("#" + seat).css("background-color", "grey");
+                           $("#" + seat).css("color", "#F6EEF2");
+                       });
+                   } else {
+                       console.error("Error:", status);
+                   }
+               });
+       }
+   });
+
 });
 
-//FILTERING SCHEDULES
+// CHECKING VALID INPUTS
 $(document).ready(function () {
-    $("#filterReservations").click(function () {
-        if (!checkLab()) {
-            alert("Please select a Laboratory!");
+    $('#form-create').submit(function (event) {
+
+        const submit = $('#form-create .btn[type="submit"]');
+
+        function validateInputs() {
+            const id_num = $('#id_num').val();
+            const dlsu_email = $('#dlsu_email').val();
+            const password = $('#PW').val();
+            const confirm_password = $('#CPW').val();
+            let errorCounter = 0;
+
+            if (!/[A-Z]/.test(password) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) {
+                setErrorFor($('#PW'), 'Password must contain at least one capital letter and at least one special character');
+                errorCounter++;
+                return false;
+            } else if (id_num.length !== 8) {
+                setErrorFor($('#id_num'), 'Invalid Input. ID Number must be 8 digits.');
+                errorCounter++;
+                return false;
+            } else if (!dlsu_email.endsWith('@dlsu.edu.ph')) {
+                setErrorFor($('#dlsu_email'), 'Not a valid email');
+                errorCounter++;
+                return false;
+            } else if (password !== confirm_password) {
+                setErrorFor($('#CPW'), 'Passwords do not match!');
+                errorCounter++;
+                return false;
+            } else {
+                setSuccessFor($('#PW'));
+                setSuccessFor($('#id_num'));
+                setSuccessFor($('#dlsu_email'));
+                setSuccessFor($('#CPW'));
+
+                console.log('inputs valid!');
+                if (errorCounter == 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
-        else if (!checkDate()) {
-            alert("Please select a Date!");
+
+        submit.prop('disabled', true);
+        if (validateInputs()) {
+            submit.prop('disabled', false);
+        } else {
+            submit.prop('disabled', true);
         }
-        else if (!checkTime()) {
-            alert("Please select a TimeSlot!");
-        }
-        else {
-            let selectedTime = $("#time").val();
-            let selectedDate = $("#date").val();
-            let selectedLab = $("#laboratory").val();
-            alert("ok!" + selectedTime + selectedLab + selectedDate);
-            $.post('filterReservations',
-                { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
-                function (data, status) {
-                    if (status === 'success') {
-                        data.reservations.forEach(function (reservation) {
-                            let seat = reservation.seat_num;
-                            $("#" + seat).css("background-color", "grey");
-                            $("#" + seat).css("color", "#F6EEF2");
-                        });
-                    } else {
-                        console.error("Error:", status);
-                    }
-                } );
-        }
-    }); 
+    });
 });
 
-//
+// Check passwords for Delete Account Student
 $(document).ready(function () {
-    $("#deleteButton").click(function () {
-        alert('Deleted!');
-    }); 
+    const deleteBtn = $('#deletePasswordS button[type="submit"]');
+
+    function comparePW() {
+        const PW = $('#PW').val();
+        const CPW = $('#CPW').val();
+
+        if (PW !== CPW) {
+            setErrorFor($('#CPW'), 'Passwords do not match!');
+            return false;
+        } else {
+            setSuccessFor($('#PW'));
+            return true;
+        }
+    }
+
+    deleteBtn.prop('disabled', true);
+    if (comparePW()) {
+        deleteBtn.prop('disabled', false);
+    }
 });
+
+// Check passwords for Delete Account Tech
