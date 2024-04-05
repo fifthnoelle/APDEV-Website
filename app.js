@@ -24,9 +24,7 @@ const defaultprofileimg = '/common/defaultimg.png';
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 
-let uri = "mongodb+srv://samanthaoneil:WkvdF4yzhZ0JoVec@cluster0.wezgvio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-// let uri = ""
-//mongoose.connect(uri);
+let uri = "mongodb+srv://shaylenekintanar:shaypw@ccapdev-website.9kkxda3.mongodb.net/CCAPDEV";
 
 mongoose.connect(uri)
     .then(() => console.log("Connected to MongoDB Atlas"))
@@ -69,8 +67,7 @@ const studentModel = mongoose.model('student', studentSchema);
 const techModel = mongoose.model('technician', techSchema);
 
 const seatSchema = new mongoose.Schema({
-    seat_id: { type: String, required: true },
-    laboratory: { type: String, required: true }
+    seat_id: { type: String, required: true }
 }, { versionKey: false });
 
 const reserveSchema = new mongoose.Schema({
@@ -441,6 +438,7 @@ server.post('/load_reservationInfo', function (req, resp) {
 
 server.get('/bookReserve', function (req, resp) {
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        console.log(seat_data);
         resp.render('bookReserve', {
             layout: 'layoutReserve',
             title: 'ILabs | Book Reserve',
