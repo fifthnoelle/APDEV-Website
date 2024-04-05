@@ -147,19 +147,7 @@ server.post('/studentRegister', function (req, resp) {
 
     studentModel.findOne(searchQuery).lean().then(function (studentData) {
         if (!studentData) {
-            // if (!/[A-Z]/.test(tempModel.PW) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(tempModel.PW)) {
-            //     errorCounter++;
-            // }
-            // if (tempModel.id_num.length !== 8) {
-            //     errorCounter++;
-            // }
-            // if (!tempModel.dlsu_email.endsWith('@dlsu.edu.ph')) {
-            //     errorCounter++;
-            // }
-            // if (tempModel.PW !== tempModel.CPW) {
-            //     errorCounter++;
-            // }
-            // if (errorCounter == 0) {    
+            if (req.body.PW == req.body.CPW) {    
                 bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
                     if (err) {
                         console.log('Error hashing password');
@@ -187,14 +175,21 @@ server.post('/studentRegister', function (req, resp) {
                         });
                     }).catch(errorFn);
                 });
-            // }
+            } else {
+                resp.render('createStudent', {
+                    layout: 'index',
+                    title: 'ILABS | Student Registered!',
+                    css: 'userRegister.css'
+                });
+            }
         } else if (studentData.username === tempModel.username) {
             // if this errors then dont continue with the rest
             console.log('Username is taken');
             resp.render('studentRegister', {
                 layout: 'index',
                 title: 'ILABS | Sign-Up',
-                css: 'userRegister.css'
+                css: 'userRegister.css',
+                error: 'Passwords dont match!'
             });
         }
     });
@@ -379,32 +374,40 @@ server.post('/techRegister', function (req, resp) {
 
     techModel.findOne(searchQuery).lean().then(function (tech_data) {
         if (!tech_data) {
-            bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
-                if (err) {
-                    console.log('Error hashing password');
-                    return;
-                }
+            if (tempModel.PW == tempModel.CPW) {
+                bcrypt.hash(tempModel.password, 10, (err, hashedPW) => {
+                    if (err) {
+                        console.log('Error hashing password');
+                        return;
+                    }
 
-                const techInstance = new techModel({
-                    first_name: tempModel.first_name,
-                    last_name: tempModel.last_name,
-                    username: tempModel.username,
-                    tech_code: tempModel.tech_code,
-                    dlsu_email: tempModel.dlsu_email,
-                    password: hashedPW,
-                    profileimg: tempModel.profileimg
-                });
-
-                techInstance.save().then(function (register) {
-                    console.log('Technician Account Created!');
-                    console.log(techInstance);
-                    resp.render('createTech', {
-                        layout: 'layoutLogin',
-                        title: 'ILABS | Technician Registered!',
-                        css: 'userRegister.css'
+                    const techInstance = new techModel({
+                        first_name: tempModel.first_name,
+                        last_name: tempModel.last_name,
+                        username: tempModel.username,
+                        tech_code: tempModel.tech_code,
+                        dlsu_email: tempModel.dlsu_email,
+                        password: hashedPW,
+                        profileimg: tempModel.profileimg
                     });
-                }).catch(errorFn);
-            });
+
+                    techInstance.save().then(function (register) {
+                        console.log('Technician Account Created!');
+                        console.log(techInstance);
+                        resp.render('createTech', {
+                            layout: 'layoutLogin',
+                            title: 'ILABS | Technician Registered!',
+                            css: 'userRegister.css'
+                        });
+                    }).catch(errorFn);
+                });
+            } else {
+                resp.render('techRegister', {
+                    layout: 'layoutRegister',
+                    title: 'ILABS | Sign-Up',
+                    error: 'Passwords dont match!'
+                });
+            }
         } else if (tech_data.username === tempModel.username) {
             resp.status(400).send('Username already exists');
         }
