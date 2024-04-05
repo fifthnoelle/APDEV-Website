@@ -116,9 +116,8 @@ server.get('/signIn', function (req, resp) { //For logging out
 
 server.get('/studentRegister', function (req, resp) {
     resp.render('studentRegister', {
-        layout: 'index',
-        title: 'ILABS | Sign-Up',
-        css: 'userRegister.css'
+        layout: 'layoutRegister',
+        title: 'ILABS | Sign-Up'
     });
 });
 
@@ -352,9 +351,8 @@ server.post('/deleteProfileT', function (req, resp) {
 
 server.get('/techRegister', function (req, resp) {
     resp.render('techRegister', {
-        layout: 'index',
-        title: 'ILABS | Sign-Up',
-        css: 'userRegister.css'
+        layout: 'layoutRegister',
+        title: 'ILABS | Sign-Up'
     });
 });
 
