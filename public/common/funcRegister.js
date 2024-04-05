@@ -1,6 +1,6 @@
 // CHECKING VALID INPUTS - student
 $(document).ready(function () {
-    $('#form-create').submit(function (event) {
+    $('#form-createS').submit(function (event) {
 
         const submit = $('#form-createS .btn[type="submit"]');
 
