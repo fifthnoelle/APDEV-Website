@@ -914,7 +914,8 @@ server.post('/editReservationStudent', function(req, resp) {
     console.log(reservationSearchQuery); 
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation) {
-            console.log(req.body.username);
+            console.log("yum" + reservation);
+            console.log("sh" + reservation.computer_lab);
             resp.render('editReservationStudent', {
                 layout: 'layoutReserve',
                 title: 'ILABS | Edit Reservation',
@@ -929,10 +930,9 @@ server.post('/editReservationStudent', function(req, resp) {
                 ogtime_slot: reservation.time_slot,
                 date: reservation.date,
                 ogdate: reservation.date,
-                oglab: reservation.lab,
+                oglab: reservation.computer_lab,
                 'seat-data': seat_data
             });
-            console.log(req.body); 
         }).catch(errorFn);
     }).catch(errorFn);
 });
