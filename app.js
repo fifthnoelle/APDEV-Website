@@ -194,11 +194,30 @@ server.get('/createTech', function (req, resp) {
     });
 });
 
-server.get('/deleteProfile', function (req, resp){
-
+server.get('/deleteProfileStudent', function (req, resp){
+    resp.render('deleteProfileStudent', {
+        layout: 'index',
+        title: 'ILABS | Sign-Up',
+        css: 'userRegister.css'
+    });
 });
 
-server.post('/deleteProfile', function (req, resp) {
+server.post('/deleteProfileStudent', function (req, resp) {
+    // get password and confirmed password
+    // check if matching with bycrypt compare
+    // find by id and delete (not pressable button unless both inputs are valid)
+    // render starting page
+});
+
+server.get('/deleteProfileTech', function (req, resp){
+    resp.render('deleteProfileTech', {
+        layout: 'index',
+        title: 'ILABS | Sign-Up',
+        css: 'userRegister.css'
+    });
+});
+
+server.post('/deleteProfileTech', function (req, resp) {
     // get password and confirmed password
     // check if matching with bycrypt compare
     // find by id and delete (not pressable button unless both inputs are valid)
