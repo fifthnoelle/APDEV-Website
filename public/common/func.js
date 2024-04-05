@@ -45,6 +45,7 @@ $(document).ready(function () {
             let element_color = $(this).css("background-color");
             if (element_color === "rgb(128, 128, 128)") { //Invalid == Reserved Seat
                 alert("Seat has already been reserved. :)")
+                $("#seat_num").val("");
             }
             else { //Valid
                 if (chosen_seat != "") {
