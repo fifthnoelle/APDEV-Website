@@ -917,7 +917,7 @@ server.post('/editReservationStudent', function(req, resp) {
         reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation) {
             console.log(req.body.username);
             resp.render('editReservationStudent', {
-                layout: 'layoutReserve',
+                layout: 'index',
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
                 username: reservation.user,
@@ -930,7 +930,8 @@ server.post('/editReservationStudent', function(req, resp) {
                 ogtime: reservation.time_slot,
                 date: reservation.date,
                 ogdate: reservation.date,
-                'seat-data': seat_data,
+                'seat-data': seat_data
+                
             });
             console.log(req.body); 
         }).catch(errorFn);
