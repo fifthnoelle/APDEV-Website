@@ -929,12 +929,12 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
             return;
         }
 
-    studentModel.findOne({ username: req.session.username }).then(function (student_data) {
-        student_data.password = req.body.password1;
-        student_data.password = hashedPW;
+        studentModel.findOne({ username: req.session.username }).then(function (student_data) {
+            student_data.password = req.body.password1;
+            student_data.password = hashedPW;
 
-        console.log('edited');
-        console.log(student_data);
+            console.log('edited');
+            console.log(student_data);
 
             student_data.save().then(function (result) {
                 if (result) {
@@ -1018,15 +1018,14 @@ server.post('/editProfilePasswordTech', function (req, resp) {
                 css: 'editprofile.css',
                 alert: 'Error Hashing Password',
                 redirect_page: 'Edit Profile Page',
-                redirect_url: '/editProfileTech'
+                redirect_url: '/editProfileStudent'
             })
             return;
         }
-    });
 
         techModel.findOne({ username: req.session.username }).then(function (technician_data) {
-            //technician_data.password = req.body.password1;
-            technician_data.password = hashedPW;
+            technician_data.password = req.body.password1;
+
             console.log('edited');
             console.log(technician_data);
 
@@ -1045,6 +1044,7 @@ server.post('/editProfilePasswordTech', function (req, resp) {
             }).catch(errorFn);
         }).catch(errorFn);
     });
+});
 
 server.get('/deleteProfileTech', function (req, resp) {
     resp.render('deleteProfileTech', {
