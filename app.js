@@ -1038,7 +1038,7 @@ server.post('/editProfilePasswordTech', function (req, resp) {
         }
 
         techModel.findOne({ username: req.session.username }).then(function (technician_data) {
-            technician_data.password = req.body.password1;
+            technician_data.password = hashedPW;
 
             console.log('edited');
             console.log(technician_data);
