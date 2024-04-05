@@ -87,8 +87,9 @@ const seatSearchQuery = {};
 
 
 server.get('/', function (req, resp) {
-    console.log(req.session.username);
-    if(req.session.username != undefined || req.session.username == "") {
+    console.log("here:" + req.session.username);
+    if (req.session.username !== undefined && req.session.username !== "")
+    {
         resp.render('sHome', {
             layout: 'index',
             title: 'ILABS | Student Homepage',
@@ -104,6 +105,9 @@ server.get('/', function (req, resp) {
 });
 
 server.get('/signIn', function (req, resp) { //For logging out
+    console.log("RESET");
+    req.session.username = "";
+    console.log("username" + req.session.username);
     resp.render('signIn', {
         layout: 'layoutSignIn',
         title: 'ILABS | Sign In',
@@ -1269,17 +1273,6 @@ server.post('/editReservationStudent', function(req, resp) {
             });
         }).catch(errorFn);
     }).catch(errorFn);
-});
-
-
-
-
-server.get('/signIn', function (req, resp) {
-    req.session.username = "";
-    resp.render('signIn', {
-        layout: 'layoutSignIn',
-        title: 'ILABS | Sign In',
-    });
 });
 
 const port = process.env.PORT | 9090;
