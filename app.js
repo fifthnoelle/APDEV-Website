@@ -413,25 +413,25 @@ server.post('/s-login-funck', function (req, resp) {
                         });
                     } else {
                         console.log("username not found");
-                        resp.render('userLoginStudent', {
-                            layout: 'layoutLogin',
-                            title: 'ILABS | User Log-in',
+                        resp.render('signInFailed', {
+                            layout: 'layoutLogout',
+                            title: 'ILABS | Sign in Failed',
                         });
                     }
                 });
             }
             else {
                 console.log("username not found");
-                resp.render('userLoginStudent', {
-                    layout: 'layoutLogin',
-                    title: 'ILABS | User Log-in',
+                resp.render('signInFailed', {
+                    layout: 'layoutLogout',
+                    title: 'ILABS | Sign In Failed'
                 });
             }
         } else {
             console.log("no match");
-            resp.render('logoutStudent', {
+            resp.render('signInFailed', {
                 layout: 'layoutLogout',
-                title: 'ILABS | Log-Out'
+                title: 'ILABS | Sign In Failed'
             });
         }
     }).catch(errorFn);
@@ -467,25 +467,25 @@ server.post('/t-login-funck', function (req, resp) {
                         });
                     } else {
                         console.log("username not found");
-                        resp.render('userLoginTech', {
-                            layout: 'layoutLogin',
-                            title: 'ILABS | User Log-in',
+                        resp.render('signInFailed', {
+                            layout: 'layoutLogout',
+                            title: 'ILABS | Sign In Failed'
                         });
                     }
                 });
             }
             else {
                 console.log("username not found");
-                resp.render('userLoginTech', {
-                    layout: 'layoutLogin',
-                    title: 'ILABS | User Log-in',
+                resp.render('signInFailed', {
+                    layout: 'layoutLogout',
+                    title: 'ILABS | Sign In Failed'
                 });
             }
         } else {
             console.log("no match");
-            resp.render('logoutTech', {
+            resp.render('signInFailed', {
                 layout: 'layoutLogout',
-                title: 'ILABS | Log-Out'
+                title: 'ILABS | Sign In Failed'
             });
         }
     }).catch(errorFn);
