@@ -20,36 +20,19 @@
                          <input type="hidden" name = "ogemail" value="{{dlsu_email}}">
                     </div>
                 </div>
-                <div class="formPersonal">
-                    <div class="formQuestion">
-                        <label for="seat_num"><b>Seat Number</b></label>
-                        <input type="text" name = "seat_num" id="seat_num" placeholder="{{seat_num}}" required>
-                         <input type="hidden" name = "ogseat_num" value="{{seat_num}}">
+                <div class="formLab">
+                    <div class="formPersonal">
+                        <input type="hidden" name="oglab" id="oglab" value="{{computer_lab}}">
                     </div>
                 </div>
                 <div class="formDateTime">
                     <div class="formQuestion">
                         <label for="date"><b>Date</b></label>
-                        <input type="calendar" id="date" name="date" placeholder="{{date}}" required>
+                        <input type="date" id="date" name="date" placeholder="{{date}}" required>
                         <input type="hidden" name="ogdate" value="{{date}}">
                     </div>
                     <div class="formQuestion">
                         <label for="time"><b>Time</b></label>
-                        {{!-- not sure if this will be edited --}}
-                        {{!-- <select name="time" id="time">
-                            <option value="1" {{#if (eq TEMP.time_slot "8:00 - 9:30" )}}selected{{/if}}>8:00 - 9:30
-                            </option>
-                            <option value="2" {{#if (eq TEMP.time_slot "10:00 - 11:30" )}}selected{{/if}}>10:00 - 11:30
-                            </option>
-                            <option value="3" {{#if (eq TEMP.time_slot "12:00 - 13:30" )}}selected{{/if}}>12:00 - 13:30
-                            </option>
-                            <option value="4" {{#if (eq TEMP.time_slot "14:00 - 15:30" )}}selected{{/if}}>14:00 - 15:30
-                            </option>
-                            <option value="5" {{#if (eq TEMP.time_slot "16:00 - 17:30" )}}selected{{/if}}>16:00 - 17:30
-                            </option>
-                            <option value="6" {{#if (eq TEMP.time_slot "18:00 - 19:30" )}}selected{{/if}}>18:00 - 19:30
-                            </option>
-                        </select> --}}
                         <input type="hidden" name = "ogtime_slot"  value="{{time_slot}}">
                         <select name="time_slot" name = "time_slot"  id="time_slot"  value="{{time_slot}}"required>
                             <option value="">- -</option>
@@ -60,6 +43,13 @@
                             <option value="16:00 - 17:30">16:00 - 17:30</option>
                             <option value="18:00 - 19:30">18:00 - 19:30</option>
                         </select>
+                    </div>
+                </div>
+                <div class="formPersonal">
+                    <div class="formQuestion">
+                        <label for="seat_num"><b>Seat Number</b></label>
+                        <input type="text" name = "seat_num" id="seat_num" value="{{seat_num}}" required>
+                         <input type="hidden" name = "ogseat_num" value="{{seat_num}}">
                     </div>
                 </div>
                 <input type="submit" class="submitBtn">

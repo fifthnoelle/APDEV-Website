@@ -626,7 +626,7 @@ server.get('/editProfileStudent', function (req, resp) {
 
 server.post('/editReservationFuncStud', function(req, resp){
     console.log(req.body); 
-    const reservationSearchQuery = {user: req.body.username, date: req.body.ogdate, time_slot: req.body.ogtime_slot, seat_num: req.body.ogseat_num }
+    const reservationSearchQuery = {user: req.body.username, date: req.body.ogdate, time_slot: req.body.ogtime_slot, seat_num: req.body.ogseat_num, computer_lab: req.body.oglab}
     console.log('test11');  
     console.log(reservationSearchQuery); 
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
@@ -638,7 +638,6 @@ server.post('/editReservationFuncStud', function(req, resp){
             reservation.time_slot = req.body.time_slot;
             console.log('edited');
             console.log(reservation);
-
             reservation.save().then(function(result) {
                 if(result){
                     console.log('saved');
@@ -650,6 +649,7 @@ server.post('/editReservationFuncStud', function(req, resp){
                         redirect_page: 'viewMyReservations',
                         redirect_url: '/viewMyReservations'
                     })
+                    console.log(req.body); 
                 }
             }).catch(errorFn);
         }).catch(errorFn);
@@ -911,13 +911,12 @@ server.post('/editReservationTech', function (req, resp) {
 server.post('/editReservationStudent', function(req, resp) {
     //const searchQuery = { username: req.session.username };
     const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
-
     console.log(reservationSearchQuery); 
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation) {
             console.log(req.body.username);
             resp.render('editReservationStudent', {
-                layout: 'index',
+                layout: 'layoutReserve',
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
                 username: reservation.user,
@@ -930,8 +929,8 @@ server.post('/editReservationStudent', function(req, resp) {
                 ogtime_slot: reservation.time_slot,
                 date: reservation.date,
                 ogdate: reservation.date,
+                oglab: reservation.lab,
                 'seat-data': seat_data
-                
             });
             console.log(req.body); 
         }).catch(errorFn);
