@@ -162,7 +162,12 @@ server.post('/studentRegister', function (req, resp) {
             });
         } else if (studentData.username === tempModel.username) {
             // if this errors then dont continue with the rest
-            resp.status(400).send('Username already exists');
+            console.log('Username is taken');
+            resp.render('studentRegister', {
+                layout: 'index',
+                title: 'ILABS | Sign-Up',
+                css: 'userRegister.css'
+            });
         }
     });
 });
@@ -191,7 +196,7 @@ server.get('/createTech', function (req, resp) {
     });
 });
 
-server.get('/deleteProfileStudent', function (req, resp){
+server.get('/deleteProfileStudent', function (req, resp) {
     resp.render('deleteProfileStudent', {
         layout: 'index',
         title: 'ILABS | Sign-Up',
@@ -199,22 +204,117 @@ server.get('/deleteProfileStudent', function (req, resp){
     });
 });
 
-server.post('/deleteProfileStudent', function (req, resp) {
+server.post('/deleteProfileS', function (req, resp) {
     // get password and confirmed password
+    const PW = req.body.PW;
+    const CPW = req.body.CPW;
+    const username = req.body.username;
+    const searchQuery = {
+        username: username
+    };
+
+    studentModel.findOne(searchQuery).lean().then(function (student) {
+        if (student) {
+            if (PW === CPW) {
+                bcrypt.compare(PW, student.password, function (err, res) {
+                    if (res) {
+                        console.log('Deleting user..');
+                        console.log(student.username);
+                        console.log(student._id);
+                        studentModel.findByIdAndDelete(student._id).lean().exec().then(function(deletedStudent) {
+                            console.log("Deleted : ", deletedStudent);
+                            resp.render('signIn', {
+                                layout: 'layoutSignIn',
+                                title: 'ILABS | Welcome',
+                            });
+                        }).catch(errorFn);
+                    } else {
+                        resp.render('deleteProfileStudent', {
+                            layout: 'index',
+                            title: 'ILABS | Delete profile',
+                            css: 'userRegister.css',
+                            error: 'Incorrect password. Please try again.'
+                        });
+                    }
+                });
+            } else {
+                resp.render('deleteProfileStudent', {
+                    layout: 'index',
+                    title: 'ILABS | Delete profile',
+                    css: 'userRegister.css',
+                    error: 'Passwords do not match! Try again.'
+                });
+            }
+        } else {
+            console.log('User trying to delete. Error found.');
+            resp.render('deleteProfileStudent', {
+                layout: 'index',
+                title: 'ILABS | Delete profile',
+                css: 'userRegister.css'
+            });
+        }
+    })
     // check if matching with bycrypt compare
     // find by id and delete (not pressable button unless both inputs are valid)
     // render starting page
 });
 
-server.get('/deleteProfileTech', function (req, resp){
+server.get('/deleteProfileTech', function (req, resp) {
     resp.render('deleteProfileTech', {
         layout: 'index',
-        title: 'ILABS | Sign-Up',
+        title: 'ILABS | Delete profile',
         css: 'userRegister.css'
     });
 });
 
-server.post('/deleteProfileTech', function (req, resp) {
+server.post('/deleteProfileT', function (req, resp) {
+    const PW = req.body.PW;
+    const CPW = req.body.CPW;
+    const username = req.body.username;
+    const searchQuery = {
+        username: username
+    };
+
+    techModel.findOne(searchQuery).lean().then(function (tech) {
+        if (tech) {
+            if (PW === CPW) {
+                bcrypt.compare(PW, tech.password, function (err, res) {
+                    if (res) {
+                        console.log('Deleting user.. ', tech.username);
+                        console.log(tech._id);
+                        techModel.findByIdAndDelete(tech._id).lean().exec().then(function(deletedTech) {
+                            console.log("Deleted: ", deletedTech);
+                            resp.render('signIn', {
+                                layout: 'layoutSignIn',
+                                title: 'ILABS | Welcome',
+                            });
+                        }).catch(errorFn);
+                    } else {
+                        resp.render('deleteProfileTech', {
+                            layout: 'index',
+                            title: 'ILABS | Delete profile',
+                            css: 'userRegister.css',
+                            error: 'Incorrect password. Please try again.'
+                        });
+                    }
+                });
+            } else {
+                resp.render('deleteProfileStudent', {
+                    layout: 'index',
+                    title: 'ILABS | Delete profile',
+                    css: 'userRegister.css',
+                    error: 'Passwords do not match! Try again.'
+                });
+            }
+        } else {
+            console.log('User trying to delete. Error found.');
+            resp.render('deleteProfileTech', {
+                layout: 'index',
+                title: 'ILABS | Delete profile',
+                css: 'userRegister.css'
+            });
+        }
+    });
     // get password and confirmed password
     // check if matching with bycrypt compare
     // find by id and delete (not pressable button unless both inputs are valid)
@@ -277,7 +377,7 @@ server.post('/techRegister', function (req, resp) {
                         css: 'userRegistration.css'
                     });
                 }).catch(errorFn);
-            }); 
+            });
         } else if (tech_data.username === tempModel.username) {
             resp.status(400).send('Username already exists');
         }
@@ -319,7 +419,7 @@ server.post('/s-login-funck', function (req, resp) {
                         });
                     }
                 });
-            }            
+            }
             else {
                 console.log("username not found");
                 resp.render('userLoginStudent', {
@@ -373,7 +473,7 @@ server.post('/t-login-funck', function (req, resp) {
                         });
                     }
                 });
-            }            
+            }
             else {
                 console.log("username not found");
                 resp.render('userLoginTech', {
@@ -830,28 +930,28 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
         }
     });
 
-        studentModel.findOne({ username: req.session.username }).then(function (student_data) {
-            student_data.password = req.body.password1;
-            student_data.password = hashedPW;
+    studentModel.findOne({ username: req.session.username }).then(function (student_data) {
+        student_data.password = req.body.password1;
+        student_data.password = hashedPW;
 
-            console.log('edited');
-            console.log(student_data);
+        console.log('edited');
+        console.log(student_data);
 
-            student_data.save().then(function (result) {
-                if (result) {
-                    console.log('saved');
-                    resp.render('alertPage', {
-                        layout: 'index',
-                        title: 'ILABS | Edit Password Successful',
-                        css: 'editprofile.css',
-                        alert: 'Edit Saved and Successful',
-                        redirect_page: 'Profile Page',
-                        redirect_url: '/userProfileStudent'
-                    })
-                }
-            }).catch(errorFn);
+        student_data.save().then(function (result) {
+            if (result) {
+                console.log('saved');
+                resp.render('alertPage', {
+                    layout: 'index',
+                    title: 'ILABS | Edit Password Successful',
+                    css: 'editprofile.css',
+                    alert: 'Edit Saved and Successful',
+                    redirect_page: 'Profile Page',
+                    redirect_url: '/userProfileStudent'
+                })
+            }
         }).catch(errorFn);
-    });
+    }).catch(errorFn);
+});
 
 
 //EDIT PROFILE TECH
@@ -924,27 +1024,27 @@ server.post('/editProfilePasswordTech', function (req, resp) {
         }
     });
 
-        techModel.findOne({ username: req.session.username }).then(function (technician_data) {
-            //technician_data.password = req.body.password1;
-            technician_data.password = hashedPW;
-            console.log('edited');
-            console.log(technician_data);
+    techModel.findOne({ username: req.session.username }).then(function (technician_data) {
+        //technician_data.password = req.body.password1;
+        technician_data.password = hashedPW;
+        console.log('edited');
+        console.log(technician_data);
 
-            technician_data.save().then(function (result) {
-                if (result) {
-                    console.log('saved');
-                    resp.render('alertPage', {
-                        layout: 'index',
-                        title: 'ILABS | Edit Password Successful',
-                        css: 'editprofile.css',
-                        alert: 'Edit Saved and Successful',
-                        redirect_page: 'Profile Page',
-                        redirect_url: '/userProfileTech'
-                    })
-                }
-            }).catch(errorFn);
+        technician_data.save().then(function (result) {
+            if (result) {
+                console.log('saved');
+                resp.render('alertPage', {
+                    layout: 'index',
+                    title: 'ILABS | Edit Password Successful',
+                    css: 'editprofile.css',
+                    alert: 'Edit Saved and Successful',
+                    redirect_page: 'Profile Page',
+                    redirect_url: '/userProfileTech'
+                })
+            }
         }).catch(errorFn);
-    });
+    }).catch(errorFn);
+});
 
 server.get('/deleteProfileTech', function (req, resp) {
     resp.render('deleteProfileTech', {

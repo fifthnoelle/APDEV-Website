@@ -1,8 +1,12 @@
 <div class="wrapper">
     <h1 id="logintitle"><strong>Delete Profile:</strong></h1>
     <div class="viewContainer">
-        <form action='deleteProfile' method='post'>
+        <form action='deleteProfileS' method='post'>
             <div class="input-box">
+                    <div class="form-control">
+                        <input type="text" placeholder="Username" name="username" id="username" required>
+                        <small>Error Message</small>
+                    </div>
                     <div class="form-control">
                         <input type="text" placeholder="Password" name="PW" id="PW" required>
                         <small>Error Message</small>
@@ -12,7 +16,7 @@
                         <small>Error Message</small>
                     </div>
                 </div>
-            <button class="btn" id="logout">Delete Profile</button>
+            <button type="submit" class="btn" id="logout">Delete Profile</button>
         </form>
             <div class="login-link">
                     Don't want to delete?   <a href="/userProfileStudent"><strong>Back to Home</strong></a>
