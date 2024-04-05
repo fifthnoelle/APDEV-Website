@@ -87,10 +87,20 @@ const seatSearchQuery = {};
 
 
 server.get('/', function (req, resp) {
-    resp.render('signIn', {
-        layout: 'layoutSignIn',
-        title: 'ILABS | Sign In',
-    });
+    console.log(req.session.username);
+    if(req.session.username != undefined || req.session.username == "") {
+        resp.render('sHome', {
+            layout: 'index',
+            title: 'ILABS | Student Homepage',
+            css: 'landing.css'
+        });
+    }
+    else {
+        resp.render('signIn', {
+            layout: 'layoutSignIn',
+            title: 'ILABS | Sign In',
+        });
+    }
 });
 
 server.get('/signIn', function (req, resp) { //For logging out
@@ -1265,6 +1275,7 @@ server.post('/editReservationStudent', function(req, resp) {
 
 
 server.get('/signIn', function (req, resp) {
+    req.session.username = "";
     resp.render('signIn', {
         layout: 'layoutSignIn',
         title: 'ILABS | Sign In',
