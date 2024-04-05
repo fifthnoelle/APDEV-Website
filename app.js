@@ -891,7 +891,7 @@ server.get('/editProfileStudent', function (req, resp) {
 
     studentModel.findOne({ username: req.session.username }).lean().then(function (student_data) {
         resp.render('editProfileStudent', {
-            layout: 'index',
+            layout: 'layoutEdit',
             title: 'ILABS | Edit My Profile',
             css: 'userRegister.css',
             first_name: student_data.first_name,
@@ -919,7 +919,7 @@ server.post('/editProfileFunctionStudent', function (req, resp) {
             if (result) {
                 console.log('saved');
                 resp.render('alertPage', {
-                    layout: 'index',
+                    layout: 'layoutEdit',
                     title: 'ILABS | Edit Successful',
                     css: 'editprofile.css',
                     alert: 'Edit Saved and Successful',
@@ -943,7 +943,7 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
         if (err) {
             console.error('Error hashing password:', err);
             resp.render('alertPage', {
-                layout: 'index',
+                layout: 'layoutEdit',
                 title: 'ILABS | Hashing Unsuccessful',
                 css: 'editprofile.css',
                 alert: 'Error Hashing Password',
@@ -964,7 +964,7 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
                 if (result) {
                     console.log('saved');
                     resp.render('alertPage', {
-                        layout: 'index',
+                        layout: 'layoutEdit',
                         title: 'ILABS | Edit Password Successful',
                         css: 'editprofile.css',
                         alert: 'Edit Saved and Successful',
@@ -983,7 +983,7 @@ server.get('/editProfileTech', function (req, resp) {
 
     techModel.findOne({ username: req.session.username }).lean().then(function (technician_data) {
         resp.render('editProfileTech', {
-            layout: 'index',
+            layout: 'layoutEdit',
             title: 'ILABS | Edit My Profile',
             css: 'userRegister.css',
             first_name: technician_data.first_name,
@@ -1012,7 +1012,7 @@ server.post('/editProfileFunctionTech', function (req, resp) {
             if (result) {
                 console.log('saved');
                 resp.render('alertPage', {
-                    layout: 'index',
+                    layout: 'layoutEdit',
                     title: 'ILABS | Edit Successful',
                     css: 'editprofile.css',
                     alert: 'Edit Saved and Successful',
@@ -1037,7 +1037,7 @@ server.post('/editProfilePasswordTech', function (req, resp) {
         if (err) {
             console.error('Error hashing password:', err);
             resp.render('alertPage', {
-                layout: 'index',
+                layout: 'layoutEdit',
                 title: 'ILABS | Hashing Unsuccessful',
                 css: 'editprofile.css',
                 alert: 'Error Hashing Password',
@@ -1057,7 +1057,7 @@ server.post('/editProfilePasswordTech', function (req, resp) {
                 if (result) {
                     console.log('saved');
                     resp.render('alertPage', {
-                        layout: 'index',
+                        layout: 'layoutEdit',
                         title: 'ILABS | Edit Password Successful',
                         css: 'editprofile.css',
                         alert: 'Edit Saved and Successful',
