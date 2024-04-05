@@ -1,3 +1,4 @@
+
 //Global Variables
 let chosen_seat = "";
 
@@ -52,6 +53,58 @@ $(document).ready(function () {
     });
 
     // Event listener for time select
+    $("#laboratory").change(function () {
+        if (checkTime()) {
+            let selectedTime = $("#time").val();
+            let selectedDate = $("#date").val();
+            let selectedLab = $("#laboratory").val();
+            for (let u = 1; u < 37; u++) {
+                if ($("#A" + u.toString().padStart(2, '0')).css("background-color") === "rgb(128, 128, 128)") {
+                    $("#A" + u.toString().padStart(2, '0')).css("background-color", "#0A502E");
+                }
+            }
+            $.post('load_seats',
+                { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
+                function (data, status) {
+                    if (status === 'success') {
+                        alert("Successful response received:");
+                        data.reservations.forEach(function (reservation) {
+                            let seat = reservation.seat_num;
+                            $("#" + seat).css("background-color", "grey");
+                            $("#" + seat).css("color", "#F6EEF2");
+                        });
+                    } else {
+                        console.error("Error:", status);
+                    }
+                });
+        }
+    })
+    $("#date").change(function () {
+        if (checkTime()) {
+            let selectedTime = $("#time").val();
+            let selectedDate = $("#date").val();
+            let selectedLab = $("#laboratory").val();
+            for (let u = 1; u < 37; u++) {
+                if ($("#A" + u.toString().padStart(2, '0')).css("background-color") === "rgb(128, 128, 128)") {
+                    $("#A" + u.toString().padStart(2, '0')).css("background-color", "#0A502E");
+                }
+            }
+            $.post('load_seats',
+                { lab: String(selectedLab), date: String(selectedDate), time: String(selectedTime) },
+                function (data, status) {
+                    if (status === 'success') {
+                        alert("Successful response received:");
+                        data.reservations.forEach(function (reservation) {
+                            let seat = reservation.seat_num;
+                            $("#" + seat).css("background-color", "grey");
+                            $("#" + seat).css("color", "#F6EEF2");
+                        });
+                    } else {
+                        console.error("Error:", status);
+                    }
+                });
+        }
+    })
     $("#time").change(function () {
         if (!checkLab()) {
             alert("Please select a Laboratory!")
@@ -64,8 +117,8 @@ $(document).ready(function () {
             let selectedTime = $(this).val();
             let selectedDate = $("#date").val();
             let selectedLab = $("#laboratory").val();
-            for(let u = 1; u < 37; u++) {
-                if($("#A" + u.toString().padStart(2, '0')).css("background-color") === "rgb(128, 128, 128)") {
+            for (let u = 1; u < 37; u++) {
+                if ($("#A" + u.toString().padStart(2, '0')).css("background-color") === "rgb(128, 128, 128)") {
                     $("#A" + u.toString().padStart(2, '0')).css("background-color", "#0A502E");
                 }
             }
@@ -116,14 +169,7 @@ $(document).ready(function () {
                     } else {
                         console.error("Error:", status);
                     }
-                } );
+                });
         }
-    }); 
-});
-
-//
-$(document).ready(function () {
-    $("#deleteButton").click(function () {
-        alert('Deleted!');
-    }); 
+    });
 });

@@ -538,7 +538,6 @@ server.post('/load_reservationInfo', function (req, resp) {
 
 server.get('/bookReserve', function (req, resp) {
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
-        console.log(seat_data);
         resp.render('bookReserve', {
             layout: 'layoutReserve',
             title: 'ILabs | Book Reserve',
