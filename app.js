@@ -168,8 +168,8 @@ server.post('/studentRegister', function (req, resp) {
                         // its not rendering the correct page ???
                         resp.render('createStudent', {
                             layout: 'index',
-                            title: 'ILABS | Register Success!',
-                            css: 'userRegistration.css'
+                            title: 'ILABS | Student Registered!',
+                            css: 'userRegister.css'
                         });
                     }).catch(errorFn);
                 });
@@ -385,9 +385,9 @@ server.post('/techRegister', function (req, resp) {
                     console.log('Technician Account Created!');
                     console.log(techInstance);
                     resp.render('createTech', {
-                        layout: 'index',
-                        title: 'ILABS | Register Success!',
-                        css: 'userRegistration.css'
+                        layout: 'layoutLogin',
+                        title: 'ILABS | Technician Registered!',
+                        css: 'userRegister.css'
                     });
                 }).catch(errorFn);
             });
