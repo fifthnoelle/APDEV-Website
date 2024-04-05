@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    alert('Hi');
-});
-
-$(document).ready(function () {
     $('#password1').on('input', function () {
         console.log('Input detected');
     });
