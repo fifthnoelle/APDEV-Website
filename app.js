@@ -24,9 +24,7 @@ const defaultprofileimg = '/common/defaultimg.png';
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 
-let uri = "mongodb+srv://samanthaoneil:WkvdF4yzhZ0JoVec@cluster0.wezgvio.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-// let uri = ""
-//mongoose.connect(uri);
+let uri = "mongodb+srv://shaylenekintanar:shaypw@ccapdev-website.9kkxda3.mongodb.net/CCAPDEV";
 
 mongoose.connect(uri)
     .then(() => console.log("Connected to MongoDB Atlas"))
@@ -69,8 +67,7 @@ const studentModel = mongoose.model('student', studentSchema);
 const techModel = mongoose.model('technician', techSchema);
 
 const seatSchema = new mongoose.Schema({
-    seat_id: { type: String, required: true },
-    laboratory: { type: String, required: true }
+    seat_id: { type: String, required: true }
 }, { versionKey: false });
 
 const reserveSchema = new mongoose.Schema({
@@ -155,7 +152,8 @@ server.post('/studentRegister', function (req, resp) {
                 studentInstance.save().then(function (register) {
                     console.log('Account Created!');
                     console.log(studentInstance);
-                    resp.render('createSuccessStudent', {
+                    // its not rendering the correct page ???
+                    resp.render('createStudent', {
                         layout: 'index',
                         title: 'ILABS | Register Success!',
                         css: 'userRegistration.css'
@@ -164,27 +162,164 @@ server.post('/studentRegister', function (req, resp) {
             });
         } else if (studentData.username === tempModel.username) {
             // if this errors then dont continue with the rest
-            resp.status(400).send('Username already exists');
+            console.log('Username is taken');
+            resp.render('studentRegister', {
+                layout: 'index',
+                title: 'ILABS | Sign-Up',
+                css: 'userRegister.css'
+            });
         }
     });
 });
 
-
-server.get('/createSuccessStudent', function (req, resp) {
-    resp.render('createSuccessStudent', {
-        layout: 'layoutSignIn',
-        title: 'ILABS | Student Registered!',
+server.get('/studentRegister', function (req, resp) {
+    resp.render('studentRegister', {
+        layout: 'index',
+        title: 'ILABS | Sign-Up',
+        css: 'userRegister.css'
     });
 });
 
-server.get('/createSuccessTech', function (req, resp) {
-    resp.render('createSuccessTech', {
-        layout: 'layoutSignIn',
-        title: 'ILABS | Technician Registered!',
-    })
-})
+server.get('/createStudent', function (req, resp) {
+    resp.render('createStudent', {
+        layout: 'index',
+        title: 'ILABS | Student Registered!',
+        css: 'userRegister.css'
+    });
+});
 
-server.get('/deleteProfile', function (req, resp) { })
+server.get('/createTech', function (req, resp) {
+    resp.render('createTech', {
+        layout: 'layoutLogin',
+        title: 'ILABS | Technician Registered!',
+        css: 'userRegister.css'
+    });
+});
+
+server.get('/deleteProfileStudent', function (req, resp) {
+    resp.render('deleteProfileStudent', {
+        layout: 'index',
+        title: 'ILABS | Sign-Up',
+        css: 'userRegister.css'
+    });
+});
+
+server.post('/deleteProfileS', function (req, resp) {
+    // get password and confirmed password
+    const PW = req.body.PW;
+    const CPW = req.body.CPW;
+    const username = req.body.username;
+    const searchQuery = {
+        username: username
+    };
+
+    studentModel.findOne(searchQuery).lean().then(function (student) {
+        if (student) {
+            if (PW === CPW) {
+                bcrypt.compare(PW, student.password, function (err, res) {
+                    if (res) {
+                        console.log('Deleting user..');
+                        console.log(student.username);
+                        console.log(student._id);
+                        studentModel.findByIdAndDelete(student._id).lean().exec().then(function(deletedStudent) {
+                            console.log("Deleted : ", deletedStudent);
+                            resp.render('signIn', {
+                                layout: 'layoutSignIn',
+                                title: 'ILABS | Welcome',
+                            });
+                        }).catch(errorFn);
+                    } else {
+                        resp.render('deleteProfileStudent', {
+                            layout: 'index',
+                            title: 'ILABS | Delete profile',
+                            css: 'userRegister.css',
+                            error: 'Incorrect password. Please try again.'
+                        });
+                    }
+                });
+            } else {
+                resp.render('deleteProfileStudent', {
+                    layout: 'index',
+                    title: 'ILABS | Delete profile',
+                    css: 'userRegister.css',
+                    error: 'Passwords do not match! Try again.'
+                });
+            }
+        } else {
+            console.log('User trying to delete. Error found.');
+            resp.render('deleteProfileStudent', {
+                layout: 'index',
+                title: 'ILABS | Delete profile',
+                css: 'userRegister.css'
+            });
+        }
+    })
+    // check if matching with bycrypt compare
+    // find by id and delete (not pressable button unless both inputs are valid)
+    // render starting page
+});
+
+server.get('/deleteProfileTech', function (req, resp) {
+    resp.render('deleteProfileTech', {
+        layout: 'index',
+        title: 'ILABS | Delete profile',
+        css: 'userRegister.css'
+    });
+});
+
+server.post('/deleteProfileT', function (req, resp) {
+    const PW = req.body.PW;
+    const CPW = req.body.CPW;
+    const username = req.body.username;
+    const searchQuery = {
+        username: username
+    };
+
+    techModel.findOne(searchQuery).lean().then(function (tech) {
+        if (tech) {
+            if (PW === CPW) {
+                bcrypt.compare(PW, tech.password, function (err, res) {
+                    if (res) {
+                        console.log('Deleting user.. ', tech.username);
+                        console.log(tech._id);
+                        techModel.findByIdAndDelete(tech._id).lean().exec().then(function(deletedTech) {
+                            console.log("Deleted: ", deletedTech);
+                            resp.render('signIn', {
+                                layout: 'layoutSignIn',
+                                title: 'ILABS | Welcome',
+                            });
+                        }).catch(errorFn);
+                    } else {
+                        resp.render('deleteProfileTech', {
+                            layout: 'index',
+                            title: 'ILABS | Delete profile',
+                            css: 'userRegister.css',
+                            error: 'Incorrect password. Please try again.'
+                        });
+                    }
+                });
+            } else {
+                resp.render('deleteProfileStudent', {
+                    layout: 'index',
+                    title: 'ILABS | Delete profile',
+                    css: 'userRegister.css',
+                    error: 'Passwords do not match! Try again.'
+                });
+            }
+        } else {
+            console.log('User trying to delete. Error found.');
+            resp.render('deleteProfileTech', {
+                layout: 'index',
+                title: 'ILABS | Delete profile',
+                css: 'userRegister.css'
+            });
+        }
+    });
+    // get password and confirmed password
+    // check if matching with bycrypt compare
+    // find by id and delete (not pressable button unless both inputs are valid)
+    // render starting page
+});
 
 server.get('/techRegister', function (req, resp) {
     resp.render('techRegister', {
@@ -236,13 +371,13 @@ server.post('/techRegister', function (req, resp) {
                 techInstance.save().then(function (register) {
                     console.log('Technician Account Created!');
                     console.log(techInstance);
-                    resp.render('createSuccessTech', {
+                    resp.render('createTech', {
                         layout: 'index',
                         title: 'ILABS | Register Success!',
                         css: 'userRegistration.css'
                     });
                 }).catch(errorFn);
-            }); 
+            });
         } else if (tech_data.username === tempModel.username) {
             resp.status(400).send('Username already exists');
         }
@@ -284,7 +419,7 @@ server.post('/s-login-funck', function (req, resp) {
                         });
                     }
                 });
-            }            
+            }
             else {
                 console.log("username not found");
                 resp.render('userLoginStudent', {
@@ -338,7 +473,7 @@ server.post('/t-login-funck', function (req, resp) {
                         });
                     }
                 });
-            }            
+            }
             else {
                 console.log("username not found");
                 resp.render('userLoginTech', {
@@ -403,6 +538,7 @@ server.post('/load_reservationInfo', function (req, resp) {
 
 server.get('/bookReserve', function (req, resp) {
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        console.log(seat_data);
         resp.render('bookReserve', {
             layout: 'layoutReserve',
             title: 'ILabs | Book Reserve',
@@ -793,12 +929,12 @@ server.post('/editProfilePasswordStudent', function (req, resp) {
             return;
         }
 
-        studentModel.findOne({ username: req.session.username }).then(function (student_data) {
-            student_data.password = req.body.password1;
-            student_data.password = hashedPW;
+    studentModel.findOne({ username: req.session.username }).then(function (student_data) {
+        student_data.password = req.body.password1;
+        student_data.password = hashedPW;
 
-            console.log('edited');
-            console.log(student_data);
+        console.log('edited');
+        console.log(student_data);
 
             student_data.save().then(function (result) {
                 if (result) {
@@ -870,38 +1006,45 @@ server.post('/editProfilePasswordTech', function (req, resp) {
         console.error("Passwords don't match!");
         console.log('changes not saved');
 
-        /*resp.render('alertPage', {
-            layout: 'index',
-            title: 'ILABS | Edit Unsuccessful',
-            css: 'editprofile.css',
-            alert: "Passwords don't match! Please try again.",
-            redirect_page: 'Edit Profile Page',
-            redirect_url: '/editProfileStudent'
-        })*/
-        
         return;
     }
-    techModel.findOne({ username: req.session.username }).then(function (technician_data) {
-        technician_data.password = req.body.password1;
 
-        console.log('edited');
-        console.log(technician_data);
+    bcrypt.hash(req.body.password1, 10, (err, hashedPW) => {
+        if (err) {
+            console.error('Error hashing password:', err);
+            resp.render('alertPage', {
+                layout: 'index',
+                title: 'ILABS | Hashing Unsuccessful',
+                css: 'editprofile.css',
+                alert: 'Error Hashing Password',
+                redirect_page: 'Edit Profile Page',
+                redirect_url: '/editProfileTech'
+            })
+            return;
+        }
+    });
 
-        technician_data.save().then(function(result) {
-            if(result){
-                console.log('saved');
-                resp.render('alertPage', {
-                    layout: 'index',
-                    title: 'ILABS | Edit Password Successful',
-                    css: 'editprofile.css',
-                    alert: 'Edit Saved and Successful',
-                    redirect_page: 'Profile Page',
-                    redirect_url: '/userProfileTech'
-                })
-            }
+        techModel.findOne({ username: req.session.username }).then(function (technician_data) {
+            //technician_data.password = req.body.password1;
+            technician_data.password = hashedPW;
+            console.log('edited');
+            console.log(technician_data);
+
+            technician_data.save().then(function (result) {
+                if (result) {
+                    console.log('saved');
+                    resp.render('alertPage', {
+                        layout: 'index',
+                        title: 'ILABS | Edit Password Successful',
+                        css: 'editprofile.css',
+                        alert: 'Edit Saved and Successful',
+                        redirect_page: 'Profile Page',
+                        redirect_url: '/userProfileTech'
+                    })
+                }
+            }).catch(errorFn);
         }).catch(errorFn);
-    }).catch(errorFn);
-});
+    });
 
 server.get('/deleteProfileTech', function (req, resp) {
     resp.render('deleteProfileTech', {
