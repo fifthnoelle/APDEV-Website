@@ -1069,6 +1069,123 @@ server.get('/deleteProfile=Success', function (req, resp) {
     });
 });
 
+server.post('/deleteLab', function (req, resp) {
+    const deleteQuery ={user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time, email: req.body.email, seat_num: req.body.seat};
+    console.log(deleteQuery);
+    
+    reservationModel.findOne(deleteQuery).lean().then(function(reservation){
+        console.log(reservation);
+        resp.render('deleteLab', {
+            layout: 'index',
+            title: 'ILabs | Delete Reservation',
+            css: 'deleteLab.css',
+            css: 'navStyle.css',
+            css: 'style.css',
+            computer_lab: reservation.computer_lab,
+            user: reservation.user,
+            email: reservation.email,
+            seat_num: reservation.seat_num,
+            time_slot: reservation.time_slot,
+            date: reservation.date,
+        });
+    }).catch(errorFn);
+});
+
+server.post('/deleting', function (req, resp) {
+    const deleteQuery ={user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time, email: req.body.email, seat_num: req.body.seat};
+    console.log(deleteQuery);
+    console.log('test1');
+    reservationModel.findOneAndDelete(deleteQuery).then(function(reservation){
+        if (reservation) {
+            console.log('Reservation deleted:', reservation);
+            resp.render('alertPage', {
+                layout: 'index',
+                title: 'ILABS | Delete Successful',
+                css: 'editprofile.css',
+                alert: 'Delete Successful!',
+                redirect_page: 'View All Reservations',
+                redirect_url: '/viewAllReservations'
+            });
+        } else {
+            console.log('Reservation not found');
+            resp.render('alertPage', {
+                layout: 'index',
+                title: 'ILABS | Delete Failed',
+                css: 'editprofile.css',
+                alert: 'Reservation not found!',
+                redirect_page: 'View All Reservations',
+                redirect_url: '/viewAllReservations'
+            });
+        }
+    }).catch(errorFn);
+
+
+});
+
+server.post('/editReservationFuncStud', function(req, resp){
+    console.log(req.body); 
+    const reservationSearchQuery = {user: req.body.username, date: req.body.ogdate, time_slot: req.body.ogtime_slot, seat_num: req.body.ogseat_num, computer_lab: req.body.oglab}
+    console.log('test11');  
+    console.log(reservationSearchQuery); 
+    seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        reservationModel.findOne(reservationSearchQuery).then(function (reservation) {
+            console.log('test1');
+            reservation.user = req.body.username;
+            reservation.seat_num = req.body.seat_num;
+            reservation.date = req.body.date;
+            reservation.time_slot = req.body.time_slot;
+            console.log('edited');
+            console.log(reservation);
+            reservation.save().then(function(result) {
+                if(result){
+                    console.log('saved');
+                    resp.render('alertPage', {
+                        layout: 'index',
+                        title: 'ILABS | Edit Successful',
+                        css: 'editprofile.css',
+                        alert: 'Edit Saved and Successful',
+                        redirect_page: 'viewMyReservations',
+                        redirect_url: '/viewMyReservations'
+                    })
+                    console.log(req.body); 
+                }
+            }).catch(errorFn);
+        }).catch(errorFn);
+    }).catch(errorFn);
+});
+
+server.post('/editReservationFuncTech', function(req, resp){
+    console.log(req.body); 
+    const reservationSearchQuery = {user: req.body.username, date: req.body.ogdate, time_slot: req.body.ogtime_slot, seat_num: req.body.ogseat_num, computer_lab: req.body.oglab}
+    console.log(reservationSearchQuery); 
+    seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
+        reservationModel.findOne(reservationSearchQuery).then(function (reservation) {
+            console.log('test1');
+            reservation.user = req.body.username;
+            reservation.seat_num = req.body.seat_num;
+            reservation.date = req.body.date;
+            reservation.time_slot = req.body.time_slot;
+            console.log('edited');
+            console.log(reservation);
+            reservation.save().then(function(result) {
+                if(result){
+                    console.log('saved');
+                    resp.render('alertPage', {
+                        layout: 'index',
+                        title: 'ILABS | Edit Successful',
+                        css: 'editprofile.css',
+                        alert: 'Edit Saved and Successful',
+                        redirect_page: 'viewAllReservations',
+                        redirect_url: '/viewAllReservations'
+                    })
+                    console.log(req.body); 
+                }
+            }).catch(errorFn);
+        }).catch(errorFn);
+    }).catch(errorFn);
+});
+
+
 server.post('/editReservationTech', function (req, resp) {
     //const searchQuery = { username: req.session.username };
     const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
@@ -1082,10 +1199,16 @@ server.post('/editReservationTech', function (req, resp) {
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
                 username: reservation.user,
+                ogusername: reservation.user,
                 dlsu_email: reservation.email,
+                ogemail: reservation.email,
                 seat_num: reservation.seat_num,
+                ogseat_num: reservation.seat_num,
                 time_slot: reservation.time_slot,
+                ogtime_slot: reservation.time_slot,
                 date: reservation.date,
+                ogdate: reservation.date,
+                oglab: reservation.computer_lab,
                 'seat-data': seat_data
             });
         }).catch(errorFn);
@@ -1094,30 +1217,37 @@ server.post('/editReservationTech', function (req, resp) {
 
 });
 
-server.post('/editReservationStudent', function (req, resp) {
-    const searchQuery = { username: req.session.username };
+server.post('/editReservationStudent', function(req, resp) {
+    //const searchQuery = { username: req.session.username };
     const reservationSearchQuery = { user: req.body.username, computer_lab: req.body.lab, date: req.body.date, time_slot: req.body.time };
-    console.log(reservationSearchQuery);
-
+    console.log(reservationSearchQuery); 
     seatModel.find(seatSearchQuery).lean().then(function (seat_data) {
         reservationModel.findOne(reservationSearchQuery).lean().then(function (reservation) {
-            console.log(reservation);
-            console.log(req.body.username);
+            console.log("yum" + reservation);
+            console.log("sh" + reservation.computer_lab);
             resp.render('editReservationStudent', {
                 layout: 'layoutReserve',
                 title: 'ILABS | Edit Reservation',
                 css: 'reserveStyle.css',
                 username: reservation.user,
+                ogusername: reservation.user,
                 dlsu_email: reservation.email,
+                ogemail: reservation.email,
                 seat_num: reservation.seat_num,
+                ogseat_num: reservation.seat_num,
                 time_slot: reservation.time_slot,
+                ogtime_slot: reservation.time_slot,
                 date: reservation.date,
+                ogdate: reservation.date,
+                oglab: reservation.computer_lab,
                 'seat-data': seat_data
             });
         }).catch(errorFn);
     }).catch(errorFn);
-
 });
+
+
+
 
 server.get('/signIn', function (req, resp) {
     resp.render('signIn', {

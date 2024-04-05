@@ -12,7 +12,7 @@ function setSuccessFor(input) {
     formControl.className = 'form-control success';
 }
 
-//
+// BOOKING RESERVING
 $(document).ready(function () {
     $("#deleteButton").click(function () {
         alert('Deleted!');
